@@ -6,6 +6,11 @@ export default [
     }
   },
   {
+    path: '/bienestar',
+    name: 'bienestar',
+    component: () => import('@/views/wellness/searchForDni.vue')
+  },
+  {
     path: '/reporte-inscritos',
     name: 'reporte-inscritos',
     component: () => import('@/views/registereds/UserReport.vue')
