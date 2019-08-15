@@ -1,0 +1,15 @@
+@import './_variables.scss';
+
+// hacks with variables
+body {
+  font-family: $body-font-family;
+}
+// end hacks with variables
+
+@import '~element-ui/packages/theme-chalk/src/index.scss';
+
+// other hacks
+.el-notification__content {
+  text-align: left;
+}
+// end other hacks

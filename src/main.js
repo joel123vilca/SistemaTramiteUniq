@@ -1,13 +1,22 @@
-import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
-import store from './store';
-import './registerServiceWorker';
+import Vue from 'vue'
+import './plugins/vuetify/vuetify'
+import './plugins/element/element'
+import App from './App.vue'
+import router from './router'
+import store from '@/store/index'
+import './registerServiceWorker'
+import '@/plugins/axios'
+import { ability } from '@/config/ability'
+import { abilitiesPlugin } from '@casl/vue'
 
-Vue.config.productionTip = false;
+Vue.use(abilitiesPlugin, ability)
 
+Vue.config.productionTip = false
+
+/* eslint-disable no-new */
 new Vue({
-  router,
   store,
-  render: h => h(App),
-}).$mount('#app');
+  router,
+  ...App
+})
+/* eslint-enable no-new */

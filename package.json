@@ -10,11 +10,25 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@casl/ability": "^3.0.1",
+    "@casl/vue": "^0.5.1",
+    "axios": "^0.18.0",
     "core-js": "^2.6.5",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "chart.js": "^2.7.3",
+    "element-ui": "^2.5.4",
+    "js-cookie": "^2.2.0",
+    "material-design-icons-iconfont": "^3.0.3",
+    "reniec-sunat-js": "^1.0.0",
+    "vue-chartjs": "^3.4.0",
+    "vue-html-to-paper": "^1.0.3",
+    "vue-meta": "^1.5.8",
+    "vue-web-cam": "^1.5.0",
+    "vue-webcam": "2.0.4",
+    "vuetify": "^1.5.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.10.0",
@@ -32,6 +46,12 @@
     "eslint-plugin-vue": "^5.0.0",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "node-sass": "^4.9.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
+    "vue-cli-plugin-vuetify": "^0.4.6",
+    "vuetify-loader": "^1.0.5"
   }
 }

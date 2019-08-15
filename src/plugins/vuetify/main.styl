@@ -1,0 +1,10 @@
+@require './_theme.styl'
+@require './_variables.styl'
+
+@import '~vuetify/src/stylus/main'
+
+// hacks
+.v-autocomplete
+  &__content.v-menu__content
+    .v-input__slot
+      margin-bottom: 0 !important
