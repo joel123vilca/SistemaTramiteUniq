@@ -11,7 +11,6 @@
     >
       <v-spacer />
       <v-avatar
-        :tile="tile"
         size="60px"
       >
         <v-img
@@ -34,50 +33,74 @@
           md12
         >
           <v-card class="card-form">
-            <v-layout
-              align-center
-              justify-center
-              row
-              fill-height
-            >
-              <v-card-title primary-title>
-                <span class="success--text font-weight-bold headline align-center justify-center">BIENESTAR - UNIQ</span>
-              </v-card-title>
-            </v-layout>
              <v-card
-      max-width="344"
-      class="mx-auto"
-    >
-     <v-form>
-      <v-container>
-      <v-row>
-        <v-col cols="12" sm="6" md="3">
-          <v-card-text
-                class="pa-0"
+              max-width="344"
+              class="mx-auto"
+            >
+              <v-layout
+                align-center
+                justify-center
+                row
+                fill-height
               >
-          <v-text-field
-            label="ingresar DNI"
-            placeholder="DNI"
-            outlined
-          ></v-text-field>
-          </v-card-text>
-        </v-col>
-      </v-row>
-      <v-card-actions>
-        <v-btn text>Ingresar</v-btn>
-      </v-card-actions>
-      </v-container>
-     </v-form>
-    </v-card>
+                <v-card-title primary-title>
+                  <span class="success--text font-weight-bold headline align-center justify-center">BIENESTAR - UNIQ</span>
+                </v-card-title>
+              </v-layout>
+                <v-form>
+                  <v-container>
+                      <v-card-text
+                        class="pa-0"
+                      >
+                        <v-text-field
+                          v-model="dni"
+                          label="ingresar DNI"
+                          :counter="8"
+                          :rules="dniRules"
+                          required
+                          placeholder="DNI"
+                          outlined
+                        ></v-text-field>
+                      </v-card-text>
+                    <v-card-actions>
+                      <v-btn @click="getUser">Ingresar</v-btn>
+                    </v-card-actions>
+                    </v-container>
+                </v-form>
+            </v-card>
           </v-card>
         </v-flex>
       </v-layout>
+      <p>{{this.message}}</p>
     </template>
   </v-container>
 </template>
 
 <script>
 export default {
+  metaInfo () {
+    return { title: 'Universidad Nacional Intercultural de Quillabamba' }
+  },
+  data () {
+    return {
+      dni:'',
+      dniRules: [
+        v => !!v || 'Dni es Requerido',
+        v => /^[0-9]{8}$/.test(v) || 'Ingresar solo numeros y 8 digitos.'
+      ],
+      message:'hola'
+    }
+  },
+  methods:{
+    getUser(){
+      console.log(this.dni)
+      if(this.dni === '75109922'){
+        this.$router.push({ name: 'completar-ficha' })
+      }else{
+        this.message = 'No se encontro su Dni'
+      }
+    }
+  }
 
 }
 </script>

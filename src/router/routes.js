@@ -2,7 +2,7 @@ export default [
   {
     path: '/',
     redirect: {
-      name: 'admin'
+      name: 'login'
     }
   },
   {
@@ -11,24 +11,14 @@ export default [
     component: () => import('@/views/wellness/searchForDni.vue')
   },
   {
-    path: '/reporte-inscritos',
-    name: 'reporte-inscritos',
-    component: () => import('@/views/registereds/UserReport.vue')
+    path: '/completar-ficha',
+    name: 'completar-ficha',
+    component: () => import('@/views/wellness/completeData.vue')
   },
   {
-    path: '/foto',
-    name: 'foto',
-    component: () => import('@/views/registereds/camara.vue')
-  },
-  {
-    path: '/admin',
-    name: 'admin',
+    path: '/login',
+    name: 'login',
     component: () => import('@/components/Login.vue')
-  },
-  {
-    path: '/preinscripcion',
-    name: 'preinscripcion',
-    component: () => import('@/views/admision/admision.vue')
   },
   {
     path: '/preinscritos',
@@ -52,47 +42,11 @@ export default [
     name: 'sgcUsersEdit',
     component: () => import('@/views/users/EditUser.vue')
   },
-  // inscritos
-  {
-    path: '/preinscrito/:id',
-    name: 'registerEdit',
-    component: () => import('@/views/registereds/Edit.vue')
-  },
-  {
-    path: '/inscritos',
-    name: 'inscritos',
-    component: () => import('@/views/registereds/Inscribed.vue')
-  },
-  {
-    path: '/camara/:id',
-    name: 'camara',
-    component: () => import('@/views/registereds/foto.vue')
-  },
-  {
-    path: '/reporte/:id',
-    name: 'reporte',
-    component: () => import('@/views/registereds/Report.vue')
-  },
-  {
-    path: '/reporte-preinscripcion/:id',
-    name: 'reportePreinscription',
-    component: () => import('@/views/registereds/ReportPreinscription.vue')
-  },
 
   // school
   {
     path: '/school/create',
     name: 'createSchool',
     component: () => import('@/views/school/Create.vue')
-  },
-  {
-    path: '/reporte-admision',
-    name: 'reportAdmin',
-    component: () => import('@/views/registereds/ReportesAdmin.vue')
-  },
-  {
-    path: '/anulados',
-    name: 'annulled',
-    component: () => import('@/views/registereds/Annulled.vue')
   }
 ]
