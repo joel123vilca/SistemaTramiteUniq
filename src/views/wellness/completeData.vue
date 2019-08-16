@@ -43,7 +43,7 @@
               fill-height
             >
               <v-card-title primary-title>
-                <span class="success--text font-weight-bold headline align-center justify-center">FORMULARIO DE PRE-INSCRIPCIÓN</span>
+                <span class="success--text font-weight-bold headline align-center justify-center">FICHA DE BIENESTAR UNIVERSITARIO  </span>
               </v-card-title>
             </v-layout>
           </v-card>
@@ -155,6 +155,473 @@
                       />
                     </v-flex>
                   </v-layout>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.dni"
+                        label="ESTADO CIVIL"
+                        :rules="rules.dni"
+                        :error="!!formErrores.dni"
+                        :error-messages="formErrores.dni"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="¿USTED PERTENECE A?"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-radio-group v-model="row" row>
+                        <v-radio label="Si" value="radio-1"></v-radio>
+                        <v-radio label="No" value="radio-2"></v-radio>
+                        <v-text-field
+                        v-model="form.cdni"
+                        label="INDICAR TIPO DE TRANSPORTE:"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                      </v-radio-group>
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="¿TIEMPO ESTIMADO DE TRASLADO DE LA UNIVERSIDAD A SU DOMICILIO?"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.dni"
+                        label="¿USTED ACTUALMENTE TRABAJA?"
+                        :rules="rules.dni"
+                        :error="!!formErrores.dni"
+                        :error-messages="formErrores.dni"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="¿CUANTAS HORAS TRABAJA A LA SEMANA?"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <h2>INFORMACIÓN DE VIVIENDA</h2>
+                  <p>indique para la vivienda donde reside:</p>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm3
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.dni"
+                        label="TENENCIA"
+                        :rules="rules.dni"
+                        :error="!!formErrores.dni"
+                        :error-messages="formErrores.dni"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm3
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="MATERIAL"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm3
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.dni"
+                        label="TIPO"
+                        :rules="rules.dni"
+                        :error="!!formErrores.dni"
+                        :error-messages="formErrores.dni"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm3
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="NUMERO DE HABITACIONES"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <h5>Servicios con los que cuenta su vivienda:</h5>
+                  <p>{{ selected }}</p>
+                  <v-layout>
+                    <v-checkbox v-model="selected" label="LUZ ELECTRICA" value="luz" class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="selected" label="RED PÚBLICA AGUA DENTRO DE VIVIENDA" value="agua" class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="selected" label="RED PÚBLICA DESAGUE DENTRO DE VIVIENDA" value="desague" class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="selected" label="CONEXION A INTERNET" value="internet" class="mx-2"></v-checkbox>
+                  </v-layout>
+                  <h2>CONTACTO DE EMERGENCIA</h2>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="NOMBRE"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="NÚMERO TELEFONO"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <h2>INFORMACIÓN GENERAL DE SALUD</h2>
+                  <p>¿usted tiene una dificultad o limitación permanente?</p>
+                  <v-layout>
+                    <v-checkbox v-model="selected" label="PARA VER, AÚN USANDO LENTES" value="luz" class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="selected" label="PARA OIR, AÚN USANDO AUDIFONOS PARA SORDERA" value="agua" class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="selected" label="PARA HABLAR" value="desague" class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="selected" label="PARA USAR BRAZOS Y MANOS/ PIERNAS Y PIES" value="internet" class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="selected" label="ALGUNA OTRA DIFICULTAD O LIMITACIÓN" value="internet" class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="selected" label="NO TIENE DISCAPACIDAD" value="internet" class="mx-2"></v-checkbox>
+                  </v-layout>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm12
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="ESPECIFIQUE LA ALGUNA OTRA DIFICULTAD O LIMITACIÓN"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <p>¿Usted padece de una enfermedad crónica?</p>
+                  <v-radio-group v-model="row" row>
+                    <v-radio label="Si" value="radio-1"></v-radio>
+                    <v-radio label="No" value="radio-2"></v-radio>
+                  </v-radio-group>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm12
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="ESPECIFIQUE LA ENFERMEDAD CRONICA"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <p>¿Recibe un tratamiento para dicha enfermedad?</p>
+                  <v-radio-group v-model="row" row>
+                    <v-radio label="Si" value="radio-1"></v-radio>
+                    <v-radio label="No" value="radio-2"></v-radio>
+                  </v-radio-group>
+                  <p>¿Usted ha tenido una intervención quirúrgica anteriormente?</p>
+                  <v-radio-group v-model="row" row>
+                    <v-radio label="Si" value="radio-1"></v-radio>
+                    <v-radio label="No" value="radio-2"></v-radio>
+                  </v-radio-group>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="ESPECIFIQUE "
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="INDIQUE LA FECHA CUÁNDO SE REALIZO"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <p>¿Se realiza anualmente chequeos médicos?</p>
+                  <v-radio-group v-model="row" row>
+                    <v-radio label="Si" value="radio-1"></v-radio>
+                    <v-radio label="No" value="radio-2"></v-radio>
+                  </v-radio-group>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="INDIQUE LA FECHA CUÁNDO SE REALIZO"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <p>¿Usted cuenta con un seguro de salud?</p>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="ELEGIR EL SEGURO QUE CUENTA"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="TIPO DE SANGRE"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <h2>INFORMACIÓN ALIMENTACIÓN</h2>
+                  <p>¿Donde Usted Suele consumir sus siguientes comidas?</p>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm3
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="DESAYUNO"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm3
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="ALMUERZO"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm3
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="CENA"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm3
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="MERIENDAS"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <p>¿Usted consume con qué frecuencia las siguientes comidas?</p>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm4
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="DESAYUNO"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm4
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="ALMUERZO"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm4
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="CENA"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <h2>INFORMACIÓN SOBRE SALUD MENTAL</h2>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="EN LOS ULTIMOS 6 MESES, ¿HA TENIDO LAS SIGUIENTES MOLESTIAS?"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cdni"
+                        label="EN LOS ULTIMOS MESES, ¿ USTED HA SUFRIDO ALGUN EVENTO QUE LE SEA DIFICIL DE MANEJAR?"
+                        :rules="rules.cdni"
+                        :error="!!formErrores.cdni"
+                        :error-messages="formErrores.cdni"
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <h2>INFORMACIÓN SOBRE SALUD MENTAL</h2>
+                  <p>¿Sus Padres Viven?</p>
+                  <v-radio-group v-model="row" row>
+                    <v-radio label="Si" value="radio-1"></v-radio>
+                    <v-radio label="No" value="radio-2"></v-radio>
+                  </v-radio-group>
+                  <p>¿Tiene hermanos?</p>
+                  <v-radio-group v-model="row" row>
+                    <v-radio label="Si" value="radio-1"></v-radio>
+                    <v-radio label="No" value="radio-2"></v-radio>
+                  </v-radio-group>
+                  <p>¿Tiene Hijos?</p>
+                  <v-radio-group v-model="row" row>
+                    <v-radio label="Si" value="radio-1"></v-radio>
+                    <v-radio label="No" value="radio-2"></v-radio>
+                  </v-radio-group>
                   <v-btn
                     color="primary"
                     large
@@ -663,6 +1130,9 @@ export default {
   },
   data () {
     return {
+      selected: [],
+      column: null,
+      row: null,
       step: 1,
       pdf: '',
       checkbox: false,

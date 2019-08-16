@@ -71,7 +71,6 @@
           </v-card>
         </v-flex>
       </v-layout>
-      <p>{{this.message}}</p>
     </template>
   </v-container>
 </template>
@@ -87,8 +86,7 @@ export default {
       dniRules: [
         v => !!v || 'Dni es Requerido',
         v => /^[0-9]{8}$/.test(v) || 'Ingresar solo numeros y 8 digitos.'
-      ],
-      message:'hola'
+      ]
     }
   },
   methods:{
@@ -97,9 +95,12 @@ export default {
       if(this.dni === '75109922'){
         this.$router.push({ name: 'completar-ficha' })
       }else{
-        this.message = 'No se encontro su Dni'
+        this.$notify.warning({
+            title: 'UNIQ',
+            message: 'NO SE ENCUENTRA SU DNI'
+        })
       }
-    }
+  }
   }
 
 }
