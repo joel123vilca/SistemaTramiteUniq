@@ -576,7 +576,7 @@
                       />
                     </v-flex>
                   </v-layout>
-                  <h2>INFORMACIÓN SOBRE SALUD MENTAL</h2>
+                  <h2>INFORMACIÓN SOBRE LA FAMILIA</h2>
                   <v-layout
                     row
                     wrap
@@ -622,6 +622,85 @@
                     <v-radio label="Si" value="radio-1"></v-radio>
                     <v-radio label="No" value="radio-2"></v-radio>
                   </v-radio-group>
+                  <p>Indique para cada miembro de su familia</p>
+                  <div v-for="(input,k) in inputs" :key="k">
+                    <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm3
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="input.name"
+                        label="nombre"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm3
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="input.lastname"
+                        label="apellidos"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm3
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="input.age"
+                        label="edad"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm3
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="input.relationship"
+                        label="parentesco"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm3
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="input.ocupation"
+                        label="ocupación"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm3
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="input.academic"
+                        label="grado academico"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm3
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="input.work"
+                        label="condicion laboral"
+                      />
+                    </v-flex>
+                    </v-layout>
+                    <span>
+                      <v-btn class="mx-2" @click="remove(k)" v-show="k || ( !k && inputs.length > 1)" fab dark small color="error">
+                        <v-icon dark>remove</v-icon>
+                      </v-btn>
+                      <v-btn class="mx-2" @click="add(k)" v-show="k == inputs.length-1" fab dark small color="indigo">
+                        <v-icon dark>add</v-icon>
+                      </v-btn>
+                    </span>
+                  </div>
                   <v-btn
                     color="primary"
                     large
@@ -1130,6 +1209,17 @@ export default {
   },
   data () {
     return {
+      inputs: [
+        {
+          name: '',
+          lastname:'',
+          age:'',
+          relationship:'',
+          ocupation:'',
+          academic:'',
+          work:''
+        }
+      ],
       selected: [],
       column: null,
       row: null,
@@ -1337,6 +1427,12 @@ export default {
       getSchools: 'schools/getSchools',
       getVerify: 'admision/getVerify'
     }),
+     add(index) {
+      this.inputs.push({ name: '',lastname:'',relationship:'',ocupation:'',age:'',academic:'',work:'' });
+    },
+    remove(index) {
+      this.inputs.splice(index, 1);
+    },
     next () {
       this.getVerify({
         dni: this.form.dni,
