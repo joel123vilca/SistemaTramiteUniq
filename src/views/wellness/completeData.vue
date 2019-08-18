@@ -342,12 +342,7 @@
                   <h2>INFORMACIÓN GENERAL DE SALUD</h2>
                   <p>¿usted tiene una dificultad o limitación permanente?</p>
                   <v-layout>
-                    <v-checkbox v-model="selected" label="PARA VER, AÚN USANDO LENTES" value="luz" class="mx-2"></v-checkbox>
-                    <v-checkbox v-model="selected" label="PARA OIR, AÚN USANDO AUDIFONOS PARA SORDERA" value="agua" class="mx-2"></v-checkbox>
-                    <v-checkbox v-model="selected" label="PARA HABLAR" value="desague" class="mx-2"></v-checkbox>
-                    <v-checkbox v-model="selected" label="PARA USAR BRAZOS Y MANOS/ PIERNAS Y PIES" value="internet" class="mx-2"></v-checkbox>
-                    <v-checkbox v-model="selected" label="ALGUNA OTRA DIFICULTAD O LIMITACIÓN" value="internet" class="mx-2"></v-checkbox>
-                    <v-checkbox v-model="selected" label="NO TIENE DISCAPACIDAD" value="internet" class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="selected" v-for="(limitation) in limitations" :key="limitation.id"  :label="limitation.title" :value="limitation.id" class="mx-2"></v-checkbox>
                   </v-layout>
                   <v-layout
                     row
@@ -576,37 +571,18 @@
                       />
                     </v-flex>
                   </v-layout>
-                  <h2>INFORMACIÓN SOBRE LA FAMILIA</h2>
-                  <v-layout
-                    row
-                    wrap
-                  >
-                    <v-flex
-                      sm6
-                      xs12
-                    >
-                      <v-text-field
-                        v-model="form.cdni"
-                        label="EN LOS ULTIMOS 6 MESES, ¿HA TENIDO LAS SIGUIENTES MOLESTIAS?"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
-                      />
-                    </v-flex>
-                    <v-flex
-                      sm6
-                      xs12
-                    >
-                      <v-text-field
-                        v-model="form.cdni"
-                        label="EN LOS ULTIMOS MESES, ¿ USTED HA SUFRIDO ALGUN EVENTO QUE LE SEA DIFICIL DE MANEJAR?"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
-                      />
-                    </v-flex>
+                  <h2>INFORMACIÓN SOBRE LA SALUD MENTAL</h2>
+                  <p>EN LOS ULTIMOS 6 MESES, ¿HA TENIDO LAS SIGUIENTES MOLESTIAS?</p>
+                  <v-layout row
+                    wrap>
+                    <v-checkbox v-model="selected" v-for="(problem) in problems" :key="problem.id"  :label="problem.title" :value="problem.id" class="mx-2"></v-checkbox>
                   </v-layout>
-                  <h2>INFORMACIÓN SOBRE SALUD MENTAL</h2>
+                    <p>EN LOS ULTIMOS MESES, ¿ USTED HA SUFRIDO ALGUN EVENTO QUE LE SEA DIFICIL DE MANEJAR?</p>
+                  <v-layout row
+                    wrap>
+                    <v-checkbox v-model="selected" v-for="(event) in events" :key="event.id"  :label="event.title" :value="event.id" class="mx-2"></v-checkbox>
+                  </v-layout>
+                  <h2>INFORMACIÓN LA FAMILIA</h2>
                   <p>¿Sus Padres Viven?</p>
                   <v-radio-group v-model="row" row>
                     <v-radio label="Si" value="radio-1"></v-radio>
@@ -622,6 +598,18 @@
                     <v-radio label="Si" value="radio-1"></v-radio>
                     <v-radio label="No" value="radio-2"></v-radio>
                   </v-radio-group>
+                  <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-autocomplete
+                        v-model="form.school_region"
+                        :items="relations"
+                        label="¿CON QUIENES VIVE?"
+                        item-text="title"
+                        item-value="id"
+                      />
+                    </v-flex>
                   <p>Indique para cada miembro de su familia</p>
                   <div v-for="(input,k) in inputs" :key="k">
                     <v-layout
@@ -1388,7 +1376,15 @@ export default {
       loadingTypeInsurances: state => state.typeInsurances.loadingTypeInsurances,
       typeInsurances: state => state.typeInsurances.typeInsurances,
       loadingBloodTypes: state => state.bloodTypes.loadingBloodTypes,
-      bloodTypes: state => state.bloodTypes.bloodTypes
+      bloodTypes: state => state.bloodTypes.bloodTypes,
+      loadingRelations: state => state.relations.loadingRelations,
+      relations: state => state.relations.relations,
+      loadingLimitations: state => state.limitations.loadingLimitations,
+      limitations: state => state.limitations.limitations,
+      loadingProblems: state => state.problems.loadingProblems,
+      problems: state => state.problems.problems,
+      loadingEvents: state => state.events.loadingEvents,
+      events: state => state.events.events
     }),
     filteredSchoolProvince () {
       let provinces = this.provinces
@@ -1431,6 +1427,10 @@ export default {
     this.getHousingTenures()
     this.getTypeInsurances()
     this.getBloodTypes()
+    this.getRelations()
+    this.getLimitations()
+    this.getProblems()
+    this.getEvents()
   },
   methods: {
     ...mapActions({
@@ -1448,7 +1448,11 @@ export default {
       getHousingMaterials: 'housingMaterials/getHousingMaterials',
       getHousingTenures: 'housingTenures/getHousingTenures',
       getTypeInsurances: 'typeInsurances/getTypeInsurances',
-      getBloodTypes: 'bloodTypes/getBloodTypes'
+      getBloodTypes: 'bloodTypes/getBloodTypes',
+      getRelations: 'relations/getRelations',
+      getLimitations: 'limitations/getLimitations',
+      getProblems: 'problems/getProblems',
+      getEvents: 'events/getEvents'
     }),
      add(index) {
       this.inputs.push({ name: '',lastname:'',relationship:'',ocupation:'',age:'',academic:'',work:'' });
