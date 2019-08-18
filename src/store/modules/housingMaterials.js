@@ -14,7 +14,6 @@ export const actions = {
       housingMaterialsAPI.get(payload)
         .then(response => {
           const housingMaterials = response.data.data
-
           commit(types.REPLACE_LOADING_HOUSING_MATERIALS, { status: false })
           commit(types.REPLACE_HOUSING_MATERIALS, { housingMaterials })
 
@@ -33,7 +32,7 @@ export const mutations = {
   [types.REPLACE_LOADING_HOUSING_MATERIALS] (state, { status }) {
     state.loadingHousingMaterials = status
   },
-  [types.REPLACE_HOUSING_TENURES] (state, { housingMaterials }) {
+  [types.REPLACE_HOUSING_MATERIALS] (state, { housingMaterials }) {
     state.housingMaterials = housingMaterials
   }
 }

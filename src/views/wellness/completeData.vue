@@ -163,12 +163,12 @@
                       sm6
                       xs12
                     >
-                      <v-text-field
-                        v-model="form.dni"
-                        label="ESTADO CIVIL"
-                        :rules="rules.dni"
-                        :error="!!formErrores.dni"
-                        :error-messages="formErrores.dni"
+                      <v-autocomplete
+                        v-model="form.school_region"
+                        :items="statesCivil"
+                        label="SELECCIONAR ESTADO CIVIL"
+                        item-text="title"
+                        item-value="id"
                       />
                     </v-flex>
                     <v-flex
@@ -256,36 +256,36 @@
                       sm3
                       xs12
                     >
-                      <v-text-field
-                        v-model="form.dni"
-                        label="TENENCIA"
-                        :rules="rules.dni"
-                        :error="!!formErrores.dni"
-                        :error-messages="formErrores.dni"
+                      <v-autocomplete
+                        v-model="form.school_region"
+                        :items="housingTenures"
+                        label="SELECCIONAR TENENCIA DE VIVIENDA"
+                        item-text="title"
+                        item-value="id"
                       />
                     </v-flex>
                     <v-flex
                       sm3
                       xs12
                     >
-                      <v-text-field
-                        v-model="form.cdni"
-                        label="MATERIAL"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
+                      <v-autocomplete
+                        v-model="form.school_region"
+                        :items="housingMaterials"
+                        label="SELECCIONAR MATERIAL DE LA VIVIENDA"
+                        item-text="title"
+                        item-value="id"
                       />
                     </v-flex>
                     <v-flex
                       sm3
                       xs12
                     >
-                      <v-text-field
-                        v-model="form.dni"
-                        label="TIPO"
-                        :rules="rules.dni"
-                        :error="!!formErrores.dni"
-                        :error-messages="formErrores.dni"
+                      <v-autocomplete
+                        v-model="form.school_region"
+                        :items="typeHousings"
+                        label="SELECCIONAR TIPO DE VIVIENDA"
+                        item-text="title"
+                        item-value="id"
                       />
                     </v-flex>
                     <v-flex
@@ -458,24 +458,24 @@
                       sm6
                       xs12
                     >
-                      <v-text-field
-                        v-model="form.cdni"
+                      <v-autocomplete
+                        v-model="form.school_region"
+                        :items="typeInsurances"
                         label="ELEGIR EL SEGURO QUE CUENTA"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
+                        item-text="title"
+                        item-value="id"
                       />
                     </v-flex>
                     <v-flex
                       sm6
                       xs12
                     >
-                      <v-text-field
-                        v-model="form.cdni"
+                      <v-autocomplete
+                        v-model="form.school_region"
+                        :items="bloodTypes"
                         label="TIPO DE SANGRE"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
+                        item-text="title"
+                        item-value="id"
                       />
                     </v-flex>
                   </v-layout>
@@ -704,7 +704,6 @@
                   <v-btn
                     color="primary"
                     large
-                    @click="next"
                   >
                     Continuar
                   </v-btn>
@@ -1377,7 +1376,19 @@ export default {
       loadingDistricts: state => state.districts.loadingDistricts,
       districts: state => state.districts.districts,
       loadingSchools: state => state.schools.loadingSchools,
-      schools: state => state.schools.schools
+      schools: state => state.schools.schools,
+      loadingStatesCivil: state => state.stateCivil.loadingStatesCivil,
+      statesCivil: state => state.stateCivil.statesCivil,
+      loadingTypeHousings: state => state.typeHousing.loadingTypeHousings,
+      typeHousings: state => state.typeHousing.typeHousings,
+      loadinsHousingMaterials: state => state.housingMaterials.loadingHousingMaterials,
+      housingMaterials: state => state.housingMaterials.housingMaterials,
+      loadingHousingTenures: state => state.housingTenures.loadingHousingTenures,
+      housingTenures: state => state.housingTenures.housingTenures,
+      loadingTypeInsurances: state => state.typeInsurances.loadingTypeInsurances,
+      typeInsurances: state => state.typeInsurances.typeInsurances,
+      loadingBloodTypes: state => state.bloodTypes.loadingBloodTypes,
+      bloodTypes: state => state.bloodTypes.bloodTypes
     }),
     filteredSchoolProvince () {
       let provinces = this.provinces
@@ -1414,6 +1425,12 @@ export default {
     this.getRegions()
     this.getProvinces()
     this.getDistricts()
+    this.getStateCivil()
+    this.getTypeHousings()
+    this.getHousingMaterials()
+    this.getHousingTenures()
+    this.getTypeInsurances()
+    this.getBloodTypes()
   },
   methods: {
     ...mapActions({
@@ -1425,7 +1442,13 @@ export default {
       getProvinces: 'provinces/getProvinces',
       getDistricts: 'districts/getDistricts',
       getSchools: 'schools/getSchools',
-      getVerify: 'admision/getVerify'
+      getVerify: 'admision/getVerify',
+      getStateCivil: 'stateCivil/getStateCivil',
+      getTypeHousings: 'typeHousing/getTypeHousings',
+      getHousingMaterials: 'housingMaterials/getHousingMaterials',
+      getHousingTenures: 'housingTenures/getHousingTenures',
+      getTypeInsurances: 'typeInsurances/getTypeInsurances',
+      getBloodTypes: 'bloodTypes/getBloodTypes'
     }),
      add(index) {
       this.inputs.push({ name: '',lastname:'',relationship:'',ocupation:'',age:'',academic:'',work:'' });
@@ -1433,40 +1456,7 @@ export default {
     remove(index) {
       this.inputs.splice(index, 1);
     },
-    next () {
-      this.getVerify({
-        dni: this.form.dni,
-        examId: this.form.type_exam_id
-      })
-        .then(response => {
-          console.log(response)
-        })
-        .catch((error) => {
-          this.form.dni = this.rules.dni.validForm
-          this.step = 1
-        })
-      var tecactusApi = new TecactusApi('m4XkYiz25N0ZM5m1P028Eu8K69ycO2QhmshdYESU')
-      tecactusApi.Reniec.getDni(this.form.dni)
-        .then(response => {
-          this.form.name = response.data.nombres
-          this.form.father_surname = response.data.apellido_paterno
-          this.form.mother_surname = response.data.apellido_materno
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-      if (this.form.dni != null && this.form.dni === this.form.cdni) {
-        if( this.form.type_exam_id === 0 && this.form.career_id === 0){
-          this.form.type_exam_id = this.rules.type_exam_id.validForm
-          this.form.career_id = this.rules.career_id.validFor
-        } else {
-          this.step = 2
-        }
-      } else {
-        this.form.dni = this.rules.dni.validForm
-        this.form.cdni = this.rules.cdni.validForm
-      }
-    },
+
     school () {
       this.getSchools({ id: this.form.school_district_id })
         .then(response => {
@@ -1481,23 +1471,6 @@ export default {
     },
     reset () {
       this.$refs.form.reset()
-    },
-    submitCreateAdmision () {
-      if (!this.$refs.form.validate()) return false
-
-      this.processingForm = true
-      this.createAdmision({ data: this.form })
-        .then(response => {
-          this.processingForm = false
-          this.$router.push({ condition: 'sgcProductsList' })
-          this.dialog = true
-          this.step = 3
-          this.pdf = response.data.pdf_path
-        })
-        .catch((error) => {
-          this.processingForm = false
-          this.formErrors = error.response.data.errors || {}
-        })
     }
   }
 

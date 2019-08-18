@@ -14,7 +14,7 @@ export const actions = {
       stateCivilAPI.get(payload)
         .then(response => {
           const statesCivil = response.data.data
-
+          console.log(statesCivil)
           commit(types.REPLACE_LOADING_STATES_CIVIL, { status: false })
           commit(types.REPLACE_STATES_CIVIL, { statesCivil })
 
