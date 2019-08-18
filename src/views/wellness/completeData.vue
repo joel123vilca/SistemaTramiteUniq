@@ -76,7 +76,7 @@
                 ref="form"
                 v-model="validForm"
                 lazy-validation
-                @submit.prevent="submitCreateAdmision"
+                @submit.prevent="submitStuden"
               >
                 <v-stepper-content step="1">
                   <v-layout
@@ -87,19 +87,9 @@
                       xs12
                       md6
                     >
-                      <v-autocomplete
-                        v-model="form.type_exam_id"
-                        :items="typeexams"
-                        :loading="loadingTypeexams"
-                        dense
-                        clearable
-                        small-chips
-                        label="SELECCIONAR MODALIDAD DE EXAMEN"
-                        item-text="title"
-                        item-value="id"
-                        :rules="rules.type_exam_id"
-                        :error="!!formErrores.type_exam_id"
-                        :error-messages="formErrores.type_exam_id"
+                      <v-text-field
+                        v-model="form.new_address"
+                        label="DIRECCIÓN DE SU VIVIENDA"
                       />
                     </v-flex>
                     <v-flex
@@ -107,51 +97,12 @@
                       xs12
                     >
                       <v-autocomplete
-                        v-model="form.career_id"
-                        :items="careers"
-                        :loading="loadingCareers"
+                        v-model="form.related"
+                        :items="relateds"
                         dense
                         clearable
                         small-chips
-                        label="SELECCIONAR CARRERA"
-                        item-text="title"
-                        item-value="id"
-                        :rules="rules.career_id"
-                        :error="!!formErrores.career_id"
-                        :error-messages="formErrores.career_id"
-                      />
-                    </v-flex>
-                  </v-layout>
-                  <v-layout
-                    row
-                    wrap
-                  >
-                    <v-flex
-                      sm6
-                      xs12
-                    >
-                      <v-text-field
-                        v-model="form.dni"
-                        label="DNI"
-                        :rules="rules.dni"
-                        :error="!!formErrores.dni"
-                        :error-messages="formErrores.dni"
-                        :counter="8"
-                        maxlength="8"
-                      />
-                    </v-flex>
-                    <v-flex
-                      sm6
-                      xs12
-                    >
-                      <v-text-field
-                        v-model="form.cdni"
-                        label="CONFIRMAR DNI"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
-                        :counter="8"
-                        maxlength="8"
+                        label="USTED PERTENECE A?"
                       />
                     </v-flex>
                   </v-layout>
@@ -164,25 +115,13 @@
                       xs12
                     >
                       <v-autocomplete
-                        v-model="form.school_region"
+                        v-model="form.state_id"
                         :items="statesCivil"
                         label="SELECCIONAR ESTADO CIVIL"
                         item-text="title"
                         item-value="id"
                       />
                     </v-flex>
-                    <v-flex
-                      sm6
-                      xs12
-                    >
-                      <v-text-field
-                        v-model="form.cdni"
-                        label="¿USTED PERTENECE A?"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
-                      />
-                    </v-flex>
                   </v-layout>
                   <v-layout
                     row
@@ -192,16 +131,9 @@
                       sm6
                       xs12
                     >
-                      <v-radio-group v-model="row" row>
-                        <v-radio label="Si" value="radio-1"></v-radio>
-                        <v-radio label="No" value="radio-2"></v-radio>
-                        <v-text-field
-                        v-model="form.cdni"
-                        label="INDICAR TIPO DE TRANSPORTE:"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
-                      />
+                      <v-radio-group v-model="form.use_transport" row>
+                        <v-radio label="Si" :value="true"></v-radio>
+                        <v-radio label="No" :value="false"></v-radio>
                       </v-radio-group>
                     </v-flex>
                     <v-flex
@@ -209,11 +141,39 @@
                       xs12
                     >
                       <v-text-field
-                        v-model="form.cdni"
-                        label="¿TIEMPO ESTIMADO DE TRASLADO DE LA UNIVERSIDAD A SU DOMICILIO?"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
+                        v-model="form.type_transport"
+                        label="TIPO DE TRANSPORTE"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.cycle"
+                        label="cycle"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.year"
+                        label="añor "
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.home_transfer_hours"
+                        label="¿TIEMPO ESTIMADO DE TRASLADO DE LA UNIVERSIDAD A SU DOMICILIO EN HORAS?"
+                      />
+                      <v-text-field
+                        v-model="form.minutes_home_transfer"
+                        label="¿TIEMPO ESTIMADO DE TRASLADO DE LA UNIVERSIDAD A SU DOMICILIO EN MINUTOS?"
                       />
                     </v-flex>
                   </v-layout>
@@ -225,24 +185,18 @@
                       sm6
                       xs12
                     >
-                      <v-text-field
-                        v-model="form.dni"
-                        label="¿USTED ACTUALMENTE TRABAJA?"
-                        :rules="rules.dni"
-                        :error="!!formErrores.dni"
-                        :error-messages="formErrores.dni"
-                      />
+                      <v-radio-group v-model="form.works" row label="¿ACTUALMENTE TRABAJA?">
+                        <v-radio label="Si" :value="true"></v-radio>
+                        <v-radio label="No" :value="false"></v-radio>
+                      </v-radio-group>
                     </v-flex>
                     <v-flex
                       sm6
                       xs12
                     >
                       <v-text-field
-                        v-model="form.cdni"
+                        v-model="form.work_hours"
                         label="¿CUANTAS HORAS TRABAJA A LA SEMANA?"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
                       />
                     </v-flex>
                   </v-layout>
@@ -257,7 +211,7 @@
                       xs12
                     >
                       <v-autocomplete
-                        v-model="form.school_region"
+                        v-model="form.housing_tenure_id"
                         :items="housingTenures"
                         label="SELECCIONAR TENENCIA DE VIVIENDA"
                         item-text="title"
@@ -269,7 +223,7 @@
                       xs12
                     >
                       <v-autocomplete
-                        v-model="form.school_region"
+                        v-model="form.housing_material_id"
                         :items="housingMaterials"
                         label="SELECCIONAR MATERIAL DE LA VIVIENDA"
                         item-text="title"
@@ -281,7 +235,7 @@
                       xs12
                     >
                       <v-autocomplete
-                        v-model="form.school_region"
+                        v-model="form.type_housing_id"
                         :items="typeHousings"
                         label="SELECCIONAR TIPO DE VIVIENDA"
                         item-text="title"
@@ -292,22 +246,19 @@
                       sm3
                       xs12
                     >
-                      <v-text-field
-                        v-model="form.cdni"
+                      <v-autocomplete
+                        v-model="form.number_rooms"
+                        :items="rooms"
                         label="NUMERO DE HABITACIONES"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
                       />
                     </v-flex>
                   </v-layout>
                   <h5>Servicios con los que cuenta su vivienda:</h5>
-                  <p>{{ selected }}</p>
                   <v-layout>
-                    <v-checkbox v-model="selected" label="LUZ ELECTRICA" value="luz" class="mx-2"></v-checkbox>
-                    <v-checkbox v-model="selected" label="RED PÚBLICA AGUA DENTRO DE VIVIENDA" value="agua" class="mx-2"></v-checkbox>
-                    <v-checkbox v-model="selected" label="RED PÚBLICA DESAGUE DENTRO DE VIVIENDA" value="desague" class="mx-2"></v-checkbox>
-                    <v-checkbox v-model="selected" label="CONEXION A INTERNET" value="internet" class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="form.electric_light" label="LUZ ELECTRICA" input-value="true" value class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="form.water_service" label="RED PÚBLICA AGUA DENTRO DE VIVIENDA" input-value="true" value class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="form.drain_service" label="RED PÚBLICA DESAGUE DENTRO DE VIVIENDA" input-value="true" value class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="form.internet_connection" label="CONEXION A INTERNET" input-value="true" value class="mx-2"></v-checkbox>
                   </v-layout>
                   <h2>CONTACTO DE EMERGENCIA</h2>
                   <v-layout
@@ -319,11 +270,8 @@
                       xs12
                     >
                       <v-text-field
-                        v-model="form.cdni"
-                        label="NOMBRE"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
+                        v-model="form.emergency_contact_name"
+                        label="NOMBRES"
                       />
                     </v-flex>
                     <v-flex
@@ -331,40 +279,21 @@
                       xs12
                     >
                       <v-text-field
-                        v-model="form.cdni"
+                        v-model="form.emergency_contact_telephon"
                         label="NÚMERO TELEFONO"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
                       />
                     </v-flex>
                   </v-layout>
                   <h2>INFORMACIÓN GENERAL DE SALUD</h2>
                   <p>¿usted tiene una dificultad o limitación permanente?</p>
+                  <p>{{ form.limitations }}</p>
                   <v-layout>
-                    <v-checkbox v-model="selected" v-for="(limitation) in limitations" :key="limitation.id"  :label="limitation.title" :value="limitation.id" class="mx-2"></v-checkbox>
-                  </v-layout>
-                  <v-layout
-                    row
-                    wrap
-                  >
-                    <v-flex
-                      sm12
-                      xs12
-                    >
-                      <v-text-field
-                        v-model="form.cdni"
-                        label="ESPECIFIQUE LA ALGUNA OTRA DIFICULTAD O LIMITACIÓN"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
-                      />
-                    </v-flex>
+                    <v-checkbox v-model="form.limitations" v-for="(limitation) in limitations" :key="limitation.id"  :label="limitation.title" :value="limitation.id" class="mx-2"></v-checkbox>
                   </v-layout>
                   <p>¿Usted padece de una enfermedad crónica?</p>
-                  <v-radio-group v-model="row" row>
-                    <v-radio label="Si" value="radio-1"></v-radio>
-                    <v-radio label="No" value="radio-2"></v-radio>
+                  <v-radio-group v-model="form.chronic_disease" row>
+                    <v-radio label="Si" :value="true"></v-radio>
+                    <v-radio label="No" :value="false"></v-radio>
                   </v-radio-group>
                   <v-layout
                     row
@@ -375,23 +304,20 @@
                       xs12
                     >
                       <v-text-field
-                        v-model="form.cdni"
+                        v-model="form.name_chronic_disease"
                         label="ESPECIFIQUE LA ENFERMEDAD CRONICA"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
                       />
                     </v-flex>
                   </v-layout>
                   <p>¿Recibe un tratamiento para dicha enfermedad?</p>
-                  <v-radio-group v-model="row" row>
-                    <v-radio label="Si" value="radio-1"></v-radio>
-                    <v-radio label="No" value="radio-2"></v-radio>
+                  <v-radio-group v-model="form.disease_treatment" row>
+                    <v-radio label="Si" :value="true"></v-radio>
+                    <v-radio label="No" :value="false"></v-radio>
                   </v-radio-group>
                   <p>¿Usted ha tenido una intervención quirúrgica anteriormente?</p>
-                  <v-radio-group v-model="row" row>
-                    <v-radio label="Si" value="radio-1"></v-radio>
-                    <v-radio label="No" value="radio-2"></v-radio>
+                  <v-radio-group v-model="form.surgical_intervention_status" row>
+                    <v-radio label="Si" :value="true"></v-radio>
+                    <v-radio label="No" :value="false"></v-radio>
                   </v-radio-group>
                   <v-layout
                     row
@@ -402,45 +328,54 @@
                       xs12
                     >
                       <v-text-field
-                        v-model="form.cdni"
+                        v-model="form.surgical_intervention"
                         label="ESPECIFIQUE "
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
                       />
                     </v-flex>
                     <v-flex
-                      sm6
+                      sm3
                       xs12
                     >
                       <v-text-field
-                        v-model="form.cdni"
-                        label="INDIQUE LA FECHA CUÁNDO SE REALIZO"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
+                        v-model="form.year_surgical_intervention"
+                        label="INDIQUE EL AÑO CUÁNDO SE REALIZO"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm3
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.surgical_intervention_month"
+                        label="INDIQUE EL MES CUÁNDO SE REALIZO"
                       />
                     </v-flex>
                   </v-layout>
                   <p>¿Se realiza anualmente chequeos médicos?</p>
-                  <v-radio-group v-model="row" row>
-                    <v-radio label="Si" value="radio-1"></v-radio>
-                    <v-radio label="No" value="radio-2"></v-radio>
+                  <v-radio-group v-model="form.annual_medical_checkup" row>
+                    <v-radio label="Si" :value="true"></v-radio>
+                    <v-radio label="No" :value="false"></v-radio>
                   </v-radio-group>
                   <v-layout
                     row
                     wrap
                   >
                     <v-flex
-                      sm6
+                      sm3
                       xs12
                     >
                       <v-text-field
-                        v-model="form.cdni"
-                        label="INDIQUE LA FECHA CUÁNDO SE REALIZO"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
+                        v-model="form.year_last_medical_checkup"
+                        label="INDIQUE EL AÑO CUÁNDO SE REALIZO"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm3
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.month_last_medical_checkup"
+                        label="INDIQUE EL MES CUÁNDO SE REALIZO"
                       />
                     </v-flex>
                   </v-layout>
@@ -454,7 +389,7 @@
                       xs12
                     >
                       <v-autocomplete
-                        v-model="form.school_region"
+                        v-model="form.type_insurance_id"
                         :items="typeInsurances"
                         label="ELEGIR EL SEGURO QUE CUENTA"
                         item-text="title"
@@ -466,7 +401,7 @@
                       xs12
                     >
                       <v-autocomplete
-                        v-model="form.school_region"
+                        v-model="form.blood_type_id"
                         :items="bloodTypes"
                         label="TIPO DE SANGRE"
                         item-text="title"
@@ -484,52 +419,44 @@
                       sm3
                       xs12
                     >
-                      <v-text-field
-                        v-model="form.cdni"
-                        label="DESAYUNO"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
+                      <v-autocomplete
+                        v-model="form.number_rooms"
+                        :items="places"
+                        label="luagares"
                       />
                     </v-flex>
                     <v-flex
                       sm3
                       xs12
                     >
-                      <v-text-field
-                        v-model="form.cdni"
-                        label="ALMUERZO"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
+                      <v-autocomplete
+                        v-model="form.foods"
+                        :items="foods"
+                        label="foods"
                       />
                     </v-flex>
                     <v-flex
                       sm3
                       xs12
                     >
-                      <v-text-field
-                        v-model="form.cdni"
-                        label="CENA"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
+                      <v-autocomplete
+                        v-model="form.frecuency"
+                        :items="frecuency"
+                        label="frecuency"
                       />
                     </v-flex>
                     <v-flex
                       sm3
                       xs12
                     >
-                      <v-text-field
-                        v-model="form.cdni"
-                        label="MERIENDAS"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
+                      <v-autocomplete
+                        v-model="form.mail_meals"
+                        :items="meals"
+                        label="mail_meals"
                       />
                     </v-flex>
                   </v-layout>
-                  <p>¿Usted consume con qué frecuencia las siguientes comidas?</p>
+                  <!-- <p>¿Usted consume con qué frecuencia las siguientes comidas?</p>
                   <v-layout
                     row
                     wrap
@@ -541,9 +468,6 @@
                       <v-text-field
                         v-model="form.cdni"
                         label="DESAYUNO"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
                       />
                     </v-flex>
                     <v-flex
@@ -553,9 +477,6 @@
                       <v-text-field
                         v-model="form.cdni"
                         label="ALMUERZO"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
                       />
                     </v-flex>
                     <v-flex
@@ -565,45 +486,60 @@
                       <v-text-field
                         v-model="form.cdni"
                         label="CENA"
-                        :rules="rules.cdni"
-                        :error="!!formErrores.cdni"
-                        :error-messages="formErrores.cdni"
                       />
                     </v-flex>
-                  </v-layout>
+                  </v-layout> -->
                   <h2>INFORMACIÓN SOBRE LA SALUD MENTAL</h2>
                   <p>EN LOS ULTIMOS 6 MESES, ¿HA TENIDO LAS SIGUIENTES MOLESTIAS?</p>
                   <v-layout row
                     wrap>
-                    <v-checkbox v-model="selected" v-for="(problem) in problems" :key="problem.id"  :label="problem.title" :value="problem.id" class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="form.problems" v-for="(problem) in problems" :key="problem.id"  :label="problem.title" :value="problem.id" class="mx-2"></v-checkbox>
                   </v-layout>
                     <p>EN LOS ULTIMOS MESES, ¿ USTED HA SUFRIDO ALGUN EVENTO QUE LE SEA DIFICIL DE MANEJAR?</p>
                   <v-layout row
                     wrap>
-                    <v-checkbox v-model="selected" v-for="(event) in events" :key="event.id"  :label="event.title" :value="event.id" class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="form.events" v-for="(event) in events" :key="event.id"  :label="event.title" :value="event.id" class="mx-2"></v-checkbox>
                   </v-layout>
                   <h2>INFORMACIÓN LA FAMILIA</h2>
                   <p>¿Sus Padres Viven?</p>
-                  <v-radio-group v-model="row" row>
-                    <v-radio label="Si" value="radio-1"></v-radio>
-                    <v-radio label="No" value="radio-2"></v-radio>
+                  <v-radio-group v-model="form.living_parents" row>
+                    <v-radio label="Si" :value="true"></v-radio>
+                    <v-radio label="No" :value="false"></v-radio>
                   </v-radio-group>
                   <p>¿Tiene hermanos?</p>
-                  <v-radio-group v-model="row" row>
-                    <v-radio label="Si" value="radio-1"></v-radio>
-                    <v-radio label="No" value="radio-2"></v-radio>
+                  <v-radio-group v-model="form.brethren" row>
+                    <v-radio label="Si" :value="true"></v-radio>
+                    <v-radio label="No" :value="false"></v-radio>
                   </v-radio-group>
+                  <v-flex
+                      sm4
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.number_brothers"
+                        label="NUMERO DE HERMANOS"
+                      />
+                    </v-flex>
                   <p>¿Tiene Hijos?</p>
-                  <v-radio-group v-model="row" row>
-                    <v-radio label="Si" value="radio-1"></v-radio>
-                    <v-radio label="No" value="radio-2"></v-radio>
+                  <v-radio-group v-model="form.children" row>
+                    <v-radio label="Si" :value="true"></v-radio>
+                    <v-radio label="No" :value="false"></v-radio>
                   </v-radio-group>
+                  <v-flex
+                      sm4
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.number_children"
+                        label="NUMERO DE HIJOS"
+                      />
+                    </v-flex>
                   <v-flex
                       sm6
                       xs12
                     >
                       <v-autocomplete
-                        v-model="form.school_region"
+                        v-model="form.relation_id"
                         :items="relations"
                         label="¿CON QUIENES VIVE?"
                         item-text="title"
@@ -611,7 +547,7 @@
                       />
                     </v-flex>
                   <p>Indique para cada miembro de su familia</p>
-                  <div v-for="(input,k) in inputs" :key="k">
+                  <div v-for="(familyMember,k) in form.familyMembers" :key="k">
                     <v-layout
                     row
                     wrap
@@ -621,7 +557,7 @@
                       xs12
                     >
                       <v-text-field
-                        v-model="input.name"
+                        v-model="familyMember.full_name"
                         label="nombre"
                       />
                     </v-flex>
@@ -630,7 +566,7 @@
                       xs12
                     >
                       <v-text-field
-                        v-model="input.lastname"
+                        v-model="familyMember.address"
                         label="apellidos"
                       />
                     </v-flex>
@@ -639,7 +575,7 @@
                       xs12
                     >
                       <v-text-field
-                        v-model="input.age"
+                        v-model="familyMember.chronic_health_problem"
                         label="edad"
                       />
                     </v-flex>
@@ -648,7 +584,7 @@
                       xs12
                     >
                       <v-text-field
-                        v-model="input.relationship"
+                        v-model="familyMember.chronic_health_name"
                         label="parentesco"
                       />
                     </v-flex>
@@ -657,7 +593,7 @@
                       xs12
                     >
                       <v-text-field
-                        v-model="input.ocupation"
+                        v-model="familyMember.treatment"
                         label="ocupación"
                       />
                     </v-flex>
@@ -666,7 +602,7 @@
                       xs12
                     >
                       <v-text-field
-                        v-model="input.academic"
+                        v-model="familyMember.disability"
                         label="grado academico"
                       />
                     </v-flex>
@@ -675,27 +611,29 @@
                       xs12
                     >
                       <v-text-field
-                        v-model="input.work"
+                        v-model="familyMember.disability_name"
                         label="condicion laboral"
                       />
                     </v-flex>
                     </v-layout>
                     <span>
-                      <v-btn class="mx-2" @click="remove(k)" v-show="k || ( !k && inputs.length > 1)" fab dark small color="error">
+                      <v-btn class="mx-2" @click="remove(k)" v-show="k || ( !k && form.familyMembers.length > 1)" fab dark small color="error">
                         <v-icon dark>remove</v-icon>
                       </v-btn>
-                      <v-btn class="mx-2" @click="add(k)" v-show="k == inputs.length-1" fab dark small color="indigo">
+                      <v-btn class="mx-2" @click="add(k)" v-show="k == form.familyMembers.length-1" fab dark small color="indigo">
                         <v-icon dark>add</v-icon>
                       </v-btn>
                     </span>
                   </div>
                   <v-btn
-                    color="primary"
-                    large
-                  >
-                    Continuar
-                  </v-btn>
+                        type="submit"
+                        color="success"
+                        :loading="processingForm"
+                      >
+                        GUARDAR INCRIPCIÓN
+                      </v-btn>
                 </v-stepper-content>
+                </v-form>
                 <v-stepper-content step="2">
                   <v-layout
                     v-model="panel"
@@ -1075,13 +1013,7 @@
                     width="600"
                   >
                     <template v-slot:activator="{ on }">
-                      <v-btn
-                        type="submit"
-                        color="success"
-                        :loading="processingForm"
-                      >
-                        GUARDAR INCRIPCIÓN
-                      </v-btn>
+
                     </template>
 
                     <v-card>
@@ -1152,7 +1084,6 @@
                     </v-card>
                   </v-dialog>
                 </v-stepper-content>
-              </v-form>
               <v-stepper-content step="3">
                 <v-layout
                   row
@@ -1196,17 +1127,6 @@ export default {
   },
   data () {
     return {
-      inputs: [
-        {
-          name: '',
-          lastname:'',
-          age:'',
-          relationship:'',
-          ocupation:'',
-          academic:'',
-          work:''
-        }
-      ],
       selected: [],
       column: null,
       row: null,
@@ -1219,6 +1139,14 @@ export default {
       imageUrl: '',
       schooles:[],
       panel: [false, true],
+      relateds: [
+        'Comunidad campesina',
+        'Comunidad nativa',
+        'No pertenencia a ninguna comunidad campesina o nativa'
+      ],
+      rooms:[
+        '1', '2' ,'3', '4', '5 a mas'
+      ],
       formErrors: {},
       formErrores: {},
       targetIssueDate: false,
@@ -1227,23 +1155,71 @@ export default {
         {
           avatar: require('@/assets/dos.png'),
           title: 'Imprima su ficha de preinscripción.'
-        },
-        { divider: true, inset: true },
-        {
-          avatar: require('@/assets/uno.png'),
-          title: 'Pague el costo de su postulación  hoy  caja de la UNIQ  y apartir de mañana en  el Banco de la Nación indicando su Nª de DNI.'
-        },
-        { divider: true, inset: true },
-        {
-          avatar: require('@/assets/tres.png'),
-          title: 'Acerquese a los puntos de inscripción portando su ficha de Preinscripción, su voucher del banco de la Nación y los requisitos.'
         }
       ],
       sexo: [
         'Masculino',
         'Femenino'
       ],
+      places: [ 'Pensión', 'Hogar', 'Universidad', 'Otro' ],
+      foods: [ 'Desayuno', 'Almuerzo', 'Cena', 'Meriendas' ],
+      frecuency: [ 'Diaramente', '4 a más veces por semana', 'Una a dos veces por semana', 'Nunca' ],
+      meals: [ 'Desayuno', 'Almuerzo', 'Cena' ],
       form: {
+        new_address:'dd',
+        related:'Comunidad nativa',
+        state_id:1,
+        use_transport:'',
+        home_transfer_hours: 1,
+        minutes_home_transfer: 1,
+        works: false,
+        work_hours: 1,
+        emergency_contact_name:'ff',
+        emergency_contact_telephon:'9535',
+        housing_tenure_id: 1,
+        housing_material_id: 1,
+        type_housing_id:1,
+        number_rooms: '1',
+        electric_light: true,
+        water_service: false,
+        drain_service: false,
+        internet_connection: false,
+        limitations:[],
+        chronic_disease: false,
+        name_chronic_disease: 'dd',
+        disease_treatment: false,
+        surgical_intervention_status: false,
+        surgical_intervention: 'dd',
+        year_surgical_intervention: 1,
+        surgical_intervention_month: 1,
+        annual_medical_checkup: false,
+        year_last_medical_checkup: 1,
+        month_last_medical_checkup: 1,
+        type_insurance_id: 1,
+        blood_type_id:1,
+        places_to_eat: 'pension',
+        foods: '',
+        frecuency: '',
+        mail_meals: '',
+        events: [],
+        problems:[],
+        living_parents: false,
+        brethren: false,
+        number_brothers: '',
+        children: false,
+        number_children: '',
+        relation_id: '',
+        familyMembers: [
+          {
+            full_name: '',
+            address:'',
+            chronic_health_problem:false,
+            chronic_health_name:'',
+            treatment:false,
+            disability:false,
+            disability_name:false
+          }
+        ],
         dni: '',
         cdni: '',
         name: '',
@@ -1452,13 +1428,22 @@ export default {
       getRelations: 'relations/getRelations',
       getLimitations: 'limitations/getLimitations',
       getProblems: 'problems/getProblems',
-      getEvents: 'events/getEvents'
+      getEvents: 'events/getEvents',
+      updateStudents: 'students/updateStudents',
     }),
      add(index) {
-      this.inputs.push({ name: '',lastname:'',relationship:'',ocupation:'',age:'',academic:'',work:'' });
+      this.form.familyMembers.push({
+            full_name: '',
+            address:'',
+            chronic_health_problem:false,
+            chronic_health_name:'',
+            treatment:false,
+            disability:false,
+            disability_name:false
+          });
     },
     remove(index) {
-      this.inputs.splice(index, 1);
+      this.form.familyMembers.splice(index, 1);
     },
 
     school () {
@@ -1475,6 +1460,21 @@ export default {
     },
     reset () {
       this.$refs.form.reset()
+    },
+    submitStuden () {
+      console.log(this.form)
+      this.processingForm = true
+      this.updateStudents({
+        id: 1,
+        data: this.form
+      })
+      .then(response => {
+          this.processingForm = false
+        })
+        .catch((error) => {
+          this.processingForm = false
+          this.formErrors = error.response.data.errors || {}
+        })
     }
   }
 

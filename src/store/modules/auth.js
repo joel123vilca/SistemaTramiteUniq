@@ -75,7 +75,7 @@ export const actions = {
 
           resolve(response)
 
-          payload.router.push({ name: 'admin' })
+          payload.router.push({ name: 'login' })
         })
         .catch(error => {
           reject(error)

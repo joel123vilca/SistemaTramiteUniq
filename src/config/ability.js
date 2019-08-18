@@ -29,7 +29,7 @@ export function defineAbilitiesFor (user = {}) {
         }
       ]
 
-    case 'Registrador':
+    case 'Bienestar':
       return [
         {
           subject: 'Registereds',
