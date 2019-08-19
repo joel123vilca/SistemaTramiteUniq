@@ -60,6 +60,7 @@
                           required
                           placeholder="DNI"
                           outlined
+                          maxlength="8"
                         ></v-text-field>
                       </v-card-text>
                     <v-card-actions>

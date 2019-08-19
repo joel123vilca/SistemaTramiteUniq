@@ -92,6 +92,13 @@
                       <v-text-field
                         v-model="form.new_address"
                         label="DIRECCIÓN DE SU VIVIENDA"
+                        :rules="rules.new_address"
+                        :error="!!formErrors.new_address"
+                        :error-messages="formErrors.new_address"
+                        @keyup="() => {
+                          formErrors.new_address = undefined
+                          delete formErrors.new_address
+                        }"
                       />
                     </v-flex>
                     <v-flex
@@ -105,6 +112,13 @@
                         clearable
                         small-chips
                         label="USTED PERTENECE A?"
+                        :rules="rules.related"
+                        :error="!!formErrors.related"
+                        :error-messages="formErrors.related"
+                        @keyup="() => {
+                          formErrors.related = undefined
+                          delete formErrors.related
+                        }"
                       />
                     </v-flex>
                   </v-layout>
@@ -122,6 +136,13 @@
                         label="SELECCIONAR ESTADO CIVIL"
                         item-text="title"
                         item-value="id"
+                        :rules="rules.state_id"
+                        :error="!!formErrors.state_id"
+                        :error-messages="formErrors.state_id"
+                        @keyup="() => {
+                          formErrors.state_id = undefined
+                          delete formErrors.state_id
+                        }"
                       />
                     </v-flex>
                   </v-layout>
@@ -136,6 +157,13 @@
                       <v-text-field
                         v-model="form.cycle"
                         label="CICLO"
+                        :rules="rules.cycle"
+                        :error="!!formErrors.cycle"
+                        :error-messages="formErrors.cycle"
+                        @keyup="() => {
+                          formErrors.cycle = undefined
+                          delete formErrors.cycle
+                        }"
                       />
                     </v-flex>
                     <v-flex
@@ -145,6 +173,13 @@
                       <v-text-field
                         v-model="form.year"
                         label="AÑO"
+                        :rules="rules.year"
+                        :error="!!formErrors.year"
+                        :error-messages="formErrors.year"
+                        @keyup="() => {
+                          formErrors.year = undefined
+                          delete formErrors.year
+                        }"
                       />
                     </v-flex>
                     <v-flex
@@ -173,6 +208,14 @@
                       <v-text-field
                         v-model="form.home_transfer_hours"
                         label="¿TIEMPO ESTIMADO DE TRASLADO DE LA UNIVERSIDAD A SU DOMICILIO EN HORAS?"
+                        :rules="rules.home_transfer_hours"
+                        :error="!!formErrors.home_transfer_hours"
+                        :error-messages="formErrors.home_transfer_hours"
+                        @keyup="() => {
+                          formErrors.home_transfer_hours = undefined
+                          delete formErrors.home_transfer_hours
+                        }"
+                        maxlength="2"
                       />
                     </v-flex>
                     <v-flex
@@ -182,6 +225,14 @@
                       <v-text-field
                         v-model="form.minutes_home_transfer"
                         label="¿TIEMPO ESTIMADO DE TRASLADO DE LA UNIVERSIDAD A SU DOMICILIO EN MINUTOS?"
+                        :rules="rules.minutes_home_transfer"
+                        :error="!!formErrors.minutes_home_transfer"
+                        :error-messages="formErrors.minutes_home_transfer"
+                        @keyup="() => {
+                          formErrors.minutes_home_transfer = undefined
+                          delete formErrors.minutes_home_transfer
+                        }"
+                        maxlength="2"
                       />
                     </v-flex>
                   </v-layout>
@@ -225,6 +276,13 @@
                         label="SELECCIONAR TENENCIA DE VIVIENDA"
                         item-text="title"
                         item-value="id"
+                        :rules="rules.housing_tenure_id"
+                        :error="!!formErrors.housing_tenure_id"
+                        :error-messages="formErrors.housing_tenure_id"
+                        @keyup="() => {
+                          formErrors.housing_tenure_id = undefined
+                          delete formErrors.housing_tenure_id
+                        }"
                       />
                     </v-flex>
                     <v-flex
@@ -237,6 +295,13 @@
                         label="SELECCIONAR MATERIAL DE LA VIVIENDA"
                         item-text="title"
                         item-value="id"
+                        :rules="rules.housing_material_id"
+                        :error="!!formErrors.housing_material_id"
+                        :error-messages="formErrors.housing_material_id"
+                        @keyup="() => {
+                          formErrors.housing_material_id= undefined
+                          delete formErrors.housing_material_id
+                        }"
                       />
                     </v-flex>
                     <v-flex
@@ -249,6 +314,13 @@
                         label="SELECCIONAR TIPO DE VIVIENDA"
                         item-text="title"
                         item-value="id"
+                        :rules="rules.type_housing_id"
+                        :error="!!formErrors.type_housing_id"
+                        :error-messages="formErrors.type_housing_id"
+                        @keyup="() => {
+                          formErrors.type_housing_id= undefined
+                          delete formErrors.type_housing_id
+                        }"
                       />
                     </v-flex>
                     <v-flex
@@ -259,6 +331,13 @@
                         v-model="form.number_rooms"
                         :items="rooms"
                         label="NUMERO DE HABITACIONES"
+                         :rules="rules.number_rooms"
+                        :error="!!formErrors.number_rooms"
+                        :error-messages="formErrors.number_rooms"
+                        @keyup="() => {
+                          formErrors.number_rooms= undefined
+                          delete formErrors.number_rooms
+                        }"
                       />
                     </v-flex>
                   </v-layout>
@@ -281,6 +360,13 @@
                       <v-text-field
                         v-model="form.emergency_contact_name"
                         label="NOMBRES"
+                        :rules="rules.emergency_contact_name"
+                        :error="!!formErrors.emergency_contact_name"
+                        :error-messages="formErrors.emergency_contact_name"
+                        @keyup="() => {
+                          formErrors.emergency_contact_name= undefined
+                          delete formErrors.emergency_contact_name
+                        }"
                       />
                     </v-flex>
                     <v-flex
@@ -290,6 +376,13 @@
                       <v-text-field
                         v-model="form.emergency_contact_telephon"
                         label="NÚMERO TELEFONO"
+                        :rules="rules.emergency_contact_telephon"
+                        :error="!!formErrors.emergency_contact_telephon"
+                        :error-messages="formErrors.emergency_contact_telephon"
+                        @keyup="() => {
+                          formErrors.emergency_contact_telephon= undefined
+                          delete formErrors.emergency_contact_telephon
+                        }"
                       />
                     </v-flex>
                   </v-layout>
@@ -389,6 +482,13 @@
                         label="ELEGIR EL SEGURO QUE CUENTA"
                         item-text="title"
                         item-value="id"
+                        :rules="rules.type_insurance_id"
+                        :error="!!formErrors.type_insurance_id"
+                        :error-messages="formErrors.type_insurance_id"
+                        @keyup="() => {
+                          formErrors.type_insurance_id= undefined
+                          delete formErrors.type_insurance_id
+                        }"
                       />
                     </v-flex>
                     <v-flex
@@ -401,6 +501,13 @@
                         label="TIPO DE SANGRE"
                         item-text="title"
                         item-value="id"
+                        :rules="rules.blood_type_id"
+                        :error="!!formErrors.blood_type_id"
+                        :error-messages="formErrors.blood_type_id"
+                        @keyup="() => {
+                          formErrors.blood_type_id= undefined
+                          delete formErrors.blood_type_id
+                        }"
                       />
                     </v-flex>
                   </v-layout>
@@ -418,6 +525,13 @@
                         v-model="form.breakfast_place"
                         :items="places"
                         label="DESAYUNO"
+                        :rules="rules.breakfast_place"
+                        :error="!!formErrors.breakfast_place"
+                        :error-messages="formErrors.breakfast_place"
+                        @keyup="() => {
+                          formErrors.breakfast_place= undefined
+                          delete formErrors.breakfast_place
+                        }"
                       />
                     </v-flex>
                     <v-flex
@@ -428,6 +542,13 @@
                         v-model="form.lunch_place"
                         :items="places"
                         label="ALMUERZO"
+                        :rules="rules.lunch_place"
+                        :error="!!formErrors.lunch_place"
+                        :error-messages="formErrors.lunch_place"
+                        @keyup="() => {
+                          formErrors.lunch_place= undefined
+                          delete formErrors.lunch_place
+                        }"
                       />
                     </v-flex>
                     <v-flex
@@ -438,6 +559,13 @@
                         v-model="form.dinner_place"
                         :items="places"
                         label="CENA"
+                        :rules="rules.dinner_place"
+                        :error="!!formErrors.dinner_place"
+                        :error-messages="formErrors.dinner_place"
+                        @keyup="() => {
+                          formErrors.dinner_place= undefined
+                          delete formErrors.dinner_place
+                        }"
                       />
                     </v-flex>
                     <v-flex
@@ -448,6 +576,13 @@
                         v-model="form.meal_place"
                         :items="places"
                         label="MERIENDAS"
+                        :rules="rules.meal_place"
+                        :error="!!formErrors.meal_place"
+                        :error-messages="formErrors.meal_place"
+                        @keyup="() => {
+                          formErrors.meal_place= undefined
+                          delete formErrors.meal_place
+                        }"
                       />
                     </v-flex>
                   </v-layout>
@@ -461,9 +596,16 @@
                       xs12
                     >
                       <v-autocomplete
-                        v-model="form.breakfastf_recuency"
+                        v-model="form.breakfast_frecuency"
                         :items="frecuency"
                         label="DESAYUNO"
+                        :rules="rules.breakfast_frecuency"
+                        :error="!!formErrors.breakfast_frecuency"
+                        :error-messages="formErrors.breakfast_frecuency"
+                        @keyup="() => {
+                          formErrors.breakfast_frecuency= undefined
+                          delete formErrors.breakfast_frecuency
+                        }"
                       />
                     </v-flex>
                     <v-flex
@@ -474,6 +616,13 @@
                         v-model="form.lunch_frecuency"
                         :items="frecuency"
                         label="ALMUERZO"
+                        :rules="rules.lunch_frecuency"
+                        :error="!!formErrors.lunch_frecuency"
+                        :error-messages="formErrors.lunch_frecuency"
+                        @keyup="() => {
+                          formErrors.lunch_frecuency= undefined
+                          delete formErrors.lunch_frecuency
+                        }"
                       />
                     </v-flex>
                     <v-flex
@@ -484,6 +633,13 @@
                         v-model="form.dinner_frecuency"
                         :items="frecuency"
                         label="CENA"
+                        :rules="rules.dinner_frecuency"
+                        :error="!!formErrors.dinner_frecuency"
+                        :error-messages="formErrors.dinner_frecuency"
+                        @keyup="() => {
+                          formErrors.dinner_frecuency= undefined
+                          delete formErrors.dinner_frecuency
+                        }"
                       />
                     </v-flex>
                   </v-layout>
@@ -801,7 +957,7 @@ export default {
         lunch_place: '',
         dinner_place: '',
         meal_place: '',
-        breakfastf_recuency: '',
+        breakfast_frecuency: '',
         lunch_frecuency: '',
         dinner_frecuency: '',
         events: [],
@@ -834,9 +990,76 @@ export default {
       processing: false,
 
       rules: {
-        relation_id: [
-          v => !!v || 'Seleccionar modalidad de requerido.'
+        related: [
+          v => !!v || 'Seleccionar pertenecia de requerido.'
+        ],
+        new_address: [
+          v => !!v || ' Su dirección es requerido.'
+        ],
+        cycle: [
+          v => !!v || 'Ciclo es requerido.'
+        ],
+        year: [
+          v => !!v || 'Año es requerido.'
+        ],
+        state_id: [
+          v => !!v || 'Su estado civil es requerido.'
+        ],
+        home_transfer_hours:[
+          v => !!v || 'las horas es requerido.',
+          v => /^[0-9]{2}$/.test(v) || 'Ingresar solo numeros y 2 digitos.'
+        ],
+        minutes_home_transfer:[
+          v => !!v || 'los minutos es requerido.',
+          v => /^[0-9]{2}$/.test(v) || 'Ingresar solo numeros y 2 digitos.'
+        ],
+        housing_tenure_id: [
+          v => !!v || 'Seleccione  es requerido.'
+        ],
+        housing_material_id: [
+          v => !!v || 'Seleccione  es requerido.'
+        ],
+        type_housing_id: [
+          v => !!v || 'Seleccione  es requerido.'
+        ],
+        number_rooms: [
+          v => !!v || 'Seleccione  es requerido.'
+        ],
+        emergency_contact_name: [
+          v => !!v || 'Nombres  es requerido.'
+        ],
+        emergency_contact_telephon: [
+          v => !!v || 'Numero  es requerido.',
+          v => /^[0-9]{9}$/.test(v) || 'Ingresar solo numeros y 9 digitos.'
+        ],
+        type_insurance_id: [
+          v => !!v || 'Seleccione  es requerido.'
+        ],
+        blood_type_id: [
+          v => !!v || 'Seleccione  es requerido.'
+        ],
+        breakfast_place: [
+          v => !!v || 'Seleccione  es requerido.'
+        ],
+        lunch_place: [
+          v => !!v || 'Seleccione  es requerido.'
+        ],
+        dinner_place: [
+          v => !!v || 'Seleccione  es requerido.'
+        ],
+        meal_place: [
+          v => !!v || 'Seleccione  es requerido.'
+        ],
+        breakfast_frecuency: [
+          v => !!v || 'Seleccione  es requerido.'
+        ],
+        lunch_frecuency: [
+          v => !!v || 'Seleccione  es requerido.'
+        ],
+        dinner_frecuency: [
+          v => !!v || 'Seleccione  es requerido.'
         ]
+
       }
     }
   },
@@ -924,7 +1147,8 @@ export default {
       this.form.type_exam = user.type_exam
     },
     submitStuden () {
-      console.log(this.form)
+      if (!this.$refs.form.validate()) return false
+
       this.processingForm = true
       this.updateStudents({
         id: this.form.id,
