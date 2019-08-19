@@ -14,7 +14,6 @@ export const actions = {
       problemsAPI.get(payload)
         .then(response => {
           const problems = response.data.data
-          console.log(problems)
           commit(types.REPLACE_LOADING_PROBLEMS, { status: false })
           commit(types.REPLACE_PROBLEMS, { problems })
 

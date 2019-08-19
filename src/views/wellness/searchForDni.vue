@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
   metaInfo () {
     return { title: 'Universidad Nacional Intercultural de Quillabamba' }
@@ -89,17 +90,30 @@ export default {
       ]
     }
   },
+  computed: {
+    ...mapState({
+      currentStudent: state => state.students.currentStudent
+    })
+  },
   methods:{
+    ...mapActions({
+      getStudent: 'students/getStudent'
+    }),
     getUser(){
-      console.log(this.dni)
-      if(this.dni === '75109922'){
-        this.$router.push({ name: 'completar-ficha' })
-      }else{
-        this.$notify.warning({
+      this.getStudent({
+        dni: this.dni,
+        data: this.form
+      })
+        .then(response => {
+          this.$router.push({ name: 'completar-ficha', params: { response: response.data.data }})
+        })
+        .catch((error) => {
+          this.$notify.warning({
             title: 'UNIQ',
             message: 'NO SE ENCUENTRA SU DNI'
-        })
-      }
+          })
+          this.formErrors = error.response.data.errors || {}
+      })
   }
   }
 

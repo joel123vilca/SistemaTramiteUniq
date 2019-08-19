@@ -3,30 +3,7 @@
     fluid
     grid-list-lg
   >
-    <v-toolbar
-      height="65"
-      app
-      center
-      class="baner"
-    >
-      <v-spacer />
-      <v-avatar
-        :tile="tile"
-        size="60px"
-      >
-        <v-img
-          :src="require('@/assets/uniq.png')"
-        />
-      </v-avatar>
-
-      <h2 class="center">
-        UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA
-      </h2>
-
-      <v-spacer />
-    </v-toolbar>
-    <NotPermission v-if="this.form.dni === null"/>
-    <template v-else>
+    <template>
       <v-layout
         row
         wrap
@@ -47,7 +24,7 @@
                 <span class="success--text font-weight-bold headline align-center justify-center">FICHA DE BIENESTAR UNIVERSITARIO  </span>
               </v-card-title>
             </v-layout>
-            <div class="subtitle-2">Nombres: {{this.form.name}} {{this.form.father_surname}} {{this.form.mother_surname}}  Modalidad: {{this.form.type_exam}}</div>
+            {{this.form.name}}
           </v-card>
           <v-divider />
           <br>
@@ -62,14 +39,7 @@
                 DATOS PRINCIPALES
               </v-stepper-step>
               <v-divider />
-              <v-stepper-step
-                step="2"
-                :complete="step > 2"
-              >
-                DATOS GENERALES
-              </v-stepper-step>
-              <v-divider />
-              <v-stepper-step step="3">
+              <v-stepper-step step="2">
                 REPORTE DE FICHA EN  PDF
               </v-stepper-step>
             </v-stepper-header>
@@ -681,9 +651,7 @@
                       </v-btn>
                 </v-stepper-content>
                 </v-form>
-                <v-stepper-content step="2">
-                </v-stepper-content>
-              <v-stepper-content step="3">
+              <v-stepper-content step="2">
                 <v-layout
                   row
                   wrap
@@ -863,8 +831,6 @@ export default {
     })
   },
   created () {
-    console.log(this.$route.params.response)
-    this.setForm(this.$route.params.response)
     this.getStateCivil()
     this.getTypeHousings()
     this.getHousingMaterials()
@@ -875,6 +841,11 @@ export default {
     this.getLimitations()
     this.getProblems()
     this.getEvents()
+    this.getStudentId({ id: this.$route.params.id })
+    .then(response => {
+        const userInfo = response.data.data
+        this.setForm(userInfo)
+    })
   },
   methods: {
     ...mapActions({
@@ -889,6 +860,7 @@ export default {
       getLimitations: 'limitations/getLimitations',
       getProblems: 'problems/getProblems',
       getEvents: 'events/getEvents',
+      getStudentId: 'students/getStudentId',
       updateStudents: 'students/updateStudents',
     }),
      add(index) {
@@ -920,6 +892,7 @@ export default {
       this.form.father_surname = user.father_surname
       this.form.mother_surname = user.mother_surname
       this.form.type_exam = user.type_exam
+      this.form.familyMembers = user.profile.familyMembers
     },
     submitStuden () {
       console.log(this.form)
@@ -940,31 +913,3 @@ export default {
 
 }
 </script>
-<style scoped>
-.scoped-toolbar-title {
-  display: flex;
-  filter: opacity(70%);
-  align-items: center;
-  padding-right: 1.4rem;
-}
-.center{
-    display: flex;
-    align-items: center;
-  padding-right: 1.4rem;
-  font-size: 25px;
-  margin-inline-start: 20px;
-}
-.baner{
-  background-color:teal;
-  color:aliceblue;
-}
-@media only screen and (max-width: 600px) {
-  .center{
-  display: flex;
-  align-items: center;
-  padding-right: 0.5em;
-  font-size: 14px;
-  margin-inline-start: 20px;
-}
-}
-</style>

@@ -21,11 +21,15 @@ export default [
     component: () => import('@/components/Login.vue')
   },
   {
-    path: '/preinscritos',
-    name: 'preinscritos',
-    component: () => import('@/views/registereds/List.vue')
+    path: '/estudiantes',
+    name: 'estudiantes',
+    component: () => import('@/views/wellness/listStudents.vue')
   },
-
+  {
+    path: '/estudiante/:id',
+    name: 'estudiante',
+    component: () => import('@/views/wellness/editStudent.vue')
+  },
   // sgc users
   {
     path: '/users',
@@ -42,7 +46,6 @@ export default [
     name: 'sgcUsersEdit',
     component: () => import('@/views/users/EditUser.vue')
   },
-
   // school
   {
     path: '/school/create',

@@ -21,16 +21,8 @@ export const getters = {
     if (rootGetters['auth/userIsClient']) {
       items.push(
         {
-          name: 'Preinscritos',
-          to: { name: 'preinscritos' }
-        },
-        {
-          name: 'Inscritos',
-          to: { name: 'inscritos' }
-        },
-        {
-          name: 'Reporte',
-          to: { name: 'reporte-inscritos' }
+          name: 'Estudiantes',
+          to: { name: 'estudiantes' }
         }
       )
 
@@ -40,28 +32,12 @@ export const getters = {
     if (rootGetters['auth/userIsAdmin']) {
       items.push(
         {
-          name: 'Preinscritos',
-          to: { name: 'preinscritos' }
+          name: 'Estudiantes',
+          to: { name: 'estudiantes' }
         },
         {
           name: 'Personal',
           to: { name: 'sgcUsersList' }
-        },
-        {
-          name: 'Inscritos',
-          to: { name: 'inscritos' }
-        },
-        {
-          name: 'Anulados',
-          to: { name: 'annulled' }
-        },
-        {
-          name: 'Crear Colegio',
-          to: { name: 'createSchool' }
-        },
-        {
-          name: 'Reportes',
-          to: { name: 'reportAdmin' }
         }
       )
       return items

@@ -4,7 +4,6 @@
     grid-list-lg
   >
     <NotPermission v-if="!$can('update', 'Users')" />
-
     <template v-else>
       <Breadcrumbs
         :routes="[
