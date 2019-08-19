@@ -3,9 +3,9 @@
     fluid
     grid-list-lg
   >
-    <NotPermission v-if="!$can('list', 'Registereds')" />
+    <NotPermission v-if="!$can('list', 'Estudiantes')" />
 
-    <template>
+    <template v-else>
       <Breadcrumbs
         :routes="[
           { name: 'Inicio', to: { name: 'estudiantes' } },
@@ -51,7 +51,7 @@
                   { text: 'Nombre', value: 'name' },
                   { text: 'Apellido', value: 'father_surname' },
                   { text: 'Carrera', value: 'career' },
-                  { text: 'Modalidad de examen', value: 'typeExam' },
+                  { text: 'Modalidad de Ingreso', value: 'type_exam' },
                   { text: 'Acciones', align: 'center', sortable: false, width: '220' }
                 ]"
                 :items="students"
@@ -74,6 +74,9 @@
                   </td>
                   <td class="px-3">
                     {{ props.item.career.title }}
+                  </td>
+                  <td class="px-3">
+                    {{ props.item.type_exam }}
                   </td>
                   <td class="text-xs-center px-3">
                     <template>
@@ -111,7 +114,7 @@ export default {
     return { title: 'Listado de Estudiantes' }
   },
   components: {
-    NotPermission: () => import('@/views/errors/NotPermission'),
+    NotPermission: () => import('@/views/errors/NotPermisionAuth'),
     Breadcrumbs: () => import('@/components/Breadcrumbs')
   },
   data () {

@@ -3,7 +3,8 @@
     fluid
     grid-list-lg
   >
-    <template>
+    <NotPermission v-if="!$can('update', 'Estudiantes')" />
+    <template v-else>
       <v-layout
         row
         wrap
@@ -21,36 +22,20 @@
               fill-height
             >
               <v-card-title primary-title>
-                <span class="success--text font-weight-bold headline align-center justify-center">FICHA DE BIENESTAR UNIVERSITARIO  </span>
+                <span class="success--text font-weight-bold headline align-center justify-center">EDITAR FICHA DE BIENESTAR UNIVERSITARIO  </span>
               </v-card-title>
             </v-layout>
             {{this.form.name}}
-          </v-card>
+          <!-- </v-card> -->
           <v-divider />
           <br>
-          <v-stepper
-            v-model="step"
-          >
-            <v-stepper-header>
-              <v-stepper-step
-                step="1"
-                :complete="step > 1"
-              >
-                DATOS PRINCIPALES
-              </v-stepper-step>
-              <v-divider />
-              <v-stepper-step step="2">
-                REPORTE DE FICHA EN  PDF
-              </v-stepper-step>
-            </v-stepper-header>
-            <v-stepper-items>
               <v-form
                 ref="form"
                 v-model="validForm"
                 lazy-validation
                 @submit.prevent="submitStuden"
               >
-                <v-stepper-content step="1">
+
                   <v-layout
                     row
                     wrap
@@ -642,6 +627,9 @@
                       </v-btn>
                     </span>
                   </div>
+                  <v-btn @click="$router.push({ name: 'estudiantes'})">
+                    Cancelar
+                  </v-btn>
                   <v-btn
                         type="submit"
                         color="success"
@@ -649,35 +637,8 @@
                       >
                         GUARDAR INCRIPCIÓN
                       </v-btn>
-                </v-stepper-content>
                 </v-form>
-              <v-stepper-content step="2">
-                <v-layout
-                  row
-                  wrap
-                >
-                  <v-flex
-                    xs12
-                    md12
-                  >
-                    <embed
-                      :src="pdf"
-                      type="application/pdf"
-                      width="1200"
-                      height="600"
-                    >
-                  </v-flex>
-                </v-layout>
-                <v-btn
-                  color="primary"
-                  @click="reset"
-                  @click.native="step = 1"
-                >
-                  Salir
-                </v-btn>
-              </v-stepper-content>
-            </v-stepper-items>
-          </v-stepper>
+          </v-card>
         </v-flex>
       </v-layout>
     </template>
@@ -692,7 +653,7 @@ export default {
     return { title: 'Universidad Nacional Intercultural de Quillabamba' }
   },
   components: {
-    NotPermission: () => import('@/views/errors/NotPermission')
+    NotPermission: () => import('@/views/errors/NotPermisionAuth')
   },
   data () {
     return {
@@ -800,7 +761,6 @@ export default {
       validForm: true,
       processingForm: false,
       processing: false,
-
       rules: {
         relation_id: [
           v => !!v || 'Seleccionar modalidad de requerido.'
@@ -863,7 +823,7 @@ export default {
       getProblems: 'problems/getProblems',
       getEvents: 'events/getEvents',
       getStudentId: 'students/getStudentId',
-      updateStudents: 'students/updateStudents',
+      patchStudents: 'students/patchStudents',
     }),
      add(index) {
       this.form.familyMembers.push({
@@ -944,12 +904,13 @@ export default {
     submitStuden () {
       console.log(this.form)
       this.processingForm = true
-      this.updateStudents({
+      this.patchStudents({
         id: this.form.id,
         data: this.form
       })
       .then(response => {
           this.processingForm = false
+          this.$router.push({ name: 'estudiantes'})
         })
         .catch((error) => {
           this.processingForm = false

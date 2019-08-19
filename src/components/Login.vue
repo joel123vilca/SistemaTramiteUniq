@@ -119,8 +119,8 @@ export default {
       validForm: true,
       processingForm: false,
       form: {
-        username: 'Admin@gmail.com',
-        password: '123456'
+        username: '',
+        password: ''
       },
       validationErrors: {},
       remember: true,
@@ -157,7 +157,7 @@ export default {
   },
 
   created () {
-    if (this.authenticated) this.$router.push({ name: 'preinscritos' })
+    if (this.authenticated) this.$router.push({ name: 'estudiantes' })
   },
 
   methods: {
@@ -187,9 +187,9 @@ export default {
 
               const roleType = response.data.data.typeUser
               if (roleType === 'Administrador') {
-                this.$router.push({ name: 'preinscritos' })
+                this.$router.push({ name: 'estudiantes' })
               } else {
-                this.$router.push({ name: 'preinscritos' })
+                this.$router.push({ name: 'estudiantes' })
               }
             })
             .catch(error => {

@@ -18,6 +18,20 @@ export default {
       .catch(error => reject(error))
   })
   },
+  patch (payload = {}) {
+    const id = payload.id
+    const data = payload.data || {}
+
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/students/${id}/admin`,
+        method: 'patch',
+        data
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
   get (payload = {}) {
     return new Promise((resolve, reject) => {
       axios({

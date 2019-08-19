@@ -24,7 +24,7 @@ export function defineAbilitiesFor (user = {}) {
           actions: ['list', 'create', 'update', 'delete']
         },
         {
-          subject: 'Inscritos',
+          subject: 'Estudiantes',
           actions: ['list', 'create', 'update', 'delete', 'patch']
         }
       ]
@@ -36,7 +36,7 @@ export function defineAbilitiesFor (user = {}) {
           actions: ['list', 'update']
         },
         {
-          subject: 'Inscritos',
+          subject: 'Estudiantes',
           actions: ['list', 'update']
         }
       ]

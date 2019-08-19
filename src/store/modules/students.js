@@ -14,7 +14,7 @@ export const actions = {
       .then(response => {
         this._vm.$notify.success({
           title: 'UNIQ',
-          message: 'El usuario ha sido actualizado con éxito.'
+          message: 'El Estudiante ha sido actualizado con éxito.'
         })
 
         resolve(response)
@@ -24,6 +24,22 @@ export const actions = {
       })
     })
   },
+  patchStudents ({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      studentsAPI.patch(payload)
+        .then(response => {
+          this._vm.$notify.success({
+            title: 'UNIQ',
+            message: 'El Estudiante ha sido actualizado con éxito.'
+          })
+
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+      })
+    },
   replaceCurrentStudent ({ commit }, payload) {
     commit(types.REPLACE_CURRENT_STUDENT, payload)
   },
