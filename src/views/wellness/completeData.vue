@@ -767,6 +767,8 @@ export default {
         father_surname: '',
         mother_surname: '',
         type_exam: '',
+        cycle:'',
+        year: '',
         new_address:'dd',
         related:'Comunidad nativa',
         state_id:1,

@@ -122,8 +122,8 @@
                       xs12
                     >
                       <v-radio-group v-model="form.use_transport"  label="Utilizas Transporte para para trasladarte " row>
-                        <v-radio label="Si" :value="true"></v-radio>
-                        <v-radio label="No" :value="false"></v-radio>
+                        <v-radio label="Si" value="1"></v-radio>
+                        <v-radio label="No" value="0"></v-radio>
                       </v-radio-group>
                     </v-flex>
                     <v-flex
@@ -131,7 +131,7 @@
                       xs12
                     >
                       <v-text-field
-                        v-if="form.use_transport === true"
+                        v-if="form.use_transport === '1' "
                         v-model="form.type_transport"
                         label="TIPO DE TRANSPORTE"
                       />
@@ -164,8 +164,8 @@
                       xs12
                     >
                       <v-radio-group v-model="form.works" row label="¿ACTUALMENTE TRABAJA?">
-                        <v-radio label="Si" :value="true"></v-radio>
-                        <v-radio label="No" :value="false"></v-radio>
+                        <v-radio label="Si" value="1"></v-radio>
+                        <v-radio label="No" value="0"></v-radio>
                       </v-radio-group>
                     </v-flex>
                     <v-flex
@@ -173,7 +173,7 @@
                       xs12
                     >
                       <v-text-field
-                        v-if="form.works === true"
+                        v-if="form.works === '1'"
                         v-model="form.work_hours"
                         label="¿CUANTAS HORAS TRABAJA A LA SEMANA?"
                       />
@@ -267,12 +267,12 @@
                   <p>¿usted tiene una dificultad o limitación permanente?</p>
                   <p>{{ form.limitations }}</p>
                   <v-layout>
-                    <v-checkbox v-model="form.limitations" v-for="(limitation) in limitations" :key="limitation.id"  :label="limitation.title" :value="limitation.id" class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="form.limitations" v-for="(limitation) in limitations" :key="limitation.id"  :label="limitation.title" :value="limitation.id" input-value="true"  class="mx-2"></v-checkbox>
                   </v-layout>
                   <p>¿Usted padece de una enfermedad crónica?</p>
                   <v-radio-group v-model="form.chronic_disease" row>
-                    <v-radio label="Si" :value="true"></v-radio>
-                    <v-radio label="No" :value="false"></v-radio>
+                    <v-radio label="Si" value="1"></v-radio>
+                    <v-radio label="No" value="0"></v-radio>
                   </v-radio-group>
                   <v-layout
                     row
@@ -283,21 +283,21 @@
                       xs12
                     >
                       <v-text-field
-                        v-if="form.chronic_disease === true"
+                        v-if="form.chronic_disease === '1'"
                         v-model="form.name_chronic_disease"
                         label="ESPECIFIQUE LA ENFERMEDAD CRONICA"
                       />
                     </v-flex>
                   </v-layout>
-                  <p v-if="form.chronic_disease === true" >¿Recibe un tratamiento para dicha enfermedad?</p>
-                  <v-radio-group v-if="form.chronic_disease === true" v-model="form.disease_treatment" row>
-                    <v-radio label="Si" :value="true"></v-radio>
-                    <v-radio label="No" :value="false"></v-radio>
+                  <p v-if="form.chronic_disease === '1'" >¿Recibe un tratamiento para dicha enfermedad?</p>
+                  <v-radio-group v-if="form.chronic_disease === '1'" v-model="form.disease_treatment" row>
+                    <v-radio label="Si" value="1"></v-radio>
+                    <v-radio label="No" value="0"></v-radio>
                   </v-radio-group>
                   <p>¿Usted ha tenido una intervención quirúrgica anteriormente?</p>
                   <v-radio-group v-model="form.surgical_intervention_status" row>
-                    <v-radio label="Si" :value="true"></v-radio>
-                    <v-radio label="No" :value="false"></v-radio>
+                    <v-radio label="Si" value="1"></v-radio>
+                    <v-radio label="No" value="0"></v-radio>
                   </v-radio-group>
                   <v-layout
                     row
@@ -308,7 +308,7 @@
                       xs12
                     >
                       <v-text-field
-                        v-if="form.surgical_intervention_status === true"
+                        v-if="form.surgical_intervention_status === '1'"
                         v-model="form.surgical_intervention"
                         label="ESPECIFIQUE"
                       />
@@ -318,7 +318,7 @@
                       xs12
                     >
                       <v-text-field
-                        v-if="form.surgical_intervention_status === true"
+                        v-if="form.surgical_intervention_status === '1'"
                         v-model="form.date_surgical_intervention"
                         label="INDIQUE LA FECHA CUÁNDO SE REALIZO"
                       />
@@ -326,8 +326,8 @@
                   </v-layout>
                   <p>¿Se realiza anualmente chequeos médicos?</p>
                   <v-radio-group v-model="form.annual_medical_checkup" row>
-                    <v-radio label="Si" :value="true"></v-radio>
-                    <v-radio label="No" :value="false"></v-radio>
+                    <v-radio label="Si" value="1"></v-radio>
+                    <v-radio label="No" value="0"></v-radio>
                   </v-radio-group>
                   <v-layout
                     row
@@ -338,7 +338,7 @@
                       xs12
                     >
                       <v-text-field
-                        v-if="form.annual_medical_checkup === true"
+                        v-if="form.annual_medical_checkup === '1'"
                         v-model="form.date_last_medical_checkup"
                         label="INDIQUE LA FECHA CUÁNDO SE REALIZO"
                       />
@@ -471,35 +471,35 @@
                   <h2>INFORMACIÓN LA FAMILIA</h2>
                   <p>¿Sus Padres Viven?</p>
                   <v-radio-group v-model="form.living_parents" row>
-                    <v-radio label="Si" :value="true"></v-radio>
-                    <v-radio label="No" :value="false"></v-radio>
+                    <v-radio label="Si" value="1"></v-radio>
+                    <v-radio label="No" value="0"></v-radio>
                   </v-radio-group>
                   <p>¿Tiene hermanos?</p>
                   <v-radio-group v-model="form.brethren" row>
-                    <v-radio label="Si" :value="true"></v-radio>
-                    <v-radio label="No" :value="false"></v-radio>
+                    <v-radio label="Si" value="1"></v-radio>
+                    <v-radio label="No" value="0"></v-radio>
                   </v-radio-group>
                   <v-flex
                       sm4
                       xs12
                     >
                       <v-text-field
-                        v-if="form.brethren === true"
+                        v-if="form.brethren === '1'"
                         v-model="form.number_brothers"
                         label="NUMERO DE HERMANOS"
                       />
                   </v-flex>
                   <p>¿Tiene Hijos?</p>
                   <v-radio-group v-model="form.children" row>
-                    <v-radio label="Si" :value="true"></v-radio>
-                    <v-radio label="No" :value="false"></v-radio>
+                    <v-radio label="Si" value="1"></v-radio>
+                    <v-radio label="No" value="0"></v-radio>
                   </v-radio-group>
                   <v-flex
                       sm4
                       xs12
                     >
                       <v-text-field
-                        v-if="form.children === true"
+                        v-if="form.children === '1'"
                         v-model="form.number_children"
                         label="NUMERO DE HIJOS"
                       />
@@ -590,8 +590,8 @@
                       xs12
                     >
                       <v-radio-group v-model="familyMember.disability"  label="¿presenta alguna discapacidad?" row>
-                        <v-radio label="Si" :value="true"></v-radio>
-                        <v-radio label="No" :value="false"></v-radio>
+                        <v-radio label="Si" value="1"></v-radio>
+                        <v-radio label="No" value="0"></v-radio>
                       </v-radio-group>
                     </v-flex>
                     <v-flex
@@ -599,7 +599,7 @@
                       xs12
                     >
                       <v-text-field
-                        v-if="familyMember.disability === true"
+                        v-if="familyMember.disability === '1'"
                         v-model="familyMember.disability_name"
                         label="ESPECIFIQUE"
                       />
@@ -609,8 +609,8 @@
                       xs12
                     >
                       <v-radio-group v-model="familyMember.chronic_health_problem"  label="¿presenta algun problemas de salud cronico?" row>
-                        <v-radio label="Si" :value="true"></v-radio>
-                        <v-radio label="No" :value="false"></v-radio>
+                        <v-radio label="Si" value="1"></v-radio>
+                        <v-radio label="No" value="0"></v-radio>
                       </v-radio-group>
                     </v-flex>
                     <v-flex
@@ -618,7 +618,7 @@
                       xs12
                     >
                       <v-text-field
-                        v-if="familyMember.chronic_health_problem === true"
+                        v-if="familyMember.chronic_health_problem === '1'"
                         v-model="familyMember.chronic_health_name"
                         label="ESPECIFIQUE"
                       />
@@ -627,9 +627,9 @@
                       sm3
                       xs12
                     >
-                      <v-radio-group v-if="familyMember.chronic_health_problem === true" v-model="familyMember.treatment"  label="¿Lleva un tratamiento?" row>
-                        <v-radio label="Si" :value="true"></v-radio>
-                        <v-radio label="No" :value="false"></v-radio>
+                      <v-radio-group v-if="familyMember.chronic_health_problem === '1'" v-model="familyMember.treatment"  label="¿Lleva un tratamiento?" row>
+                        <v-radio label="Si" value="1"></v-radio>
+                        <v-radio label="No" value="0"></v-radio>
                       </v-radio-group>
                     </v-flex>
                     </v-layout>
@@ -738,6 +738,8 @@ export default {
         new_address:'dd',
         related:'Comunidad nativa',
         state_id:1,
+        cycle:'',
+        year:'',
         use_transport:'',
         home_transfer_hours: 1,
         minutes_home_transfer: 1,
@@ -772,7 +774,7 @@ export default {
         dinner_frecuency: '',
         events: [],
         problems:[],
-        living_parents: false,
+        living_parents: 0,
         brethren: false,
         number_brothers: '',
         children: false,
@@ -888,10 +890,55 @@ export default {
     setForm (user) {
       this.form.id = user.id
       this.form.name = user.name
-      this.form.dni = user.dni
+      this.form.dni= user.dni
       this.form.father_surname = user.father_surname
       this.form.mother_surname = user.mother_surname
       this.form.type_exam = user.type_exam
+      this.form.cycle = user.profile.cycle
+      this.form.year = user.profile.year
+      this.new_address = user.profile.new_address
+      this.form.related = user.profile.related
+      this.form.state_id = user.profile.state.id
+      this.form.use_transport = user.profile.use_transport
+      this.form.home_transfer_hours = user.profile.home_transfer_hours
+      this.form.minutes_home_transfer = user.profile.minutes_home_transfer
+      this.form.works = user.profile.works
+      this.form.work_hours = user.profile.work_hours
+      this.form.emergency_contact_name = user.profile.emergency_contact_name
+      this.form.emergency_contact_telephon = user.profile.emergency_contact_telephon
+      this.form.housing_tenure_id = user.profile.housing.housingTenure.id
+      this.form.housing_material_id = user.profile.housing.housingMaterial.id
+      this.form.type_housing_id = user.profile.housing.typeHousing.id
+      this.form.number_rooms = user.profile.housing.number_rooms
+      this.form.electric_light = user.profile.housing.electric_light
+      this.form.water_service = user.profile.housing.water_service
+      this.form.drain_service = user.profile.housing.drain_service
+      this.form.internet_connection = user.profile.housing.internet_connection
+      this.form.limitations = user.profile.limitations
+      this.form.chronic_disease = user.profile.chronic_disease
+      this.form.name_chronic_disease = user.profile.name_chronic_disease
+      this.form.disease_treatment = user.profile.disease_treatment
+      this.form.surgical_intervention_status = user.profile.surgical_intervention_status
+      this.form.surgical_intervention = user.profile.surgical_intervention
+      this.form.annual_medical_checkup = user.profile.annual_medical_checkup
+      this.form.date_last_medical_checkup = user.profile.date_last_medical_checkup
+      this.form.type_insurance_id = user.profile.typeInsurance.id
+      this.form.blood_type_id = user.profile.bloodType.id
+      this.form.breakfast_place = user.profile.breakfast_place
+      this.form.lunch_place = user.profile.lunch_place
+      this.form.dinner_place = user.profile.dinner_place
+      this.form.meal_place = user.profile.meal_place
+      this.form.breakfastf_recuency = user.profile.breakfastf_recuency
+      this.form.lunch_frecuency = user.profile.lunch_frecuency
+      this.form.dinner_frecuency = user.profile.dinner_frecuency
+      this.form.events = user.profile.events
+      this.form.problems = user.profile.problems
+      this.form.living_parents = user.profile.living_parents
+      this.form.brethren = user.profile.brethren
+      this.form.number_brothers = user.profile.number_brothers
+      this.form.children = user.profile.children
+      this.form.number_children= user.profile.number_children
+      this.form.relation_id = user.profile.relation.id
       this.form.familyMembers = user.profile.familyMembers
     },
     submitStuden () {

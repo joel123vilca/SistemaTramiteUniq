@@ -75,6 +75,22 @@
                   <td class="px-3">
                     {{ props.item.career.title }}
                   </td>
+                  <td class="text-xs-center px-3">
+                    <template>
+                      <v-btn
+                        class="ma-0"
+                        :to="{ name: 'estudiante', params: { id: props.item.id } }"
+                        small
+                        icon
+                        flat
+                        color="info"
+                      >
+                        <v-icon small>
+                          edit
+                        </v-icon>
+                      </v-btn>
+                    </template>
+                  </td>
                 </tr>
               </v-data-table>
             </v-flex>
