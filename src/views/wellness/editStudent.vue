@@ -26,7 +26,7 @@
               </v-card-title>
             </v-layout>
             {{this.form.name}}
-          <!-- </v-card> -->
+          </v-card>
           <v-divider />
           <br>
               <v-form
@@ -638,7 +638,6 @@
                         GUARDAR INCRIPCIÓN
                       </v-btn>
                 </v-form>
-          </v-card>
         </v-flex>
       </v-layout>
     </template>

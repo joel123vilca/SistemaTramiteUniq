@@ -382,8 +382,16 @@
                   </v-layout>
                   <h2>INFORMACIÓN GENERAL DE SALUD</h2>
                   <p>¿usted tiene una dificultad o limitación permanente?</p>
-                  <v-layout>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm4
+                      xs12
+                    >
                     <v-checkbox v-model="form.limitations" v-for="(limitation) in limitations" :key="limitation.id"  :label="limitation.title" :value="limitation.id" class="mx-2"></v-checkbox>
+                    </v-flex>
                   </v-layout>
                   <p>¿Usted padece de una enfermedad crónica?</p>
                   <v-radio-group v-model="form.chronic_disease" row>
@@ -640,12 +648,22 @@
                   <p>EN LOS ULTIMOS 6 MESES, ¿HA TENIDO LAS SIGUIENTES MOLESTIAS?</p>
                   <v-layout row
                     wrap>
+                    <v-flex
+                      sm4
+                      xs12
+                    >
                     <v-checkbox v-model="form.problems" v-for="(problem) in problems" :key="problem.id"  :label="problem.title" :value="problem.id" class="mx-2"></v-checkbox>
+                    </v-flex>
                   </v-layout>
                     <p>EN LOS ULTIMOS MESES, ¿ USTED HA SUFRIDO ALGUN EVENTO QUE LE SEA DIFICIL DE MANEJAR?</p>
                   <v-layout row
                     wrap>
+                    <v-flex
+                      sm4
+                      xs12
+                    >
                     <v-checkbox v-model="form.events" v-for="(event) in events" :key="event.id"  :label="event.title" :value="event.id" class="mx-2"></v-checkbox>
+                    </v-flex>
                   </v-layout>
                   <h2>INFORMACIÓN LA FAMILIA</h2>
                   <p>¿Sus Padres Viven?</p>
