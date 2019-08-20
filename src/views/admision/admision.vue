@@ -7,7 +7,7 @@
       height="65"
       app
       center
-      class="baner"
+      class="wellness-baner"
     >
       <v-spacer />
       <v-avatar
@@ -19,7 +19,7 @@
         />
       </v-avatar>
 
-      <h2 class="center">
+      <h2 class="wellness-center">
         UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA
       </h2>
 
@@ -944,19 +944,19 @@ export default {
   align-items: center;
   padding-right: 1.4rem;
 }
-.center{
+.wellness-center{
     display: flex;
     align-items: center;
   padding-right: 1.4rem;
   font-size: 25px;
   margin-inline-start: 20px;
 }
-.baner{
+.wellness-baner{
   background-color:teal;
   color:aliceblue;
 }
 @media only screen and (max-width: 600px) {
-  .center{
+  .wellness-center{
   display: flex;
   align-items: center;
   padding-right: 0.5em;

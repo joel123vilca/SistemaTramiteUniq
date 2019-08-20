@@ -47,7 +47,7 @@
                 <span class="success--text font-weight-bold headline align-center justify-center">FICHA DE BIENESTAR UNIVERSITARIO  </span>
               </v-card-title>
             </v-layout>
-            <div class="subtitle-2">Nombres: {{this.form.name}} {{this.form.father_surname}} {{this.form.mother_surname}}  Modalidad: {{this.form.type_exam}}</div>
+            <div class="subtitle-2">Nombres: {{this.form.name}} {{this.form.father_surname}} {{this.form.mother_surname}}  Modalidad: {{this.form.type_exam}} ESCUELA PROFESIONAL: {{this.form.career}}</div>
           </v-card>
           <v-divider />
           <br>
@@ -62,14 +62,8 @@
                 DATOS PRINCIPALES
               </v-stepper-step>
               <v-divider />
-              <v-stepper-step
-                step="2"
-                :complete="step > 2"
-              >
-                DATOS GENERALES
-              </v-stepper-step>
               <v-divider />
-              <v-stepper-step step="3">
+              <v-stepper-step step="2">
                 REPORTE DE FICHA EN  PDF
               </v-stepper-step>
             </v-stepper-header>
@@ -388,7 +382,6 @@
                   </v-layout>
                   <h2>INFORMACIÓN GENERAL DE SALUD</h2>
                   <p>¿usted tiene una dificultad o limitación permanente?</p>
-                  <p>{{ form.limitations }}</p>
                   <v-layout>
                     <v-checkbox v-model="form.limitations" v-for="(limitation) in limitations" :key="limitation.id"  :label="limitation.title" :value="limitation.id" class="mx-2"></v-checkbox>
                   </v-layout>
@@ -833,13 +826,11 @@
                         color="success"
                         :loading="processingForm"
                       >
-                        GUARDAR INCRIPCIÓN
+                        GUARDAR FICHA
                       </v-btn>
                 </v-stepper-content>
                 </v-form>
-                <v-stepper-content step="2">
-                </v-stepper-content>
-              <v-stepper-content step="3">
+              <v-stepper-content step="2">
                 <v-layout
                   row
                   wrap
@@ -849,7 +840,13 @@
                     md12
                   >
                     <embed
-                      :src="pdf"
+                      :src="formatPath"
+                      type="application/pdf"
+                      width="1200"
+                      height="600"
+                    >
+                    <embed
+                      :src="reportPath"
                       type="application/pdf"
                       width="1200"
                       height="600"
@@ -858,7 +855,6 @@
                 </v-layout>
                 <v-btn
                   color="primary"
-                  @click="reset"
                   @click.native="step = 1"
                 >
                   Salir
@@ -888,7 +884,8 @@ export default {
       column: null,
       row: null,
       step: 1,
-      pdf: '',
+      formatPath: '',
+      reportPath: '',
       checkbox: false,
       tile: true,
       dialog: false,
@@ -923,9 +920,10 @@ export default {
         father_surname: '',
         mother_surname: '',
         type_exam: '',
+        career: '',
         cycle:'',
         year: '',
-        new_address:'dd',
+        new_address:'',
         related:'Comunidad nativa',
         state_id:1,
         use_transport:'',
@@ -933,8 +931,8 @@ export default {
         minutes_home_transfer: 1,
         works: false,
         work_hours: 1,
-        emergency_contact_name:'ff',
-        emergency_contact_telephon:'9535',
+        emergency_contact_name:'',
+        emergency_contact_telephon:'',
         housing_tenure_id: 1,
         housing_material_id: 1,
         type_housing_id:1,
@@ -945,12 +943,12 @@ export default {
         internet_connection: false,
         limitations:[],
         chronic_disease: false,
-        name_chronic_disease: 'dd',
+        name_chronic_disease: '',
         disease_treatment: false,
         surgical_intervention_status: false,
-        surgical_intervention: 'dd',
+        surgical_intervention: '',
         annual_medical_checkup: false,
-        date_last_medical_checkup: '',
+        date_last_medical_checkup: '2019-07-01',
         type_insurance_id: 1,
         blood_type_id:1,
         breakfast_place: '',
@@ -1007,11 +1005,11 @@ export default {
         ],
         home_transfer_hours:[
           v => !!v || 'las horas es requerido.',
-          v => /^[0-9]{2}$/.test(v) || 'Ingresar solo numeros y 2 digitos.'
+          v => /^[0-9]$/.test(v) || 'Ingresar solo numeros y 2 digitos.'
         ],
         minutes_home_transfer:[
           v => !!v || 'los minutos es requerido.',
-          v => /^[0-9]{2}$/.test(v) || 'Ingresar solo numeros y 2 digitos.'
+          v => /^[0-9]$/.test(v) || 'Ingresar solo numeros y 2 digitos.'
         ],
         housing_tenure_id: [
           v => !!v || 'Seleccione  es requerido.'
@@ -1088,7 +1086,6 @@ export default {
     })
   },
   created () {
-    console.log(this.$route.params.response)
     this.setForm(this.$route.params.response)
     this.getStateCivil()
     this.getTypeHousings()
@@ -1145,6 +1142,7 @@ export default {
       this.form.father_surname = user.father_surname
       this.form.mother_surname = user.mother_surname
       this.form.type_exam = user.type_exam
+      this.form.career = user.career.title
     },
     submitStuden () {
       if (!this.$refs.form.validate()) return false
@@ -1156,6 +1154,9 @@ export default {
       })
       .then(response => {
           this.processingForm = false
+          this.step = 2
+          this.formatPath = response.data.formatPath
+          this.reportPath = response.data.reportPath
         })
         .catch((error) => {
           this.processingForm = false

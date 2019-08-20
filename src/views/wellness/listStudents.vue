@@ -94,6 +94,16 @@
                       </v-btn>
                     </template>
                   </td>
+                  <td>
+                    <v-btn
+                      color="blue-grey"
+                      class="ma-2 white--text"
+                      :to="{ name: 'reporte', params: { id: props.item.id } }"
+                    >
+                    Reporte
+                    <v-icon right dark>cloud_download</v-icon>
+                    </v-btn>
+                  </td>
                 </tr>
               </v-data-table>
             </v-flex>

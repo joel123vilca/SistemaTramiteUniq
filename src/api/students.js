@@ -67,5 +67,16 @@ export default {
         .then(response => resolve(response))
         .catch(error => reject(error))
     })
-  }
+  },
+  getReport (payload = {}) {
+    const id = payload.id
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/students/${id}/reports`,
+        method: 'get'
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
 }

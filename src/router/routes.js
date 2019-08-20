@@ -2,7 +2,7 @@ export default [
   {
     path: '/',
     redirect: {
-      name: 'login'
+      name: 'bienestar'
     }
   },
   {
@@ -51,5 +51,10 @@ export default [
     path: '/school/create',
     name: 'createSchool',
     component: () => import('@/views/school/Create.vue')
+  },
+  {
+    path: '/reporte/:id',
+    name: 'reporte',
+    component: () => import('@/views/wellness/report.vue')
   }
 ]
