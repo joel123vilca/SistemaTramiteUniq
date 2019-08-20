@@ -416,7 +416,7 @@
                       xs12
                     >
                       <v-autocomplete
-                        v-model="form.breakfastf_recuency"
+                        v-model="form.breakfast_frecuency"
                         :items="frecuency"
                         label="DESAYUNO"
                       />
@@ -695,7 +695,7 @@ export default {
         father_surname: '',
         mother_surname: '',
         type_exam: '',
-        new_address:'dd',
+        new_address:'',
         related:'Comunidad nativa',
         state_id:1,
         cycle:'',
@@ -705,8 +705,8 @@ export default {
         minutes_home_transfer: 1,
         works: false,
         work_hours: 1,
-        emergency_contact_name:'ff',
-        emergency_contact_telephon:'9535',
+        emergency_contact_name:'',
+        emergency_contact_telephon:'',
         housing_tenure_id: 1,
         housing_material_id: 1,
         type_housing_id:1,
@@ -717,10 +717,10 @@ export default {
         internet_connection: false,
         limitations:[],
         chronic_disease: false,
-        name_chronic_disease: 'dd',
+        name_chronic_disease: '',
         disease_treatment: false,
         surgical_intervention_status: false,
-        surgical_intervention: 'dd',
+        surgical_intervention: '',
         annual_medical_checkup: false,
         date_last_medical_checkup: '',
         type_insurance_id: 1,
@@ -729,7 +729,7 @@ export default {
         lunch_place: '',
         dinner_place: '',
         meal_place: '',
-        breakfastf_recuency: '',
+        breakfast_frecuency: '',
         lunch_frecuency: '',
         dinner_frecuency: '',
         events: [],
@@ -887,7 +887,7 @@ export default {
       this.form.lunch_place = user.profile.lunch_place
       this.form.dinner_place = user.profile.dinner_place
       this.form.meal_place = user.profile.meal_place
-      this.form.breakfastf_recuency = user.profile.breakfastf_recuency
+      this.form.breakfast_frecuency = user.profile.breakfast_frecuency
       this.form.lunch_frecuency = user.profile.lunch_frecuency
       this.form.dinner_frecuency = user.profile.dinner_frecuency
       this.form.events = user.profile.events

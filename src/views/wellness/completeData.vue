@@ -464,7 +464,7 @@
                       <v-text-field
                         v-if="form.annual_medical_checkup === true"
                         v-model="form.date_last_medical_checkup"
-                        label="INDIQUE LA FECHA CUÁNDO SE REALIZO"
+                        label="INDIQUE LA FECHA CUÁNDO SE REALIZO (2019-07-03)"
                       />
                     </v-flex>
                   </v-layout>
@@ -849,6 +849,12 @@
                 </v-stepper-content>
                 </v-form>
               <v-stepper-content step="2">
+                <div class="my-2">
+                  <v-btn  block color="success" @click="DownloadPdf">DESCARGAR REPORTE FICHA BIENESTAR</v-btn>
+                </div>
+                <div class="my-2">
+                  <v-btn  block color="success" @click="DownloadPdfReport">DESCARGAR REPORTE FICHA MEDICA</v-btn>
+                </div>
                 <v-layout
                   row
                   wrap
@@ -966,7 +972,7 @@ export default {
         surgical_intervention_status: false,
         surgical_intervention: '',
         annual_medical_checkup: false,
-        date_last_medical_checkup: '2019-07-01',
+        date_last_medical_checkup: '',
         type_insurance_id: 1,
         blood_type_id:1,
         breakfast_place: '',
@@ -1022,12 +1028,10 @@ export default {
           v => !!v || 'Su estado civil es requerido.'
         ],
         home_transfer_hours:[
-          v => !!v || 'las horas es requerido.',
-          v => /^[0-9]$/.test(v) || 'Ingresar solo numeros y 2 digitos.'
+          v => !!v || 'las horas es requerido.'
         ],
         minutes_home_transfer:[
-          v => !!v || 'los minutos es requerido.',
-          v => /^[0-9]$/.test(v) || 'Ingresar solo numeros y 2 digitos.'
+          v => !!v || 'los minutos es requerido.'
         ],
         housing_tenure_id: [
           v => !!v || 'Seleccione  es requerido.'
@@ -1180,6 +1184,22 @@ export default {
           this.processingForm = false
           this.formErrors = error.response.data.errors || {}
         })
+    },
+    DownloadPdf(){
+      const url = this.formatPath
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', 'ReporteTotal.pdf')
+      document.body.appendChild(link)
+      link.click()
+    },
+    DownloadPdfReport(){
+      const url = this.reportPath
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', 'ReporteTotal.pdf')
+      document.body.appendChild(link)
+      link.click()
     }
   }
 

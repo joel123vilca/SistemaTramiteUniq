@@ -56,5 +56,10 @@ export default [
     path: '/reporte/:id',
     name: 'reporte',
     component: () => import('@/views/wellness/report.vue')
+  },
+  {
+    path: '/reportes',
+    name: 'reportes',
+    component: () => import('@/views/wellness/reportes.vue')
   }
 ]

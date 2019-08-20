@@ -7,7 +7,7 @@
       height="65"
       app
       center
-      class="baner"
+      class="welfere-baner"
     >
       <v-spacer />
       <v-avatar
@@ -17,7 +17,7 @@
           :src="require('@/assets/uniq.png')"
         />
       </v-avatar>
-      <h2 class="center">
+      <h2 class="welfere-center">
         UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA
       </h2>
       <v-spacer />
@@ -106,13 +106,14 @@ export default {
         data: this.form
       })
         .then(response => {
-          this.$router.push({ name: 'completar-ficha', params: { response: response.data.data }})
+            console.log(response)
+            if(response.data.secondTime === true){
+              this.$router.push({ name: 'reportes', params: { response: response.data} })
+            }else{
+              this.$router.push({ name: 'completar-ficha', params: { response: response.data.data }})
+            }
         })
         .catch((error) => {
-          this.$notify.warning({
-            title: 'UNIQ',
-            message: 'NO SE ENCUENTRA SU DNI'
-          })
           this.formErrors = error.response.data.errors || {}
       })
   }
@@ -128,14 +129,14 @@ export default {
   align-items: center;
   padding-right: 1.4rem;
 }
-.center{
-    display: flex;
-    align-items: center;
+.welfere-center{
+  display: flex;
+  align-items: center;
   padding-right: 1.4rem;
   font-size: 25px;
   margin-inline-start: 20px;
 }
-.baner{
+.welfere-baner{
   background-color:teal;
   color:aliceblue;
 }
@@ -144,7 +145,7 @@ export default {
   color:aliceblue;
 }
 @media only screen and (max-width: 600px) {
-  .center{
+  .welfere-center{
   display: flex;
   align-items: center;
   padding-right: 0.5em;
