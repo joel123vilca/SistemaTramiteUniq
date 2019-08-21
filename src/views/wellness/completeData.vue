@@ -438,14 +438,39 @@
                       />
                     </v-flex>
                     <v-flex
-                      sm3
+                      v-if="form.surgical_intervention_status === true"
+                      sm6
                       xs12
                     >
-                      <v-text-field
-                        v-if="form.surgical_intervention_status === true"
-                        v-model="form.date_surgical_intervention"
-                        label="INDIQUE LA FECHA CUÁNDO SE REALIZO"
-                      />
+                      <v-menu
+                          ref="menu"
+                          v-model="targetIssueDateOne"
+                          :close-on-content-click="false"
+                          transition="scale-transition"
+                          offset-y
+                          full-width
+                          min-width="290px"
+                        >
+                        <template v-slot:activator="{ on }">
+                        <v-text-field
+                            :value="formatDate(form.date_surgical_intervention)"
+                            hint="Formato DD/MM/AAAA"
+                            label="INDIQUE LA FECHA CUÁNDO SE REALIZO"
+                            prepend-icon="event"
+                            readonly
+                            v-on="on"
+                            :rules="rules.date_surgical_intervention"
+                            :error="!!formErrors.date_surgical_intervention"
+                            :error-messages="formErrors.date_surgical_intervention"
+                        ></v-text-field>
+                        </template>
+                        <v-date-picker
+                          ref="picker"
+                          v-model="form.date_surgical_intervention"
+                          min="1970-01-01"
+                          @input="targetIssueDateOne = false"
+                        ></v-date-picker>
+                      </v-menu>
                     </v-flex>
                   </v-layout>
                   <p>¿Se realiza anualmente chequeos médicos?</p>
@@ -454,18 +479,43 @@
                     <v-radio label="No" :value="false"></v-radio>
                   </v-radio-group>
                   <v-layout
+                     v-if="form.annual_medical_checkup === true"
                     row
                     wrap
                   >
                     <v-flex
-                      sm3
+                      sm6
                       xs12
                     >
-                      <v-text-field
-                        v-if="form.annual_medical_checkup === true"
-                        v-model="form.date_last_medical_checkup"
-                        label="INDIQUE LA FECHA CUÁNDO SE REALIZO (2019-07-03)"
-                      />
+                    <v-menu
+                          ref="menu"
+                          v-model="targetIssueDate"
+                          :close-on-content-click="false"
+                          transition="scale-transition"
+                          offset-y
+                          full-width
+                          min-width="290px"
+                        >
+                        <template v-slot:activator="{ on }">
+                        <v-text-field
+                            :value="formatDate(form.date_last_medical_checkup)"
+                            hint="Formato DD/MM/AAAA"
+                            label="INDIQUE LA FECHA CUÁNDO SE REALIZO"
+                            prepend-icon="event"
+                            readonly
+                            v-on="on"
+                            :rules="rules.date_last_medical_checkup"
+                            :error="!!formErrors.date_last_medical_checkup"
+                            :error-messages="formErrors.date_last_medical_checkup"
+                        ></v-text-field>
+                        </template>
+                        <v-date-picker
+                          ref="picker"
+                          v-model="form.date_last_medical_checkup"
+                          min="1970-01-01"
+                          @input="targetIssueDate = false"
+                        ></v-date-picker>
+                      </v-menu>
                     </v-flex>
                   </v-layout>
                   <p>¿Usted cuenta con un seguro de salud?</p>
@@ -930,6 +980,7 @@ export default {
       formErrors: {},
       formErrores: {},
       targetIssueDate: false,
+      targetIssueDateOne: false,
       items: [
         { header: 'Para confirmar su inscripción siga los siguientes pasos:' },
         {
@@ -972,7 +1023,8 @@ export default {
         name_chronic_disease: '',
         disease_treatment: false,
         surgical_intervention_status: false,
-        surgical_intervention: '',
+        surgical_intervention:'',
+        date_surgical_intervention: '',
         annual_medical_checkup: false,
         date_last_medical_checkup: '',
         type_insurance_id: 1,
@@ -1167,6 +1219,11 @@ export default {
       this.form.mother_surname = user.mother_surname
       this.form.type_exam = user.type_exam
       this.form.career = user.career.title
+    },
+    formatDate (date) {
+      if (!date) return null
+      const [year, month, day] = date.split('-')
+      return `${year}-${month}-${day}`
     },
     submitStuden () {
       if (!this.$refs.form.validate()) return false

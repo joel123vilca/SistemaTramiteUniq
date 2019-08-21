@@ -52,6 +52,7 @@
                   { text: 'Apellido', value: 'father_surname' },
                   { text: 'Carrera', value: 'career' },
                   { text: 'Modalidad de Ingreso', value: 'type_exam' },
+                  { text: 'Lleno ficha'},
                   { text: 'Acciones', align: 'center', sortable: false, width: '220' }
                 ]"
                 :items="students"
@@ -77,6 +78,10 @@
                   </td>
                   <td class="px-3">
                     {{ props.item.type_exam }}
+                  </td>
+                  <td>
+                    <div v-if="props.item.profile != null"><strong class="primary--text">Si</strong></div>
+                    <div v-else><strong class="error--text">No</strong></div>
                   </td>
                   <td class="text-xs-center px-3">
                     <template>
