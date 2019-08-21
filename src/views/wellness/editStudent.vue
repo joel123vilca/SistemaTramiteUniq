@@ -219,10 +219,10 @@
                   </v-layout>
                   <h5>Servicios con los que cuenta su vivienda:</h5>
                   <v-layout>
-                    <v-checkbox v-model="form.electric_light" label="LUZ ELECTRICA" input-value="true" value class="mx-2"></v-checkbox>
-                    <v-checkbox v-model="form.water_service" label="RED PÚBLICA AGUA DENTRO DE VIVIENDA" input-value="true" value class="mx-2"></v-checkbox>
-                    <v-checkbox v-model="form.drain_service" label="RED PÚBLICA DESAGUE DENTRO DE VIVIENDA" input-value="true" value class="mx-2"></v-checkbox>
-                    <v-checkbox v-model="form.internet_connection" label="CONEXION A INTERNET" input-value="true" value class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="form.electric_light" label="LUZ ELECTRICA" value="1"  class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="form.water_service" label="RED PÚBLICA AGUA DENTRO DE VIVIENDA" value="1"  class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="form.drain_service" label="RED PÚBLICA DESAGUE DENTRO DE VIVIENDA" value="1" class="mx-2"></v-checkbox>
+                    <v-checkbox v-model="form.internet_connection" label="CONEXION A INTERNET" value="1"  class="mx-2"></v-checkbox>
                   </v-layout>
                   <h2>CONTACTO DE EMERGENCIA</h2>
                   <v-layout
@@ -243,7 +243,7 @@
                       xs12
                     >
                       <v-text-field
-                        v-model="form.emergency_contact_telephon"
+                        v-model="form.emergency_contact_telephone"
                         label="NÚMERO TELEFONO"
                       />
                     </v-flex>
@@ -697,24 +697,24 @@ export default {
         type_exam: '',
         new_address:'',
         related:'Comunidad nativa',
-        state_id:1,
+        state_id: 0,
         cycle:'',
         year:'',
         use_transport:'',
-        home_transfer_hours: 1,
-        minutes_home_transfer: 1,
+        home_transfer_hours: '',
+        minutes_home_transfer: '',
         works: false,
         work_hours: 1,
         emergency_contact_name:'',
-        emergency_contact_telephon:'',
+        emergency_contact_telephone:'',
         housing_tenure_id: 1,
         housing_material_id: 1,
         type_housing_id:1,
         number_rooms: '1',
-        electric_light: true,
-        water_service: false,
-        drain_service: false,
-        internet_connection: false,
+        electric_light:0,
+        water_service: 0,
+        drain_service: 0,
+        internet_connection: 0,
         limitations:[],
         chronic_disease: false,
         name_chronic_disease: '',
@@ -855,7 +855,7 @@ export default {
       this.form.type_exam = user.type_exam
       this.form.cycle = user.profile.cycle
       this.form.year = user.profile.year
-      this.new_address = user.profile.new_address
+      this.form.new_address = user.profile.new_address
       this.form.related = user.profile.related
       this.form.state_id = user.profile.state.id
       this.form.use_transport = user.profile.use_transport
@@ -864,7 +864,7 @@ export default {
       this.form.works = user.profile.works
       this.form.work_hours = user.profile.work_hours
       this.form.emergency_contact_name = user.profile.emergency_contact_name
-      this.form.emergency_contact_telephon = user.profile.emergency_contact_telephon
+      this.form.emergency_contact_telephone = user.profile.emergency_contact_telephone
       this.form.housing_tenure_id = user.profile.housing.housingTenure.id
       this.form.housing_material_id = user.profile.housing.housingMaterial.id
       this.form.type_housing_id = user.profile.housing.typeHousing.id

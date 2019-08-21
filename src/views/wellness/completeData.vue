@@ -368,14 +368,14 @@
                       xs12
                     >
                       <v-text-field
-                        v-model="form.emergency_contact_telephon"
+                        v-model="form.emergency_contact_telephone"
                         label="NÚMERO TELEFONO"
-                        :rules="rules.emergency_contact_telephon"
-                        :error="!!formErrors.emergency_contact_telephon"
-                        :error-messages="formErrors.emergency_contact_telephon"
+                        :rules="rules.emergency_contact_telephone"
+                        :error="!!formErrors.emergency_contact_telephone"
+                        :error-messages="formErrors.emergency_contact_telephone"
                         @keyup="() => {
-                          formErrors.emergency_contact_telephon= undefined
-                          delete formErrors.emergency_contact_telephon
+                          formErrors.emergency_contact_telephone= undefined
+                          delete formErrors.emergency_contact_telephone
                         }"
                       />
                     </v-flex>
@@ -667,12 +667,12 @@
                   </v-layout>
                   <h2>INFORMACIÓN LA FAMILIA</h2>
                   <p>¿Sus Padres Viven?</p>
-                  <v-radio-group v-model="form.living_parents" row>
+                  <v-radio-group v-model="form.living_parents" @change="add(k)" row>
                     <v-radio label="Si" :value="true"></v-radio>
                     <v-radio label="No" :value="false"></v-radio>
                   </v-radio-group>
                   <p>¿Tiene hermanos?</p>
-                  <v-radio-group v-model="form.brethren" row>
+                  <v-radio-group v-model="form.brethren"  row>
                     <v-radio label="Si" :value="true"></v-radio>
                     <v-radio label="No" :value="false"></v-radio>
                   </v-radio-group>
@@ -831,11 +831,13 @@
                     </v-flex>
                     </v-layout>
                     <span>
-                      <v-btn class="mx-2" @click="remove(k)" v-show="k || ( !k && form.familyMembers.length > 1)" fab dark small color="error">
+                      <v-btn  @click="remove(k)" v-show="k || ( !k && form.familyMembers.length > 1)"  dark color="error">
                         <v-icon dark>remove</v-icon>
+                        Eliminar
                       </v-btn>
-                      <v-btn class="mx-2" @click="add(k)" v-show="k == form.familyMembers.length-1" fab dark small color="indigo">
+                      <v-btn  @click="add(k)" v-show="k == form.familyMembers.length-1"  dark  color="indigo">
                         <v-icon dark>add</v-icon>
+                        Agregar mas familiares
                       </v-btn>
                     </span>
                   </div>
@@ -956,12 +958,12 @@ export default {
         works: false,
         work_hours: 1,
         emergency_contact_name:'',
-        emergency_contact_telephon:'',
+        emergency_contact_telephone:'',
         housing_tenure_id: 1,
         housing_material_id: 1,
         type_housing_id:1,
         number_rooms: '1',
-        electric_light: true,
+        electric_light: false,
         water_service: false,
         drain_service: false,
         internet_connection: false,
@@ -1048,7 +1050,7 @@ export default {
         emergency_contact_name: [
           v => !!v || 'Nombres  es requerido.'
         ],
-        emergency_contact_telephon: [
+        emergency_contact_telephone: [
           v => !!v || 'Numero  es requerido.',
           v => /^[0-9]{9}$/.test(v) || 'Ingresar solo numeros y 9 digitos.'
         ],
@@ -1135,7 +1137,7 @@ export default {
       getEvents: 'events/getEvents',
       updateStudents: 'students/updateStudents',
     }),
-     add(index) {
+    add(index) {
       this.form.familyMembers.push({
             full_name: '',
             address:'',
@@ -1202,7 +1204,6 @@ export default {
       link.click()
     }
   }
-
 }
 </script>
 <style scoped>
