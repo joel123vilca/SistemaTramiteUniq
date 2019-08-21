@@ -901,6 +901,15 @@
                 </v-stepper-content>
                 </v-form>
               <v-stepper-content step="2">
+                <div class="progress" v-if="this.formatPath === null">
+                  <v-progress-circular
+                    :size="100"
+                    :width="15"
+                    indeterminate
+                    color="teal"
+                  ></v-progress-circular>
+                </div>
+                <div v-else>
                 <div class="my-2">
                   <v-btn  block color="success" @click="DownloadPdf">DESCARGAR REPORTE FICHA BIENESTAR</v-btn>
                 </div>
@@ -935,6 +944,7 @@
                 >
                   Salir
                 </v-btn>
+                </div>
               </v-stepper-content>
             </v-stepper-items>
           </v-stepper>
@@ -960,7 +970,7 @@ export default {
       column: null,
       row: null,
       step: 1,
-      formatPath: '',
+      formatPath: null,
       reportPath: '',
       checkbox: false,
       tile: true,
@@ -1280,6 +1290,14 @@ export default {
 .baner{
   background-color:teal;
   color:aliceblue;
+}
+.v-progress-circular {
+  margin: 1rem;
+}
+.progress{
+   display: flex;
+   justify-content: center;
+   margin-top: 70px;
 }
 @media only screen and (max-width: 600px) {
   .center{

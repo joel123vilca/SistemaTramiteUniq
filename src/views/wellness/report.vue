@@ -1,4 +1,14 @@
 <template>
+    <div>
+    <div class="progress" v-if="this.formatPath === null">
+      <v-progress-circular
+        :size="100"
+        :width="15"
+        indeterminate
+        color="teal"
+      ></v-progress-circular>
+    </div>
+    <template v-else>
     <v-layout
       row
       wrap
@@ -21,6 +31,8 @@
     >
     </v-flex>
     </v-layout>
+    </template>
+    </div>
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
@@ -30,7 +42,7 @@ export default {
   },
   data () {
     return {
-      formatPath: '',
+      formatPath: null,
       reportPath: ''
     }
   },
@@ -45,6 +57,9 @@ export default {
         const userInfo = response.data
         this.setForm(userInfo)
       })
+      .catch(error => {
+          this.$router.push({ name: 'estudiantes'})
+      })
   },
   methods: {
     ...mapActions({
@@ -58,3 +73,13 @@ export default {
   }
 }
 </script>
+<style>
+.v-progress-circular {
+  margin: 1rem;
+}
+.progress{
+   display: flex;
+   justify-content: center;
+   margin-top: 70px;
+}
+</style>

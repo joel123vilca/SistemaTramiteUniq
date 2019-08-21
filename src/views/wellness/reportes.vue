@@ -28,7 +28,7 @@
     <NotPermission v-if="this.formatPath === null"/>
     <template v-else>
       <div class="my-2">
-        <v-btn  block color="success" @click="DownloadPdf">DESCARGAR REPORTE FICHA BIENESTAR</v-btn>
+        <v-btn  block color="success" @click="DownloadPdf"  target="_blank">DESCARGAR REPORTE FICHA BIENESTAR</v-btn>
       </div>
       <div class="my-2">
         <v-btn  block color="success" @click="DownloadPdfReport">DESCARGAR REPORTE FICHA MEDICA</v-btn>
@@ -101,4 +101,5 @@ export default {
   }
 }
 </script>
+
 

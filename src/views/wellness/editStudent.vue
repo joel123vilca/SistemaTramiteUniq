@@ -4,6 +4,14 @@
     grid-list-lg
   >
     <NotPermission v-if="!$can('update', 'Estudiantes')" />
+    <div class="progress" v-else-if="this.form.name === null">
+      <v-progress-circular
+        :size="100"
+        :width="15"
+        indeterminate
+        color="teal"
+      ></v-progress-circular>
+    </div>
     <template v-else>
       <v-layout
         row
@@ -743,7 +751,7 @@ export default {
       frecuency: [ 'Diaramente', '4 a más veces por semana', 'Una a dos veces por semana', 'Nunca' ],
       form: {
         id: '',
-        name: '',
+        name:null,
         dni:null,
         father_surname: '',
         mother_surname: '',
@@ -982,3 +990,14 @@ export default {
 
 }
 </script>
+
+<style>
+.v-progress-circular {
+  margin: 1rem;
+}
+.progress{
+   display: flex;
+   justify-content: center;
+   margin-top: 70px;
+}
+</style>
