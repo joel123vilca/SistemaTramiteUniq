@@ -25,7 +25,7 @@
                 <span class="success--text font-weight-bold headline align-center justify-center">EDITAR FICHA DE BIENESTAR UNIVERSITARIO  </span>
               </v-card-title>
             </v-layout>
-            <div class="overline mb-4">Nombres: {{this.form.name}}</div>
+            <div class="overline mb-4">Nombres: {{this.form.name}} {{this.form.father_surname}} {{this.form.mother_surname}}</div>
             <div class="overline mb-4">Escuela Profesional: {{this.form.career}}</div>
             <div class="overline mb-4">Modalidad: {{this.form.type_exam}}</div>
           </v-card>
@@ -748,6 +748,7 @@ export default {
         father_surname: '',
         mother_surname: '',
         type_exam: '',
+        career: '',
         new_address:'',
         related:'Comunidad nativa',
         state_id: 0,
@@ -907,6 +908,7 @@ export default {
       this.form.father_surname = user.father_surname
       this.form.mother_surname = user.mother_surname
       this.form.type_exam = user.type_exam
+      this.form.career = user.career.title
       this.form.cycle = user.profile.cycle
       this.form.year = user.profile.year
       this.form.new_address = user.profile.new_address
