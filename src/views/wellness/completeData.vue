@@ -1054,6 +1054,16 @@ export default {
         children: false,
         number_children: '',
         relation_id: '',
+
+        language_id: 0,
+        allergies: '',
+        parents_live_together: true,
+        residence_parents:'',
+        where_works:'',
+        history_diseases:'',
+        activities_free_time:'',
+        people_free_time:'',
+        problem_support:'',
         familyMembers: [
           {
             full_name: '',
