@@ -150,6 +150,98 @@
                       />
                     </v-flex>
                   </v-layout>
+                  <v-layout>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-autocomplete
+                        v-model="form.language_id"
+                        :items="languages"
+                        label="IDIOMA"
+                        item-text="title"
+                        item-value="id"
+                        :error="!!formErrors.languages_id"
+                        :error-messages="formErrors.language_id"
+                        @keyup="() => {
+                          formErrors.language_id= undefined
+                          delete formErrors.language_id
+                        }"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.allergies"
+                        label="ALERGIAS"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.where_works"
+                        label="¿Donde Trabajas?"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.residence_parents"
+                        label="Recidencia de los padres"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.activities_free_time"
+                        label="Actividades que hago en mi tiempo libre"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.people_free_time"
+                        label="Las personas que paso mi tiempo libre"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.problem_support"
+                        label="Mi soporte de problemas"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.history_diseases"
+                        label="Historia de mis enfermedades"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-radio-group v-model="form.parents_live_together" row label="¿Mis padres viven juntos?">
+                        <v-radio label="Si" :value="true"></v-radio>
+                        <v-radio label="No" :value="false"></v-radio>
+                      </v-radio-group>
+                    </v-flex>
+                  </v-layout>
                   <v-layout
                     row
                     wrap
@@ -803,6 +895,15 @@ export default {
         children: false,
         number_children: '',
         relation_id: '',
+        language_id: 0,
+        allergies: '',
+        parents_live_together: true,
+        residence_parents:'',
+        where_works:'',
+        history_diseases:'',
+        activities_free_time:'',
+        people_free_time:'',
+        problem_support:'',
         familyMembers: [
           {
             full_name: '',
@@ -851,7 +952,9 @@ export default {
       loadingProblems: state => state.problems.loadingProblems,
       problems: state => state.problems.problems,
       loadingEvents: state => state.events.loadingEvents,
-      events: state => state.events.events
+      events: state => state.events.events,
+      loadingLanguages: state => state.languages.loadingLanguages,
+      languages: state => state.languages.languages
     })
   },
   created () {
@@ -870,6 +973,7 @@ export default {
         const userInfo = response.data.data
         this.setForm(userInfo)
     })
+    this.getLanguages()
   },
   methods: {
     ...mapActions({
@@ -886,6 +990,7 @@ export default {
       getEvents: 'events/getEvents',
       getStudentId: 'students/getStudentId',
       patchStudents: 'students/patchStudents',
+      getLanguages: 'languages/getLanguages'
     }),
      add(index) {
       this.form.familyMembers.push({
