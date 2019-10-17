@@ -178,6 +178,11 @@
                         label="ALERGIAS"
                       />
                     </v-flex>
+                  </v-layout>
+                  <v-layout
+                    row
+                    wrap
+                  >
                     <v-flex
                       sm6
                       xs12
@@ -196,6 +201,11 @@
                         label="Recidencia de los padres"
                       />
                     </v-flex>
+                  </v-layout>
+                  <v-layout
+                    row
+                    wrap
+                  >
                     <v-flex
                       sm6
                       xs12
@@ -214,6 +224,11 @@
                         label="Las personas que paso mi tiempo libre"
                       />
                     </v-flex>
+                  </v-layout>
+                  <v-layout
+                    row
+                    wrap
+                  >
                     <v-flex
                       sm6
                       xs12
@@ -1069,6 +1084,15 @@ export default {
       this.form.number_children= user.profile.number_children
       this.form.relation_id = user.profile.relation.id
       this.form.familyMembers = user.profile.familyMembers
+      this.form.language_id = user.profile.languages.id
+      this.form.allergies = user.profile.allergies
+      this.form.parents_live_together = user.profile.parents_live_together
+      this.form.residence_parents = user.profile.residence_parents
+      this.form.where_works = user.profile.where_works
+      this.form.history_diseases = user.profile.history_diseases
+      this.form.activities_free_time = user.profile.activities_free_time
+      this.form.people_free_time = user.profile.people_free_time
+      this.form.problem_support = user.profile.problem_support
     },
     formatDate (date) {
       if (!date) return null

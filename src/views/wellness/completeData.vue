@@ -229,7 +229,10 @@
                       />
                     </v-flex>
                   </v-layout>
-                  <v-layout>
+                  <v-layout
+                    row
+                    wrap
+                  >
                     <v-flex
                       sm6
                       xs12
@@ -257,6 +260,11 @@
                         label="ALERGIAS"
                       />
                     </v-flex>
+                  </v-layout>
+                  <v-layout
+                    row
+                    wrap
+                  >
                     <v-flex
                       sm6
                       xs12
@@ -275,6 +283,11 @@
                         label="Recidencia de los padres"
                       />
                     </v-flex>
+                  </v-layout>
+                  <v-layout
+                    row
+                    wrap
+                  >
                     <v-flex
                       sm6
                       xs12
@@ -293,6 +306,11 @@
                         label="Las personas que paso mi tiempo libre"
                       />
                     </v-flex>
+                  </v-layout>
+                  <v-layout
+                    row
+                    wrap
+                  >
                     <v-flex
                       sm6
                       xs12
