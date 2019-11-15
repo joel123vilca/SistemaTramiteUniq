@@ -79,4 +79,14 @@ export default {
         .catch(error => reject(error))
     })
   },
+  getReportExcel (payload = {}) {
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/students/reports/total`,
+        method: 'get'
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
 }

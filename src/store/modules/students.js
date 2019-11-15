@@ -102,6 +102,19 @@ export const actions = {
         })
     })
   },
+  getReportExcel ({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      studentsAPI.getReportExcel(payload)
+        .then(response => {
+          const student = response.data
+          commit(types.REPLACE_CURRENT_STUDENT, { student })
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  },
 }
 
 export const getStudent = (state) => {
