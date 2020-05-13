@@ -2,17 +2,12 @@ export default [
   {
     path: '/',
     redirect: {
-      name: 'bienestar'
+      name: 'sistemaTramite'
     }
   },
   {
-    path: '/bienestar',
-    name: 'bienestar',
-    component: () => import('@/views/wellness/searchForDni.vue')
-  },
-  {
-    path: '/completar-ficha',
-    name: 'completar-ficha',
+    path: '/sistema-tramite',
+    name: 'sistemaTramite',
     component: () => import('@/views/wellness/completeData.vue')
   },
   {
@@ -24,11 +19,6 @@ export default [
     path: '/estudiantes',
     name: 'estudiantes',
     component: () => import('@/views/wellness/listStudents.vue')
-  },
-  {
-    path: '/estudiante/:id',
-    name: 'estudiante',
-    component: () => import('@/views/wellness/editStudent.vue')
   },
   // sgc users
   {
@@ -45,21 +35,5 @@ export default [
     path: '/users/:id',
     name: 'sgcUsersEdit',
     component: () => import('@/views/users/EditUser.vue')
-  },
-  // school
-  {
-    path: '/school/create',
-    name: 'createSchool',
-    component: () => import('@/views/school/Create.vue')
-  },
-  {
-    path: '/reporte/:id',
-    name: 'reporte',
-    component: () => import('@/views/wellness/report.vue')
-  },
-  {
-    path: '/reportes',
-    name: 'reportes',
-    component: () => import('@/views/wellness/reportes.vue')
   }
 ]
