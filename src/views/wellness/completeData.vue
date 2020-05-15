@@ -7,7 +7,6 @@
       </v-avatar>
 
       <h2 class="center">UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA</h2>
-
       <v-spacer />
     </v-toolbar>
     <template>
@@ -21,6 +20,12 @@
                 >SISTEMA DE TRAMITE DOCUMENTARIO UNIQ</span>
               </v-card-title>
             </v-layout>
+            <p
+              class="card-content-text"
+            >Estimados usuarios, para mayor facilidad, se ha puesto a su disposición este formulario, que le permitirá el envío de documentos a la UNIQ.</p>
+            <p
+              class="card-content-text"
+            >Esta modalidad de recepción estará activa en tanto dura la emergencia nacional declarada por D.S. N° 044-2020-PCM</p>
             <v-container fluid grid-list-lg>
               <v-form ref="form" v-model="validForm" lazy-validation @submit.prevent="submitStuden">
                 <v-layout row wrap>
@@ -36,7 +41,10 @@
                     />
                   </v-flex>
                 </v-layout>
-                <v-layout v-if="form.tipo === 'judirica'" row wrap>
+                <v-layout v-if="form.tipo === 'PERSONA JUDIRICA'" row wrap>
+                  <v-flex sm12 xs12>
+                    <h2>Datos del solicitante</h2>
+                  </v-flex>
                   <v-flex sm6 xs12>
                     <v-text-field
                       v-model="form.razon_social"
@@ -104,6 +112,9 @@
                     />
                   </v-flex>
                   <v-flex sm12 xs12>
+                    <h2>Datos del documento</h2>
+                  </v-flex>
+                  <v-flex sm12 xs12>
                     <v-textarea outline v-model="form.asunto" label="Asunto" />
                   </v-flex>
                   <v-flex sm6 xs12>
@@ -139,7 +150,10 @@
                     </v-card>
                   </v-flex>
                 </v-layout>
-                <v-layout v-if="form.tipo === 'natural'" row wrap>
+                <v-layout v-if="form.tipo === 'CIUDADANO'" row wrap>
+                  <v-flex sm12 xs12>
+                    <h2>Datos del solicitante</h2>
+                  </v-flex>
                   <v-flex sm6 xs12>
                     <v-text-field
                       v-model="form.nombre"
@@ -219,6 +233,9 @@
                     />
                   </v-flex>
                   <v-flex sm12 xs12>
+                    <h2>Datos del documento</h2>
+                  </v-flex>
+                  <v-flex sm12 xs12>
                     <v-textarea outline v-model="form.asunto" label="Asunto" />
                   </v-flex>
                   <v-flex sm6 xs12>
@@ -279,8 +296,8 @@ export default {
   data () {
     return {
       tipos: [
-        'judirica',
-        'natural',
+        'PERSONA JUDIRICA',
+        'CIUDADANO',
       ],
       formErrors: {},
       formErrores: {},
@@ -345,22 +362,6 @@ export default {
     submitStuden () {
       alert("Estamos en prueba!!!")
     },
-    DownloadPdf(){
-      const url = this.formatPath
-      const link = document.createElement('a')
-      link.href = url
-      link.setAttribute('download', 'ReporteTotal.pdf')
-      document.body.appendChild(link)
-      link.click()
-    },
-    DownloadPdfReport(){
-      const url = this.reportPath
-      const link = document.createElement('a')
-      link.href = url
-      link.setAttribute('download', 'ReporteTotal.pdf')
-      document.body.appendChild(link)
-      link.click()
-    }
   }
 }
 </script>
@@ -389,6 +390,11 @@ export default {
    display: flex;
    justify-content: center;
    margin-top: 70px;
+}
+.card-content-text{
+  margin-left: 50px;
+  text-align: start;
+  font-size: 1.2rem;
 }
 @media only screen and (max-width: 600px) {
   .center{
