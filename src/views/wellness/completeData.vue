@@ -1,6 +1,6 @@
 <template>
   <v-container fluid grid-list-lg>
-    <v-toolbar height="65" app center class="baner">
+    <v-toolbar height="65" app center class="baner" dark color="teal">
       <v-spacer />
       <v-avatar :tile="tile" size="60px">
         <v-img :src="require('@/assets/uniq.png')" />
@@ -387,10 +387,6 @@ export default {
   padding-right: 1.4rem;
   font-size: 25px;
   margin-inline-start: 20px;
-}
-.baner{
-  background-color:teal;
-  color:aliceblue;
 }
 .v-progress-circular {
   margin: 1rem;

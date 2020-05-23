@@ -1,13 +1,10 @@
 <template>
   <v-app :dark="dark">
     <Toolbar />
-    <NavigationDrawer v-if="$vuetify.breakpoint.smAndDown || authenticated" />
+    <NavigationDrawer />
 
     <v-content>
-      <transition
-        name="page"
-        mode="out-in"
-      >
+      <transition name="page" mode="out-in">
         <slot>
           <router-view :key="$route.fullPath" />
         </slot>

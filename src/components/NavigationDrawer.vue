@@ -10,10 +10,7 @@
     app
     class="pa-4"
   >
-    <v-list
-      v-if="authenticated"
-      class="mb-4"
-    >
+    <v-list class="mb-4">
       <v-list-tile
         v-if="primaryDrawer.mini"
         color="yellow"
@@ -25,36 +22,18 @@
         </v-list-tile-action>
       </v-list-tile>
 
-      <v-list-tile
-        avatar
-        tag="div"
-      >
+      <v-list-tile avatar tag="div">
         <v-list-tile-avatar>
           <template v-if="user && user.image_path">
-            <v-img
-              :src="user.image_path"
-              :lazy-src="user.image_path"
-              contain
-            >
-              <v-layout
-                slot="placeholder"
-                fill-height
-                align-center
-                justify-center
-                ma-0
-              >
-                <v-progress-circular
-                  indeterminate
-                  color="grey lighten-5"
-                />
+            <v-img :src="user.image_path" :lazy-src="user.image_path" contain>
+              <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                <v-progress-circular indeterminate color="grey lighten-5" />
               </v-layout>
             </v-img>
           </template>
 
           <template v-else>
-            <v-icon>
-              person
-            </v-icon>
+            <v-icon>person</v-icon>
           </template>
         </v-list-tile-avatar>
 
@@ -78,9 +57,7 @@
           :to="item.to"
           :disabled="!item.to"
         >
-          <v-list-tile-action
-            v-if="item.icon"
-          >
+          <v-list-tile-action v-if="item.icon">
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
@@ -111,17 +88,8 @@
         max-height="31"
         class="mt-5"
       >
-        <v-layout
-          slot="placeholder"
-          fill-height
-          align-center
-          justify-center
-          ma-0
-        >
-          <v-progress-circular
-            indeterminate
-            color="grey lighten-5"
-          />
+        <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+          <v-progress-circular indeterminate color="grey lighten-5" />
         </v-layout>
       </v-img>
     </v-list>

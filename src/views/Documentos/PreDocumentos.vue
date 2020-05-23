@@ -4,15 +4,14 @@
       <Breadcrumbs
         :routes="[
           { name: 'Inicio', to: { name:'preinscritos' } },
-          { name: 'Usuarios' },
+          { name: 'Documentos Virtuales' },
           { name: 'Listado' }
         ]"
       />
       <v-card>
         <v-toolbar color="grey darken-4" dark card>
-          <v-toolbar-title>Usuarios</v-toolbar-title>
+          <v-toolbar-title>Documentos Virtuales</v-toolbar-title>
           <v-spacer />
-          <v-btn :to="{ name: 'sgcUsersCreate' }" color="success">Agregar Usuario</v-btn>
         </v-toolbar>
         <v-container fluid grid-list-lg>
           <v-layout row wrap>

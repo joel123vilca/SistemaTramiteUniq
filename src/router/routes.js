@@ -20,6 +20,11 @@ export default [
     name: 'estudiantes',
     component: () => import('@/views/wellness/listStudents.vue')
   },
+  {
+    path: '/registrar',
+    name: 'regis',
+    component: () => import('@/views/Documentos/RegistrarDocumento.vue')
+  },
   // sgc users
   {
     path: '/users',
