@@ -361,7 +361,8 @@ export default {
   methods: {
     ...mapActions({
       replaceCurrentProduct: 'admision/replaceCurrentProduct',
- 
+      createRepresentante:'documentos/createRepresentante',
+      createCiudadano: 'documentos/createCiudadano',
     }),
     deleteDoc() {
       this.docUrl = null;
@@ -388,7 +389,26 @@ export default {
     },
     submitDoc () {
       if (!this.$refs.form.validate()) return false
-      alert('El tramite se hizo con exito, Estamos en prueba');
+      this.processingForm = true
+      if(this.form.tipo != 'CIUDADANO'){        
+      this.createRepresentante({ data: this.form })
+        .then(response => {
+          this.processingForm = false
+        })
+        .catch((error) => {
+          this.processingForm = false
+          this.formErrors = error.response.data.errors || {}
+        })
+      } else {        
+      this.createCiudadano({ data: this.form })
+        .then(response => {
+          this.processingForm = false
+        })
+        .catch((error) => {
+          this.processingForm = false
+          this.formErrors = error.response.data.errors || {}
+        })
+      }
     },
   }
 }
