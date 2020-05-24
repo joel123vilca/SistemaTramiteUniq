@@ -154,21 +154,7 @@ export default {
       getStudents: 'students/getStudents',
       getReportExcel: 'students/getReportExcel'
     }),
-    DownloadExcel(){
-      this.getReportExcel()
-      .then(response => {
-        const Excel = response.data
-        this.Download(Excel)
-      })
-    },
-    Download(Excel){
-      const url = Excel.excel_path
-      const link = document.createElement('a')
-      link.href = url
-      link.setAttribute('download', 'inscritos.xls')
-      document.body.appendChild(link)
-      link.click()
-    }
+    
   }
 }
 </script>

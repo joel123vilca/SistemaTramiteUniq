@@ -31,12 +31,7 @@
             >El horario de recepción de documentos es de 8:00 a 13 horas y de 15:00 - 18:00 horas, de lunes a viernes. El envio despues de las 18:00 horas sera registrado el dia habil siguiente.</p>
             <p>
               <v-container fluid grid-list-lg>
-                <v-form
-                  ref="form"
-                  v-model="validForm"
-                  lazy-validation
-                  @submit.prevent="submitStuden"
-                >
+                <v-form ref="form" v-model="validForm" lazy-validation @submit.prevent="submitDoc">
                   <v-layout row wrap>
                     <h2>Datos del solicitante</h2>
                     <v-flex sm12 xs12>
@@ -48,6 +43,7 @@
                         small-chips
                         label="Tipo de persona"
                         outline
+                        :rules="rules.tipo"
                       />
                     </v-flex>
                   </v-layout>
@@ -280,7 +276,7 @@
                     </v-flex>
                   </v-layout>
                   <v-flex sm6 sx12>
-                    <v-btn type="submit" block color="success" :loading="processingForm">Enviar</v-btn>
+                    <v-btn type="submit" block color="success">Enviar</v-btn>
                   </v-flex>
                 </v-form>
               </v-container>
@@ -332,6 +328,28 @@ export default {
       validForm: true,
       processingForm: false,
       processing: false,
+      rules: {
+        tipo: [
+          v => !!v || 'El Tipo es requerido'
+        ],
+        direccion: [
+          v => !!v || 'La direccion  es requerido'
+        ],
+        dni: [
+          v => !!v || 'El dni  es requerido'
+        ],
+        email: [
+          v => !!v || 'El correo electrónico es requerido',
+          // eslint-disable-next-line no-useless-escape
+          v => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'El correo electrónico debe ser válido'
+        ],
+        nombre: [
+          v => !!v || 'El nombre es requerido'
+        ],
+        apellido_materno: [
+          v => !!v || 'El apellido es requerido'
+        ]
+      }
     }
   },
   computed: {
@@ -368,8 +386,9 @@ export default {
     reset () {
       this.$refs.form.reset()
     },
-    submitStuden () {
-      alert("Estamos en prueba!!!")
+    submitDoc () {
+      if (!this.$refs.form.validate()) return false
+      alert('El tramite se hizo con exito, Estamos en prueba');
     },
   }
 }
