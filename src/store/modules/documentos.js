@@ -34,5 +34,17 @@ export const actions = {
             })
         })
       },
+      uploadArchivo ({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+          documentoAPI.uploadArchivo(payload)
+            .then(response => {
+              resolve(response)
+            })
+            .catch(error => {
+              reject(error)
+            })
+        })
+      },
+    
 }
 

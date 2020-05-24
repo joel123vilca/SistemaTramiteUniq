@@ -29,13 +29,16 @@ export default {
             .catch(error => reject(error))
         })
       },
-  uploadImage (payload = {}) {
-    const img = payload
+  uploadArchivo (payload = {}) {
+    const formData = payload.formData
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/registereds/image`,
+        url: `${HOST}/registros/archivo`,
         method: 'post',
-        data: img
+        data: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       })
         .then(response => resolve(response))
         .catch(error => reject(error))

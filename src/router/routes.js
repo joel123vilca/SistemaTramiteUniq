@@ -21,6 +21,11 @@ export default [
     component: () => import('@/views/wellness/listStudents.vue')
   },
   {
+    path: '/documentos',
+    name: 'documentos',
+    component: () => import('@/views/Documentos/PreDocumentos.vue')
+  },
+  {
     path: '/registrar',
     name: 'regis',
     component: () => import('@/views/Documentos/RegistrarDocumento.vue')

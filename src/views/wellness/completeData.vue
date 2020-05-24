@@ -77,13 +77,13 @@
                     </v-flex>
                     <v-flex sm6 xs12>
                       <v-text-field
-                        v-model="form.dependecia"
+                        v-model="form.dependencia"
                         label="Dependencia"
-                        :error="!!formErrors.dependecia"
-                        :error-messages="formErrors.dependecia"
+                        :error="!!formErrors.dependencia"
+                        :error-messages="formErrors.dependencia"
                         @keyup="() => {
-                          formErrors.dependecia= undefined
-                          delete formErrors.dependecia
+                          formErrors.dependencia= undefined
+                          delete formErrors.dependencia
                         }"
                         outline
                       />
@@ -111,6 +111,32 @@
                         @keyup="() => {
                           formErrors.cargo_firmante= undefined
                           delete formErrors.cargo_firmante
+                        }"
+                        outline
+                      />
+                    </v-flex>
+                    <v-flex sm6 xs12>
+                      <v-text-field
+                        v-model="form.direccion"
+                        label="Direccion"
+                        :error="!!formErrors.direccion"
+                        :error-messages="formErrors.direccion"
+                        @keyup="() => {
+                          formErrors.direccion= undefined
+                          delete formErrors.direccion
+                        }"
+                        outline
+                      />
+                    </v-flex>
+                    <v-flex sm6 xs12>
+                      <v-text-field
+                        v-model="form.telefono"
+                        label="Telefono"
+                        :error="!!formErrors.telefono"
+                        :error-messages="formErrors.telefono"
+                        @keyup="() => {
+                          formErrors.telefono= undefined
+                          delete formErrors.telefono
                         }"
                         outline
                       />
@@ -143,7 +169,7 @@
                           <el-upload
                             class="avatar-uploader"
                             action
-                            name="doc"
+                            name="archivo"
                             :http-request="onFilePickedDoc"
                             :show-file-list="false"
                           >
@@ -155,18 +181,15 @@
                     </v-flex>
                   </v-layout>
                   <v-layout v-if="form.tipo === 'CIUDADANO'" row wrap>
-                    <v-flex sm12 xs12>
-                      <h2>Datos del solicitante</h2>
-                    </v-flex>
                     <v-flex sm6 xs12>
                       <v-text-field
-                        v-model="form.nombre"
+                        v-model="form.nombres"
                         label="NOMBRES"
-                        :error="!!formErrors.nombre"
-                        :error-messages="formErrors.nombre"
+                        :error="!!formErrors.nombres"
+                        :error-messages="formErrors.nombres"
                         @keyup="() => {
-                          formErrors.nombre= undefined
-                          delete formErrors.nombre
+                          formErrors.nombres= undefined
+                          delete formErrors.nombres
                         }"
                         outline
                       />
@@ -237,6 +260,19 @@
                       />
                     </v-flex>
                     <v-flex sm12 xs12>
+                      <v-text-field
+                        v-model="form.email"
+                        label="Email"
+                        :error="!!formErrors.email"
+                        :error-messages="formErrors.email"
+                        @keyup="() => {
+                          formErrors.email= undefined
+                          delete formErrors.email
+                        }"
+                        outline
+                      />
+                    </v-flex>
+                    <v-flex sm12 xs12>
                       <h2>Datos del documento</h2>
                     </v-flex>
                     <v-flex sm12 xs12>
@@ -264,7 +300,7 @@
                           <el-upload
                             class="avatar-uploader"
                             action
-                            name="doc"
+                            name="archivo"
                             :http-request="onFilePickedDoc"
                             :show-file-list="false"
                           >
@@ -311,7 +347,8 @@ export default {
       docFile: '',
       form: {
         tipo:'',
-        nombre:'',
+        nombres:'',
+        email:'',
         apellido_paterno: '',
         apellido_materno:'',
         telefono:'',
@@ -320,10 +357,12 @@ export default {
         asunto:'',
         razon_social:'',
         ruc:'',
-        dependecia:'',
+        dependencia:'',
         firmante:'',
         cargo_firmante:'',
-        file:''
+        file:'',
+        archivo_url:'',
+        archivo_path:''
       },
       validForm: true,
       processingForm: false,
@@ -343,7 +382,7 @@ export default {
           // eslint-disable-next-line no-useless-escape
           v => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'El correo electrónico debe ser válido'
         ],
-        nombre: [
+        nombres: [
           v => !!v || 'El nombre es requerido'
         ],
         apellido_materno: [
@@ -363,12 +402,13 @@ export default {
       replaceCurrentProduct: 'admision/replaceCurrentProduct',
       createRepresentante:'documentos/createRepresentante',
       createCiudadano: 'documentos/createCiudadano',
+      uploadArchivo: 'documentos/uploadArchivo'
     }),
     deleteDoc() {
       this.docUrl = null;
     },
     onFilePickedDoc(e) {
-      console.log(e.file);
+      console.log(e.filename);
       this.form.file = e.file;
       if(e.file !== undefined) {
         this.docName = e.file.name;
@@ -378,6 +418,14 @@ export default {
           this.docUrl = 'https://img2.freepng.es/20181211/jll/kisspng-computer-file-computer-software-document-file-form-5c0f62f6a186c6.8357000615445122466616.jpg';
             this.docFile = e.file;
         })
+        let formData = new FormData();
+        formData.append(e.filename, e.file, e.file.name)
+      this.uploadArchivo({ formData })
+        .then(response => {
+          this.form.archivo_url = response.data.file_url
+          this.form.archivo_path = response.data.file_path
+        })
+
       } else {
         this.docName = '';
         this.docFile = '';
