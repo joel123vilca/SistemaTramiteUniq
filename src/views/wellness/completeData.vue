@@ -47,7 +47,7 @@
                       />
                     </v-flex>
                   </v-layout>
-                  <v-layout v-if="form.tipo === 'PERSONA JUDIRICA'" row wrap>
+                  <v-layout v-if="form.tipo === 'PERSONA JURIDICA'" row wrap>
                     <v-flex sm12 xs12></v-flex>
                     <v-flex sm6 xs12>
                       <v-text-field
@@ -337,7 +337,7 @@ export default {
   data () {
     return {
       tipos: [
-        'PERSONA JUDIRICA',
+        'PERSONA JURIDICA',
         'CIUDADANO',
       ],
       formErrors: {},
