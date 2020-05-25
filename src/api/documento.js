@@ -5,7 +5,19 @@ const HOST = baseUrlAPI
 
 export default {
 
-    postCiudadano(payload = {}) {
+  get (payload = {}) {
+    const params = payload.params || {}
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/registros`,
+        method: 'get',
+        params
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },  
+  postCiudadano(payload = {}) {
         const data = payload.data || {}
         return new Promise((resolve, reject) => {
           axios({

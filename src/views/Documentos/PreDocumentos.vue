@@ -15,10 +15,10 @@
         </v-toolbar>
         <v-container fluid grid-list-lg>
           <v-layout row wrap>
-            <v-flex v-if="users.length" sm6 offset-sm6>
+            <v-flex v-if="documentos.length" sm6 offset-sm6>
               <v-text-field
                 v-model="searchUsers"
-                :disabled="loadingUsers"
+                :disabled="loadingDocumentos"
                 box
                 append-icon="search"
                 label="Buscar"
@@ -26,44 +26,81 @@
                 hide-details
               />
             </v-flex>
-            <v-flex xs12>
+            <v-radio-group v-model="row" row>
+              <v-radio label="Juridico" value="judirico"></v-radio>
+              <v-radio label="Ciudadano" value="ciudadano"></v-radio>
+            </v-radio-group>
+            <v-flex xs12 v-if="row==='ciudadano'">
               <v-data-table
                 :headers="[
-                  { text: 'Nombres', value: 'name' },
-                  { text: 'Correo electrónico', value: 'email' },
-                  { text: 'Tipo', value: 'typeUser' },
+                  { text: 'Nombres', value: 'nombres' },
+                  { text: 'Correo electrónico' },
+                  { text: 'Asunto', value: 'asunto' },
                   { text: 'Acciones', align: 'center', sortable: false, width: '220' }
                 ]"
-                :items="users"
+                :items="documentos"
                 :search="searchUsers"
-                :loading="loadingUsers"
+                :loading="loadingDocumentos"
                 class="elevation-1"
               >
                 <tr slot="items" slot-scope="props">
-                  <td class="px-3">{{ props.item.name }}</td>
-                  <td class="px-3">{{ props.item.email }}</td>
-                  <td class="px-3">
-                    <v-chip
-                      v-if="props.item.typeUser.title === 'Administrador'"
-                      small
-                      color="primary"
-                      text-color="white"
-                    >{{ props.item.typeUser.title }}</v-chip>
-                    <v-chip
-                      v-else-if="props.item.typeUser.title === 'Registrador'"
-                      small
-                    >{{ props.item.typeUser.title }}</v-chip>
+                  <td
+                    class="px-3"
+                    v-if="props.item.remitente.hasOwnProperty('email')"
+                  >{{ props.item.remitente.nombres }}</td>
+                  <td
+                    class="px-3"
+                    v-if="props.item.remitente.hasOwnProperty('email')"
+                  >{{ props.item.remitente.email }}</td>
+                  <td
+                    class="px-3"
+                    v-if="props.item.remitente.hasOwnProperty('email')"
+                  >{{ props.item.asunto }}</td>
+                  <td
+                    class="text-xs-center px-3"
+                    v-if="props.item.remitente.hasOwnProperty('email')"
+                  >
+                    <template>
+                      <v-btn class="ma-0" small icon flat color="info">
+                        <v-icon small>edit</v-icon>
+                      </v-btn>
+                    </template>
                   </td>
-                  <td class="text-xs-center px-3">
-                    <template v-if="$can('update', 'Users')">
-                      <v-btn
-                        class="ma-0"
-                        :to="{ name: 'sgcUsersEdit', params: { id: props.item.id } }"
-                        small
-                        icon
-                        flat
-                        color="info"
-                      >
+                </tr>
+              </v-data-table>
+            </v-flex>
+            <v-flex xs12 v-else>
+              <v-data-table
+                :headers="[
+                  { text: 'Razon Social', value: 'nombres' },
+                  { text: 'Firmante' },
+                  { text: 'Asunto', value: 'asunto' },
+                  { text: 'Acciones', align: 'center', sortable: false, width: '220' }
+                ]"
+                :items="documentos"
+                :search="searchUsers"
+                :loading="loadingDocumentos"
+                class="elevation-1"
+              >
+                <tr slot="items" slot-scope="props">
+                  <td
+                    class="px-3"
+                    v-if="props.item.remitente.hasOwnProperty('firmante')"
+                  >{{ props.item.remitente.razon_social }}</td>
+                  <td
+                    class="px-3"
+                    v-if="props.item.remitente.hasOwnProperty('firmante')"
+                  >{{ props.item.remitente.firmante }}</td>
+                  <td
+                    class="px-3"
+                    v-if="props.item.remitente.hasOwnProperty('firmante')"
+                  >{{ props.item.asunto }}</td>
+                  <td
+                    class="text-xs-center px-3"
+                    v-if="props.item.remitente.hasOwnProperty('firmante')"
+                  >
+                    <template>
+                      <v-btn class="ma-0" small icon flat color="info">
                         <v-icon small>edit</v-icon>
                       </v-btn>
                     </template>
@@ -95,14 +132,15 @@ export default {
 
   data () {
     return {
-      searchUsers: ''
+      searchUsers: '',
+      row: 'ciudadano',
     }
   },
 
   computed: {
     ...mapState({
-      users: state => state.users.users,
-      loadingUsers: state => state.users.loadingUsers
+      documentos: state => state.documentos.documentos,
+      loadingDocumentos: state => state.documentos.loadingDocumentos
     })
   },
 
@@ -110,24 +148,13 @@ export default {
   },
 
   created () {
-    if (!this.$can('list', 'Users')) return false
-    this.getUsers()
+    this.getDocumentos()
   },
 
   methods: {
     ...mapActions({
-      getUsers: 'users/getUsers',
-      replaceShowModalDeleteUser: 'users/replaceShowModalDeleteUser',
-      replaceShowModalIncreaseDecreaseCredits: 'credits/replaceShowModalIncreaseDecreaseCredits',
-      replaceCurrentUser: 'users/replaceCurrentUser',
-      replaceUsers: 'users/replaceUsers'
+      getDocumentos: 'documentos/getDocumentos',
     }),
-
-    openModalDeleteUser (user) {
-      this.replaceCurrentUser({ user })
-      this.replaceShowModalDeleteUser({ status: true })
-    }
-
   }
 }
 </script>
