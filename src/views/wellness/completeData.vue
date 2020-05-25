@@ -141,6 +141,19 @@
                         outline
                       />
                     </v-flex>
+                    <v-flex sm6 xs12>
+                      <v-text-field
+                        v-model="form.email"
+                        label="Email"
+                        :error="!!formErrors.email"
+                        :error-messages="formErrors.email"
+                        @keyup="() => {
+                          formErrors.email= undefined
+                          delete formErrors.email
+                        }"
+                        outline
+                      />
+                    </v-flex>
                     <v-flex sm12 xs12>
                       <h2>Datos del documento</h2>
                     </v-flex>

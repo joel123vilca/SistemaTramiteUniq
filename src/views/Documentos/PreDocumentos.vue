@@ -72,7 +72,7 @@
             <v-flex xs12 v-else>
               <v-data-table
                 :headers="[
-                  { text: 'Razon Social', value: 'nombres' },
+                  { text: 'Nombre de la institución', value: 'nombres' },
                   { text: 'Firmante' },
                   { text: 'Asunto', value: 'asunto' },
                   { text: 'Acciones', align: 'center', sortable: false, width: '220' }

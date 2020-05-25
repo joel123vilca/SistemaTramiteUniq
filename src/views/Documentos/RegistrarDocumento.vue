@@ -25,23 +25,22 @@
               >
                 <v-container fluid grid-list-lg>
                   <v-text-field
-                    v-model="form.email"
+                    v-model="form.descripcion"
                     :disabled="processingForm"
-                    label="Fecha"
-                    type="date"
+                    label="Descripcion"
                     outline
                   />
                   <v-text-field
-                    v-model="form.name"
+                    v-model="form.observaciones"
                     :disabled="processingForm"
-                    label="Tipo de Documento"
+                    label="Observaciones"
                     outline
                   />
 
                   <v-layout row wrap>
                     <v-flex sm6 xs12>
                       <v-autocomplete
-                        v-model="form.type_user_id"
+                        v-model="form.tipo_documento_id"
                         :items="typeUsers"
                         :loading="loadingTipeUsers"
                         dense
@@ -51,76 +50,58 @@
                         item-text="title"
                         item-value="id"
                         :disabled="processingForm"
-                        :error="!!formErrors.type_user_id"
-                        :error-messages="formErrors.type_user_id"
+                        :error="!!formErrors.tipo_documento_id"
+                        :error-messages="formErrors.tipo_documento_id"
                         @change="() => {
-                          formErrors.type_user_id = undefined
-                          delete formErrors.type_user_id
+                          formErrors.tipo_documento_id = undefined
+                          delete formErrors.tipo_documento_id
                         }"
                         outline
                       />
                     </v-flex>
                     <v-flex sm6 xs12>
                       <v-text-field
-                        v-model="form.name"
-                        :disabled="processingForm"
-                        label="Tipo de Documento"
-                        outline
-                      />
-                    </v-flex>
-                  </v-layout>
-                  <v-layout row wrap>
-                    <v-flex sm6 xs12>
-                      <v-text-field
-                        v-model="form.name"
-                        :disabled="processingForm"
-                        label="N° de documento"
-                        outline
-                      />
-                    </v-flex>
-                    <v-flex sm6 xs12>
-                      <v-text-field
-                        v-model="form.name"
-                        :disabled="processingForm"
-                        label="N° correlativo"
-                        outline
-                      />
-                    </v-flex>
-                  </v-layout>
-
-                  <v-layout row wrap>
-                    <v-flex sm6 xs12>
-                      <v-text-field
-                        v-model="form.name"
-                        :disabled="processingForm"
-                        label="Tipo remitente"
-                        outline
-                      />
-                    </v-flex>
-                    <v-flex sm6 xs12>
-                      <v-text-field
-                        v-model="form.name"
-                        :disabled="processingForm"
-                        label="Remitente"
-                        outline
-                      />
-                    </v-flex>
-                  </v-layout>
-
-                  <v-layout row wrap>
-                    <v-flex sm6 xs12>
-                      <v-text-field
-                        v-model="form.name"
+                        v-model="form.asunto"
                         :disabled="processingForm"
                         label="Asunto"
                         outline
                       />
                     </v-flex>
+                  </v-layout>
+                  <v-layout row wrap>
                     <v-flex sm6 xs12>
                       <v-text-field
-                        v-model="form.name"
+                        v-model="form.numero_folios"
                         :disabled="processingForm"
-                        label="Dirigido a"
+                        label="N° de Folios"
+                        outline
+                      />
+                    </v-flex>
+                    <v-flex sm6 xs12>
+                      <v-text-field
+                        v-model="form.fecha_registro"
+                        :disabled="processingForm"
+                        label="Fecha de Registro"
+                        outline
+                        type="date"
+                      />
+                    </v-flex>
+                  </v-layout>
+
+                  <v-layout row wrap>
+                    <v-flex sm6 xs12>
+                      <v-text-field
+                        v-model="form.numero_documento"
+                        :disabled="processingForm"
+                        label="Numero de documento"
+                        outline
+                      />
+                    </v-flex>
+                    <v-flex sm6 xs12>
+                      <v-text-field
+                        v-model="form.numero_tramite_documentario"
+                        :disabled="processingForm"
+                        label="Numero de Tramite Documentario"
                         outline
                       />
                     </v-flex>
@@ -129,36 +110,17 @@
                   <v-layout row wrap>
                     <v-flex sm6 xs12>
                       <v-text-field
-                        v-model="form.name"
-                        :disabled="processingForm"
-                        label="Atencion"
-                        outline
-                      />
-                    </v-flex>
-                    <v-flex sm6 xs12>
-                      <v-text-field
-                        v-model="form.name"
+                        v-model="form.prioridad"
                         :disabled="processingForm"
                         label="Prioridad"
                         outline
                       />
                     </v-flex>
-                  </v-layout>
-
-                  <v-layout row wrap>
                     <v-flex sm6 xs12>
                       <v-text-field
-                        v-model="form.name"
+                        v-model="form.procedimiento_id"
                         :disabled="processingForm"
-                        label="Fuente"
-                        outline
-                      />
-                    </v-flex>
-                    <v-flex sm6 xs12>
-                      <v-text-field
-                        v-model="form.name"
-                        :disabled="processingForm"
-                        label="N° voucher"
+                        label="Procedimiento"
                         outline
                       />
                     </v-flex>
@@ -172,7 +134,7 @@
                     :disabled="!validForm || processingForm"
                     :loading="processingForm"
                   >Guardar</v-btn>
-                  <v-btn @click="$router.push({ name: 'sgcUsersList' })">Cancelar</v-btn>
+                  <v-btn @click="$router.push({ name: 'registros' })">Cancelar</v-btn>
                 </div>
               </v-form>
             </v-card-text>
@@ -206,11 +168,18 @@ export default {
       formErrors: {},
 
       form: {
-        email: '',
-        name: '',
-        type_user_id: 0
+        descripcion: "",
+        observaciones: "",
+        asunto: "",
+        numero_folios: "",
+        fecha_registro: "",
+        numero_documento: "",
+        numero_tramite_documentario: "",
+        prioridad: "Normal",
+        archivo_url: "",
+        tipo_documento_id: 0,
+        procedimiento_id: 0
       },
-
       validForm: true,
       processingForm: false,
 
