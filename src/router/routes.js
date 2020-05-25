@@ -30,6 +30,11 @@ export default [
     name: 'regis',
     component: () => import('@/views/Documentos/RegistrarDocumento.vue')
   },
+  {
+    path: '/registrar-ciudadano',
+    name: 'regisCiudadano',
+    component: () => import('@/views/Documentos/RegistrarCiudadano.vue')
+  },
   // sgc users
   {
     path: '/users',

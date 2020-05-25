@@ -36,6 +36,8 @@
                   { text: 'Nombres', value: 'nombres' },
                   { text: 'Correo electrónico' },
                   { text: 'Asunto', value: 'asunto' },
+                  { text: 'Fecha de Tramite' },
+                  { text: 'Hora' },
                   { text: 'Acciones', align: 'center', sortable: false, width: '220' }
                 ]"
                 :items="documentos"
@@ -46,19 +48,27 @@
                 <tr slot="items" slot-scope="props">
                   <td
                     class="px-3"
-                    v-if="props.item.remitente.hasOwnProperty('email')"
+                    v-if="props.item.remitente.hasOwnProperty('nombres')"
                   >{{ props.item.remitente.nombres }}</td>
                   <td
                     class="px-3"
-                    v-if="props.item.remitente.hasOwnProperty('email')"
+                    v-if="props.item.remitente.hasOwnProperty('nombres')"
                   >{{ props.item.remitente.email }}</td>
                   <td
                     class="px-3"
-                    v-if="props.item.remitente.hasOwnProperty('email')"
+                    v-if="props.item.remitente.hasOwnProperty('nombres')"
                   >{{ props.item.asunto }}</td>
                   <td
+                    class="px-3"
+                    v-if="props.item.remitente.hasOwnProperty('nombres')"
+                  >{{ props.item.fecha_registro }}</td>
+                  <td
+                    class="px-3"
+                    v-if="props.item.remitente.hasOwnProperty('nombres')"
+                  >{{ props.item.hora_registro }}</td>
+                  <td
                     class="text-xs-center px-3"
-                    v-if="props.item.remitente.hasOwnProperty('email')"
+                    v-if="props.item.remitente.hasOwnProperty('nombres')"
                   >
                     <template>
                       <v-btn class="ma-0" small icon flat color="info">
@@ -75,6 +85,8 @@
                   { text: 'Nombre de la institución', value: 'nombres' },
                   { text: 'Firmante' },
                   { text: 'Asunto', value: 'asunto' },
+                  { text:'Fecha de registro'},
+                  { text: 'Hora de registro'},
                   { text: 'Acciones', align: 'center', sortable: false, width: '220' }
                 ]"
                 :items="documentos"
@@ -95,6 +107,14 @@
                     class="px-3"
                     v-if="props.item.remitente.hasOwnProperty('firmante')"
                   >{{ props.item.asunto }}</td>
+                  <td
+                    class="px-3"
+                    v-if="props.item.remitente.hasOwnProperty('firmante')"
+                  >{{ props.item.fecha_registro }}</td>
+                  <td
+                    class="px-3"
+                    v-if="props.item.remitente.hasOwnProperty('firmante')"
+                  >{{ props.item.hora_registro }}</td>
                   <td
                     class="text-xs-center px-3"
                     v-if="props.item.remitente.hasOwnProperty('firmante')"
@@ -122,7 +142,7 @@ export default {
   middleware: 'auth',
 
   metaInfo () {
-    return { title: 'Listado de Usuarios' }
+    return { title: 'Listado de Documentos' }
   },
 
   components: {

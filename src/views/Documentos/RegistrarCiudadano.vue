@@ -27,66 +27,52 @@
                   <v-layout row wrap>
                     <v-flex sm6 xs12>
                       <v-text-field
-                        v-model="form.razon_social"
-                        label="Razon Social"
-                        :error="!!formErrors.razon_social"
-                        :error-messages="formErrors.razon_social"
+                        v-model="form.nombres"
+                        label="NOMBRES"
+                        :error="!!formErrors.nombres"
+                        :error-messages="formErrors.nombres"
                         @keyup="() => {
-                          formErrors.razon_social = undefined
-                          delete formErrors.razon_social
+                          formErrors.nombres= undefined
+                          delete formErrors.nombres
                         }"
                         outline
                       />
                     </v-flex>
                     <v-flex sm6 xs12>
                       <v-text-field
-                        v-model="form.ruc"
-                        label="Ruc"
-                        :error="!!formErrors.ruc"
-                        :error-messages="formErrors.ruc"
+                        v-model="form.apellido_paterno"
+                        label="Apellido Paterno"
+                        :error="!!formErrors.apellido_paterno"
+                        :error-messages="formErrors.apellido_paterno"
                         @keyup="() => {
-                          formErrors.ruc= undefined
-                          delete formErrors.ruc
+                          formErrors.apellido_paterno= undefined
+                          delete formErrors.apellido_paterno
                         }"
                         outline
                       />
                     </v-flex>
                     <v-flex sm6 xs12>
                       <v-text-field
-                        v-model="form.dependencia"
-                        label="Dependencia"
-                        :error="!!formErrors.dependencia"
-                        :error-messages="formErrors.dependencia"
+                        v-model="form.telefono"
+                        label="Telefono"
+                        :error="!!formErrors.telefono"
+                        :error-messages="formErrors.telefono"
                         @keyup="() => {
-                          formErrors.dependencia= undefined
-                          delete formErrors.dependencia
+                          formErrors.telefono= undefined
+                          delete formErrors.telefono
                         }"
                         outline
                       />
                     </v-flex>
                     <v-flex sm6 xs12>
                       <v-text-field
-                        v-model="form.firmante"
-                        label="Firmante"
-                        :error="!!formErrors.firmante"
-                        :error-messages="formErrors.firmante"
+                        v-model="form.apellido_materno"
+                        label="Apellido Materno"
+                        :error="!!formErrors.apellido_materno"
+                        :error-messages="formErrors.apellido_materno"
                         @keyup="() => {
-                          formErrors.firmante= undefined
-                          delete formErrors.firmante
-                        }"
-                        outline
-                      />
-                    </v-flex>
-                    <v-flex sm6 xs12>
-                      <v-text-field
-                        v-model="form.cargo_firmante"
-                        label="Cargo Firmante"
-                        outlined
-                        :error="!!formErrors.cargo_firmante"
-                        :error-messages="formErrors.cargo_firmante"
-                        @keyup="() => {
-                          formErrors.cargo_firmante= undefined
-                          delete formErrors.cargo_firmante
+                          formErrors.apellido_materno= undefined
+                          delete formErrors.apellido_materno
                         }"
                         outline
                       />
@@ -106,18 +92,18 @@
                     </v-flex>
                     <v-flex sm6 xs12>
                       <v-text-field
-                        v-model="form.telefono"
-                        label="Telefono"
-                        :error="!!formErrors.telefono"
-                        :error-messages="formErrors.telefono"
+                        v-model="form.dni"
+                        label="DNI"
+                        :error="!!formErrors.dni"
+                        :error-messages="formErrors.dni"
                         @keyup="() => {
-                          formErrors.telefono= undefined
-                          delete formErrors.telefono
+                          formErrors.dni= undefined
+                          delete formErrors.dni
                         }"
                         outline
                       />
                     </v-flex>
-                    <v-flex sm6 xs12>
+                    <v-flex sm12 xs12>
                       <v-text-field
                         v-model="form.email"
                         label="Email"
