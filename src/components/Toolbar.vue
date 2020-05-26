@@ -7,8 +7,9 @@
       dark
       class="teal darken-1"
       center
+      v-if="authenticated"
     >
-      <v-toolbar-side-icon @click.stop="replacePrimaryDrawerModel" />
+      <v-toolbar-side-icon @click.stop="replacePrimaryDrawerModel" v-if="authenticated" />
 
       <v-spacer />
       <img style="max-height:50px;width:50px;" :src="require('@/assets/uniq.png')" />

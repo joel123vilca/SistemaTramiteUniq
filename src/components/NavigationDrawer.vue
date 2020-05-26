@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    v-if="authenticated"
     v-model="primaryDrawer.model"
     :permanent="primaryDrawer.type === 'permanent'"
     :temporary="primaryDrawer.type === 'temporary'"
