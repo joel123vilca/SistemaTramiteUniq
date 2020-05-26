@@ -245,7 +245,7 @@
                     color="success"
                     :disabled="!validForm || processingForm"
                     :loading="processingForm"
-                  >Guardar</v-btn>
+                  >Registrar</v-btn>
                   <v-btn @click="$router.push({ name: 'registros' })">Cancelar</v-btn>
                 </div>
               </v-form>

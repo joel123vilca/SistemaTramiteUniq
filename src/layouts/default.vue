@@ -2,7 +2,6 @@
   <v-app :dark="dark">
     <Toolbar />
     <NavigationDrawer />
-
     <v-content>
       <transition name="page" mode="out-in">
         <slot>
@@ -34,7 +33,7 @@ export default {
 
     ...mapGetters({
       authenticated: 'auth/check',
-      userIsAdmin: 'auth/userIsAdmin',
+      userIsTramitador: 'auth/userIsTramitador',
       userIsClient: 'auth/userIsClient'
     })
   },

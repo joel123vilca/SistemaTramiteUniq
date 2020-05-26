@@ -5,11 +5,11 @@ export const ability = AbilityBuilder.define((can, cannot) => {
 })
 
 export function defineAbilitiesFor (user = {}) {
-  const roleType = user.typeUser.title || 'guest'
+  const roleType = user.tipoUsuario.tipo || 'guest'
   // const roleType = user.typeUser.id === 1 ? 'Registrador' : 'Administrador'
 
   switch (roleType) {
-    case 'Administrador':
+    case 'Tramitador':
       return [
         {
           subject: 'Dashboard',

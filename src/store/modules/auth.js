@@ -13,12 +13,12 @@ export const getters = {
   token: state => state.token,
   check: state => state.user !== null,
 
-  userIsAdmin: (state, getters, rootState, rootGetters) => {
-    return state.user && state.user.typeUser.title === 'Administrador'
+  userIsTramitador: (state, getters, rootState, rootGetters) => {
+    return state.user && state.user.tipoUsuario.tipo === 'Tramitador'
   },
 
   userIsClient: (state, getters, rootState, rootGetters) => {
-    return state.user && state.user.typeUser.title !== 'Administrador'
+    return state.user && state.user.tipoUsuario.tipo != 'Tramitador'
   }
 }
 
@@ -37,7 +37,6 @@ export const actions = {
 
           const newAbilities = defineAbilitiesFor(user)
           ability.update(newAbilities)
-
           resolve(response)
         })
         .catch(error => {

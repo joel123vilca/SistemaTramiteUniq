@@ -21,23 +21,23 @@ export const getters = {
     if (rootGetters['auth/userIsClient']) {
       items.push(
         {
-          name: 'Estudiantes',
-          to: { name: 'estudiantes' }
+          name: 'Documentos Virtuales',
+          to: { name: 'documentos' }
         }
       )
 
       return items
     }
 
-    if (rootGetters['auth/userIsAdmin']) {
+    if (rootGetters['auth/userIsTramitador']) {
       items.push(
         {
-          name: 'Estudiantes',
-          to: { name: 'estudiantes' }
+          name: 'Documentos Virtuales',
+          to: { name: 'documentos' }
         },
         {
           name: 'Personal',
-          to: { name: 'sgcUsersList' }
+          to: { name: 'regisCiudadano' }
         }
       )
       return items
