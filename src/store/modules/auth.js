@@ -12,14 +12,6 @@ export const getters = {
   user: state => state.user,
   token: state => state.token,
   check: state => state.user !== null,
-
-  userIsTramitador: (state, getters, rootState, rootGetters) => {
-    return state.user && state.user.tipoUsuario.tipo === 'Tramitador'
-  },
-
-  userIsClient: (state, getters, rootState, rootGetters) => {
-    return state.user && state.user.tipoUsuario.tipo != 'Tramitador'
-  }
 }
 
 export const actions = {
@@ -32,11 +24,8 @@ export const actions = {
     return new Promise((resolve, reject) => {
       authAPI.user()
         .then(response => {
-          const user = response.data.data
+          const user = response.data.success
           commit(types.FETCH_USER_SUCCESS, { user })
-
-          const newAbilities = defineAbilitiesFor(user)
-          ability.update(newAbilities)
           resolve(response)
         })
         .catch(error => {

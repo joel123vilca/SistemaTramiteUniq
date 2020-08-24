@@ -5,16 +5,15 @@
       :clipped-left="primaryDrawer.clipped"
       app
       dark
-      class="teal darken-1"
+      class="toolbar-tramite"
       center
       v-if="authenticated"
     >
       <v-toolbar-side-icon @click.stop="replacePrimaryDrawerModel" v-if="authenticated" />
 
       <v-spacer />
-      <img style="max-height:50px;width:50px;" :src="require('@/assets/uniq.png')" />
       <v-toolbar-title class="scoped-toolbar-title ma-0 pa-0">
-        <h4>Universidad Nacional Intercultural de Quillabamba</h4>
+        <h4>Sistema de tramite de Municipalidad de Pocollay</h4>
       </v-toolbar-title>
 
       <v-spacer />
@@ -77,14 +76,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-// .v-toolbar {
-//   font-weight: 300;
-//   background-color: rgba(0, 0, 0, 0.86);
-//   box-shadow: 0px 9px 31px 0px rgba(0, 0, 0, 0.7);
-//   background-repeat: repeat-x;
-//   background-image: url(https://static.parastorage.com/services/skins/2.1229.80/images/wysiwyg/core/themes/base/ironpatern.png);
-// }
 
+.toolbar-tramite{
+
+  background: #0F62AC !important;
+}
 .scoped-toolbar-title {
   display: flex;
   filter: opacity(70%);
@@ -111,14 +107,14 @@ export default {
 
     &.hover:hover {
       border-radius: 6px;
-      background: #74ba1a !important;
+      background: #0F62AC !important;
       color: white;
     }
   }
 }
 
 .scoped-btn-active {
-  background: #74ba1a !important;
+  background: #0F62AC !important;
 }
 
 </style>

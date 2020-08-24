@@ -35,7 +35,9 @@ export default {
         url: `${HOST}/user`,
         method: 'get'
       })
-        .then(response => resolve(response))
+        .then(response => {
+          resolve(response)
+        })
         .catch(error => reject(error))
     })
   }

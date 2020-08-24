@@ -3,9 +3,7 @@
     fluid
     grid-list-lg
   >
-    <NotPermission v-if="!$can('create', 'Users')" />
-
-    <template v-else>
+    <template>
       <Breadcrumbs
         :routes="[
           { name: 'Inicio', to: { name: 'estudiantes' } },
@@ -17,13 +15,13 @@
         wrap
       >
         <v-flex
-          md6
-          sm6
+          md12
+          sm12
           xs12
         >
           <v-card>
             <v-card-title primary-title>
-              <span class="success--text font-weight-bold headline">Registrar Usuario</span>
+              <span class="primary--text font-weight-bold headline">Registrar Usuario</span>
             </v-card-title>
             <v-divider />
             <v-card-text
@@ -42,24 +40,13 @@
                   <v-text-field
                     v-model="form.email"
                     :disabled="processingForm"
-                    label="Email"
+                    label="Usuario"
                     :rules="rules.email"
                     :error="!!formErrors.email"
                     :error-messages="formErrors.email"
                     @keyup="() => {
                       formErrors.email = undefined
                       delete formErrors.email
-                    }"
-                  />
-                  <v-text-field
-                    v-model="form.name"
-                    :disabled="processingForm"
-                    label="Nombre"
-                    :error="!!formErrors.name"
-                    :error-messages="formErrors.name"
-                    @keyup="() => {
-                      formErrors.name = undefined
-                      delete formErrors.name
                     }"
                   />
                   <v-text-field
@@ -83,7 +70,7 @@
                       sm6
                       xs12
                     >
-                      <v-autocomplete
+                      <!-- <v-autocomplete
                         v-model="form.type_user_id"
                         :items="typeUsers"
                         :loading="loadingTipeUsers"
@@ -100,7 +87,7 @@
                           formErrors.type_user_id = undefined
                           delete formErrors.type_user_id
                         }"
-                      />
+                      /> -->
                     </v-flex>
                   </v-layout>
                 </v-container>
@@ -180,12 +167,6 @@ export default {
       loadingTipeUsers: state => state.typeUsers.loadingTipeUsers
     })
   },
-
-  created () {
-    if (!this.$can('create', 'Users')) return false
-    this.getTypeUsers()
-  },
-
   methods: {
     ...mapActions({
       replaceCurrentUser: 'users/replaceCurrentUser',

@@ -16,32 +16,41 @@ export const state = {
 
 export const getters = {
   sidebarItems: (state, getters, rootState, rootGetters) => {
-    let items = []
+    let items = [
+      {
+        name: 'Documentos Virtuales',
+        to: { name: 'documentos' }
+      },
+      {
+        name: 'Personal',
+        to: { name: 'regisCiudadano' }
+      }
+    ]
 
-    if (rootGetters['auth/userIsClient']) {
-      items.push(
-        {
-          name: 'Documentos Virtuales',
-          to: { name: 'documentos' }
-        }
-      )
+    // if (rootGetters['auth/userIsClient']) {
+    //   items.push(
+    //     {
+    //       name: 'Documentos Virtuales',
+    //       to: { name: 'documentos' }
+    //     }
+    //   )
 
-      return items
-    }
+    //   return items
+    // }
 
-    if (rootGetters['auth/userIsTramitador']) {
-      items.push(
-        {
-          name: 'Documentos Virtuales',
-          to: { name: 'documentos' }
-        },
-        {
-          name: 'Personal',
-          to: { name: 'regisCiudadano' }
-        }
-      )
-      return items
-    }
+    // if (rootGetters['auth/userIsTramitador']) {
+    //   items.push(
+    //     {
+    //       name: 'Documentos Virtuales',
+    //       to: { name: 'documentos' }
+    //     },
+    //     {
+    //       name: 'Personal',
+    //       to: { name: 'regisCiudadano' }
+    //     }
+    //   )
+    //   return items
+    // }
 
     return items
   }

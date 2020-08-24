@@ -39,7 +39,7 @@
         </v-list-tile-avatar>
 
         <v-list-tile-content>
-          <v-list-tile-title>{{ user.name }}</v-list-tile-title>
+          <v-list-tile-title>{{ user.username}}</v-list-tile-title>
         </v-list-tile-content>
 
         <v-list-tile-action />
@@ -82,17 +82,6 @@
           <v-list-tile-content>Cerrar sesión</v-list-tile-content>
         </v-list-tile>
       </template>
-      <v-img
-        :src="require('@/assets/uniq.png')"
-        :lazy-src="require('@/assets/uniq.png')"
-        contain
-        max-height="31"
-        class="mt-5"
-      >
-        <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
-          <v-progress-circular indeterminate color="grey lighten-5" />
-        </v-layout>
-      </v-img>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -140,7 +129,7 @@ export default {
 
   &:hover {
     color: white !important;
-    background: #74ba1a !important;
+    background: #0F62AC !important;
   }
 }
 

@@ -1,2 +1,2 @@
 
-export const baseUrlAPI = 'http://tramiteapi.uniq.edu.pe/public/api'
+export const baseUrlAPI = 'http://ohyepe.ansekabussines.com/public/api'

@@ -1,14 +1,14 @@
 <template>
-  <v-app id="login" class="teal darken-1">
+  <v-app id="login" class="login">
     <v-container fluid fill-height>
       <template v-if="!authenticated">
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4 lg4>
             <v-card class="elevation-1 pa-3">
               <v-card-title>
-                <div class="layout column align-center">
+                <!-- <div class="layout column align-center">
                   <img src="@/assets/uniq.png" alt="uniq" width="200" height="200" />
-                </div>
+                </div> -->
               </v-card-title>
               <h4>LOGIN</h4>
               <v-divider />
@@ -79,7 +79,6 @@ export default {
 
   data () {
     return {
-      tryFacebookLogin: false,
       validForm: true,
       processingForm: false,
       form: {
@@ -91,7 +90,6 @@ export default {
       rules: {
         username: [
           v => !!v || 'El correo electrónico es requerido',
-          // eslint-disable-next-line no-useless-escape
           v => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'El correo electrónico debe ser válido'
         ],
         password: [
@@ -111,14 +109,6 @@ export default {
     })
   },
 
-  watch: {
-    showModalLogin (newValue, oldValue) {
-      if (!newValue) {
-        this.tryFacebookLogin = false
-        return false
-      }
-    }
-  },
 
   created () {
     if (this.authenticated) this.$router.push({ name: 'documentos' })
@@ -136,8 +126,9 @@ export default {
       this.login({ params: this.form })
         .then(response => {
           // Save the token.
+          console.log(response)
           this.$store.dispatch('auth/saveToken', {
-            token: response.data.token,
+            token: response.data.success.token,
             remember: this.remember
           })
 
@@ -148,23 +139,21 @@ export default {
           this.$store.dispatch('auth/fetchUser')
             .then(response => {
               this.processingForm = false
-
-              const roleType = response.data.data.tipo
-              console.log('roletype',roleType);
-              if (roleType === 'Tramitador') {
-                this.$router.push({ name: 'documentos' })
+              console.log('para saber el tiopp',response)
+              const roleType = response.data.success.tipo
+              if (roleType === 'N') {
+                this.$router.push({ name: 'sgcUsersCreate' })
               } else {
-                this.$router.push({ name: 'documentos' })
+                this.$router.push({ name: 'sgcUsersCreate' })
               }
             })
             .catch(error => {
+              console.log('errrorrrr')
               this.processingForm = false
-              this.validationErrors = error.response.data.errors || {}
             })
         })
         .catch((error) => {
           this.processingForm = false
-          this.validationErrors = error.response.data.errors || {}
         })
     },
 
@@ -186,5 +175,6 @@ export default {
     left: 0;
     content: "";
     z-index: 0;
+    background: #0F62AC !important;
   }
 </style>
