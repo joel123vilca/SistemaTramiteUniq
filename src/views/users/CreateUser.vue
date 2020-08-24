@@ -38,15 +38,15 @@
                   grid-list-lg
                 >
                   <v-text-field
-                    v-model="form.email"
+                    v-model="form.username"
                     :disabled="processingForm"
                     label="Usuario"
-                    :rules="rules.email"
-                    :error="!!formErrors.email"
-                    :error-messages="formErrors.email"
+                    :rules="rules.username"
+                    :error="!!formErrors.username"
+                    :error-messages="formErrors.username"
                     @keyup="() => {
-                      formErrors.email = undefined
-                      delete formErrors.email
+                      formErrors.username = undefined
+                      delete formErrors.username
                     }"
                   />
                   <v-text-field
@@ -62,6 +62,19 @@
                       delete formErrors.password
                     }"
                   />
+                  <v-text-field
+                    v-model="form.c_password"
+                    type="password"
+                    :disabled="processingForm"
+                    label="Comprobar Contraseña"
+                    :rules="rules.c_password"
+                    :error="!!formErrors.c_password"
+                    :error-messages="formErrors.c_password"
+                    @keyup="() => {
+                      formErrors.c_password = undefined
+                      delete formErrors.c_password
+                    }"
+                  />
                   <v-layout
                     row
                     wrap
@@ -70,24 +83,21 @@
                       sm6
                       xs12
                     >
-                      <!-- <v-autocomplete
-                        v-model="form.type_user_id"
+                      <v-autocomplete
+                        v-model="form.tipo"
                         :items="typeUsers"
-                        :loading="loadingTipeUsers"
                         dense
                         clearable
                         small-chips
                         label="Seleccionar tipo de usuario"
-                        item-text="title"
-                        item-value="id"
                         :disabled="processingForm"
-                        :error="!!formErrors.type_user_id"
-                        :error-messages="formErrors.type_user_id"
+                        :error="!!formErrors.tipo"
+                        :error-messages="formErrors.tipo"
                         @change="() => {
-                          formErrors.type_user_id = undefined
-                          delete formErrors.type_user_id
+                          formErrors.tipo = undefined
+                          delete formErrors.tipo
                         }"
-                      /> -->
+                      />
                     </v-flex>
                   </v-layout>
                 </v-container>
@@ -115,7 +125,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   middleware: 'auth',
@@ -135,23 +145,19 @@ export default {
       formErrors: {},
 
       form: {
-        email: '',
+        username: '',
         password: '',
-        name: '',
-        type_user_id: 0
+        c_password: '',
+        tipo: 1,
+        persona_id:'',
       },
-
+      typeUsers:[1,2],
       validForm: true,
       processingForm: false,
 
       rules: {
-        name: [
+        username: [
           v => !!v || 'El nombre es requerido'
-        ],
-        email: [
-          v => !!v || 'El correo electrónico es requerido',
-          // eslint-disable-next-line no-useless-escape
-          v => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'El correo electrónico debe ser válido'
         ],
         password: [
           v => !!v || 'La contraseña es requerida'
@@ -165,6 +171,9 @@ export default {
       currentUser: state => state.users.currentUser,
       typeUsers: state => state.typeUsers.typeUsers,
       loadingTipeUsers: state => state.typeUsers.loadingTipeUsers
+    }),
+    ...mapGetters({
+      user: 'auth/user', 
     })
   },
   methods: {
@@ -180,6 +189,7 @@ export default {
       if (!this.$refs.form.validate()) return false
 
       this.processingForm = true
+      this.form.persona_id = this.user.id;
       this.createUser({ data: this.form })
         .then(response => {
           this.processingForm = false

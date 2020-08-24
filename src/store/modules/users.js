@@ -69,7 +69,7 @@ export const actions = {
       userAPI.post(payload)
         .then(response => {
           this._vm.$notify.success({
-            title: 'UNIQ',
+            title: 'STP',
             message: 'El usuario ha sido creado con éxito.'
           })
 

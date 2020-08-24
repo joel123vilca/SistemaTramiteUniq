@@ -50,7 +50,7 @@ export default {
 
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/users`,
+        url: `${HOST}/register`,
         method: 'post',
         data
       })

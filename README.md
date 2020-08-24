@@ -1,4 +1,4 @@
-# wellness-uniq
+# wellness-pocollay
 
 ## Project setup
 ```

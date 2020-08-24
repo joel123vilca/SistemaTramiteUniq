@@ -40,7 +40,7 @@ export const actions = {
       authAPI.login(payload)
         .then(response => {
           this._vm.$notify.success({
-            title: 'UNIQ',
+            title: 'STP',
             message: 'Bienvenido'
           })
 
@@ -57,7 +57,7 @@ export const actions = {
           commit(types.LOGOUT)
 
           this._vm.$notify.success({
-            title: 'UNIQ',
+            title:'STP',
             message: 'Hasta luego'
           })
 

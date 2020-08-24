@@ -23,7 +23,7 @@ export default {
     NavigationDrawer: () => import('@/components/NavigationDrawer.vue')
   },
   data: () => ({
-    title: 'Bienvenido a la UNIQ!'
+    title: 'Bienvenido a la Sistema de tramite Pocollay'
   }),
 
   computed: {
